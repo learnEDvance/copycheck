@@ -9,10 +9,10 @@
 <pre>
 ┌─CopyCheck live run · refresh: every cell commit (~72 pushes / run)───┐
 ├────────────────────────────┬─────────────────────────────────────────┤
-│ loaded model               │ gemma-3-270m-it                         │
+│ loaded model               │ no model yet                            │
 │ samples done               │ 3 / 720  <span style="color:#3a3a3a">░░░░░░░░░░░░░░░░░░░░</span>           │
-│ elapsed                    │ 00:00:22                                │
-│ last update                │ 2026-09-24 23:01:40                     │
+│ elapsed                    │ 00:00:27                                │
+│ last update                │ 2026-09-24 23:01:45                     │
 │ last commit                │ #3                                      │
 ├────────────────────────────┼──────────┼──────────┼───────────────────┤
 │ model                      │ <span style="color:#3a3a3a">CER</span>      │ <span style="color:#3a3a3a">exact%</span>   │ <span style="color:#3a3a3a">bar</span>               │
@@ -38,11 +38,11 @@
 ## Status (machine-readable)
 
 ```
-loaded_model = gemma-3-270m-it
+loaded_model = None
 samples_done = 3
 total_samples = 720
-elapsed_sec = 22.463985681533813
-last_update = 2026-09-24 23:01:40
+elapsed_sec = 27.0382182598114
+last_update = 2026-09-24 23:01:45
 commit_num = 3
 model.gemma-3-270m-it.cer = 0.4938968253968254
 model.gemma-3-270m-it.exact_pct = 0.0
