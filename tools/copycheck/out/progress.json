@@ -1,0 +1,12 @@
+{
+  "start_ts": 1790271078.1297748,
+  "commit_global": 0,
+  "models": {
+    "gemma-3-270m-it": {
+      "done_cells": [
+        "gibberish-S"
+      ]
+    }
+  },
+  "run_id": "20260924-230118"
+}
