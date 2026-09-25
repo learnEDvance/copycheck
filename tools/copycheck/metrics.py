@@ -61,10 +61,19 @@ def _traceback(a: str, b: str):
     return insertions, deletions, substitutions
 
 
-def _lcs(src: str, first_divergence: int, exact: bool) -> int:
-    if exact:
-        return len(src)
-    return len(src) - first_divergence
+def _lcs_len(a: str, b: str) -> int:
+    """Length of the longest common subsequence, 2-row DP."""
+    n, m = len(a), len(b)
+    prev = [0] * (m + 1)
+    for i in range(1, n + 1):
+        cur = [0] * (m + 1)
+        for j in range(1, m + 1):
+            if a[i - 1] == b[j - 1]:
+                cur[j] = prev[j - 1] + 1
+            else:
+                cur[j] = max(prev[j], cur[j - 1])
+        prev = cur
+    return prev[m]
 
 
 def score(src: str, out: str) -> dict:
@@ -77,6 +86,7 @@ def score(src: str, out: str) -> dict:
     while lcp < common and src[lcp] == out[lcp]:
         lcp += 1
     first_divergence = lcp  # identical => len(src); prefix => min(len); else first differing index
+    lcs_len = _lcs_len(src, out)
 
     return {
         "src_len": len(src),
@@ -88,7 +98,8 @@ def score(src: str, out: str) -> dict:
         "deletions": deletions,
         "substitutions": substitutions,
         "lcp": lcp,
-        "lcs": _lcs(src, first_divergence, exact),
+        "lcs_len": lcs_len,
+        "pct_conserved": round(lcs_len / max(1, len(src)), 4),
         "first_divergence": first_divergence,
         "exact_pct": round(100.0 if exact else 0.0, 2),
         "len_ratio": round(len(out) / len(src), 4) if len(src) else 0.0,
@@ -103,15 +114,15 @@ if __name__ == "__main__":
 
     r = score("abc", "ac")
     assert r["edit_distance"] == 1 and r["deletions"] == 1
-    assert r["lcp"] == 1 and r["lcs"] == 2 and r["first_divergence"] == 1
+    assert r["lcp"] == 1 and r["lcs_len"] == 2 and r["first_divergence"] == 1
 
     r = score("hello", "helxo")
     assert r["substitutions"] == 1
-    assert r["lcp"] == 3 and r["lcs"] == 2 and r["first_divergence"] == 3
+    assert r["lcp"] == 3 and r["lcs_len"] == 4 and r["first_divergence"] == 3
 
     r = score("abcd", "abcd")
     assert r["exact"] is True and r["edit_distance"] == 0
-    assert r["lcp"] == 4 and r["lcs"] == 4 and r["first_divergence"] == 4
+    assert r["lcp"] == 4 and r["lcs_len"] == 4 and r["first_divergence"] == 4
 
     import random
 

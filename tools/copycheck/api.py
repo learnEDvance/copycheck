@@ -1,6 +1,7 @@
 """LM Studio client + CLI wrappers. Python 3 stdlib only."""
 
 import json
+import re
 import subprocess
 import time
 import urllib.error
@@ -34,6 +35,7 @@ def list_llms(base=BASE):
                 "key": m["key"],
                 "display": m.get("display_name"),
                 "ctx": m.get("max_context_length"),
+                "size": m.get("size_bytes") or m.get("size") or 0,
             })
     return out
 
@@ -88,6 +90,7 @@ def chat(base, model, messages, endpoint=None, max_tokens=2048,
     ttft_ms = None
     deltas = []
     content = []
+    reasoning = []
     finish = None
     usage = None
     stats = None
@@ -131,7 +134,11 @@ def chat(base, model, messages, endpoint=None, max_tokens=2048,
                         stats = obj.get("stats")
                     continue
                 c0 = ch[0]
-                d = (c0.get("delta") or {}).get("content")
+                delta = c0.get("delta") or {}
+                d = delta.get("content")
+                r = delta.get("reasoning_content") or delta.get("reasoning")
+                if r:
+                    reasoning.append(r)
                 if d:
                     content.append(d)
                     ms = (time.monotonic() - t0) * 1000
@@ -148,7 +155,9 @@ def chat(base, model, messages, endpoint=None, max_tokens=2048,
             model_ret = obj.get("model")
             ch = obj.get("choices") or []
             if ch:
-                content = [(ch[0].get("message") or {}).get("content") or ""]
+                msg = ch[0].get("message") or {}
+                content = [msg.get("content") or ""]
+                reasoning = [msg.get("reasoning_content") or ""]
                 finish = ch[0].get("finish_reason")
             usage = obj.get("usage")
             stats = obj.get("stats")
@@ -161,7 +170,8 @@ def chat(base, model, messages, endpoint=None, max_tokens=2048,
     wall_ms = (time.monotonic() - t0) * 1000
     return {
         "endpoint": endpoint, "id": rid, "created": created, "model": model_ret,
-        "content_raw": "".join(content), "finish_reason": finish,
+        "content_raw": "".join(content), "reasoning_raw": "".join(reasoning),
+        "finish_reason": finish,
         "usage": usage, "stats": stats,
         "first_byte_ms": round(first_byte_ms, 1) if first_byte_ms else None,
         "ttft_ms": round(ttft_ms, 1) if ttft_ms else None,
@@ -200,6 +210,61 @@ def lms_server_status():
 
 def lms_server_start():
     return _lms("server", "start")
+
+
+def _parse_gb_section(text: str, label: str):
+    m = re.search(label + r"\s*[:=]?\s*([\d.]+)\s*(MiB|MB|GiB|GB)", text, re.IGNORECASE)
+    if m:
+        val = float(m.group(1))
+        return val / 1024.0 if m.group(2).lower() in ("mib", "mb") else val
+    return None
+
+
+def lms_load_estimate(key, timeout=180):
+    """Return {'gpu_gb', 'total_gb', 'rc', 'out'} from `lms load --estimate-only`."""
+    rc, out, err = _lms("load", key, "--estimate-only")
+    blob = (out or "") + "\n" + (err or "")
+    gpu_gb = _parse_gb_section(blob, r"Estimated\s+GPU\s+Memory")
+    total_gb = _parse_gb_section(blob, r"Estimated\s+Total\s+Memory")
+    if total_gb is None:
+        m = re.search(r"approximately\s+([\d.]+)\s*(GB|GiB)", blob, re.IGNORECASE)
+        if m:
+            total_gb = float(m.group(1))
+    return {"gpu_gb": gpu_gb, "total_gb": total_gb, "rc": rc, "out": blob.strip()}
+
+
+def gpu_mem_free_gb():
+    return _smi_query("memory.free")
+
+
+def gpu_mem_total_gb():
+    return _smi_query("memory.total")
+
+
+def _smi_query(prop):
+    try:
+        p = subprocess.run(
+            ["nvidia-smi", f"--query-gpu={prop}", "--format=csv,noheader,nounits"],
+            capture_output=True, text=True, timeout=15)
+        if p.returncode != 0:
+            return None
+        vals = [int(x.strip()) for x in p.stdout.splitlines() if x.strip()]
+        if not vals:
+            return None
+        return min(vals) / 1024.0
+    except Exception:
+        return None
+
+
+def sys_mem_available_gb():
+    try:
+        with open("/proc/meminfo", encoding="utf-8") as fh:
+            for ln in fh:
+                if ln.startswith("MemAvailable:"):
+                    return int(ln.split()[1]) / 1024.0 / 1024.0
+    except Exception:
+        pass
+    return None
 
 
 def _server_up(base=BASE, tries=4, wait=6):

@@ -1,3 +1,4 @@
 tools/copycheck/out/log.txt
+tools/copycheck/out/progress.json.tmp
 tools/copycheck/__pycache__/
 __pycache__/

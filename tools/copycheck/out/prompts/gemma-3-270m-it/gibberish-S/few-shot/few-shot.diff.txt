@@ -1,0 +1,26 @@
+### SOURCE
+1bMVyI]3uVp3H[=w_)xTl!0}.vsAjyRPd6Rd;1aa@u}wKm*1n&{xWD!/QfDp,B[#xG/3:qfvMbtDS(RuXPbgh4kXwbVB%;p9-hb= P_1)zU@p[tk,vQDAuu
+
+### EXTRACTED OUTPUT
+CopySTART
+1bMVyI]3uVp3H[=w_)xTl!0}.vsAjyRPd6Rd;1aa@u}wKm*1n&{xWD!/QfDp,B[#xG/3:qfvMbtDS(RuXPbgh4kXwbVB%;p9-hb= P_1)zU@p[tk,vQDAuu
+### METRICS
+{
+  "src_len": 120,
+  "out_len": 129,
+  "edit_distance": 11,
+  "cer": 0.09166666666666666,
+  "exact": false,
+  "insertions": 10,
+  "deletions": 1,
+  "substitutions": 0,
+  "lcp": 0,
+  "lcs_len": 119,
+  "pct_conserved": 0.9917,
+  "first_divergence": 0,
+  "exact_pct": 0.0,
+  "len_ratio": 1.075
+}
+### FIRST DIVERGENCE
+  src: '1bMVyI]3uVp3H[=w_)xTl!0}.vsAjyRPd6Rd;1aa@u}wKm*1n&{xWD!/QfDp'
+  out: 'CopySTART\n1bMVyI]3uVp3H[=w_)xTl!0}.vsAjyRPd6Rd;1aa@u}wKm*1n&'

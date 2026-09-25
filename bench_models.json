@@ -1,0 +1,8 @@
+{
+  "note": "CopyCheck v2 per-model tuning. Keys match LM Studio model keys. If a model is absent here, size-bucketing applies (estimated load <= 8GB -> 8 slots, larger -> 4 slots) with 20 baseline reps. Entries here win over the bucket defaults.",
+  "models": {
+    "gemma-3-270m-it": { "slots": 64, "repeats": 100 },
+    "google/gemma-4-e4b": { "slots": 8, "repeats": 20 }
+  },
+  "skip": []
+}
