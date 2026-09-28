@@ -1,8 +1,17 @@
 {
-  "note": "CopyCheck v2 per-model tuning. Keys match LM Studio model keys. If a model is absent here, size-bucketing applies (estimated load <= 8GB -> 8 slots, larger -> 4 slots) with 20 baseline reps. Entries here win over the bucket defaults.",
+  "note": "CopyCheck v2 per-model tuning. Keys match LM Studio model keys, mirrored from user-concrete-model-default-config (parallel/contextLength/offloadRatio). slots = numParallelSessions, ctx = contextLength, gpu = offloadRatio (passed as --gpu to lms load). repeats = baseline repetitions per cell (270m and lfm2.5 get 100, e4b 20, rest default 20).",
   "models": {
-    "gemma-3-270m-it": { "slots": 64, "repeats": 100 },
-    "google/gemma-4-e4b": { "slots": 8, "repeats": 20 }
+    "gemma-3-270m-it": { "slots": 32, "repeats": 100, "ctx": 16384 },
+    "liquid/lfm2.5-1.2b": { "slots": 32, "repeats": 100, "ctx": 16384 },
+    "nvidia/nemotron-3-nano-4b": { "slots": 8, "ctx": 16384 },
+    "ibm/granite-4-h-tiny": { "slots": 4, "ctx": 16384, "gpu": 1.0 },
+    "google/gemma-4-e2b": { "slots": 8, "ctx": 16384, "gpu": 0.8571428571428571 },
+    "prism-ml/bonsai-27b": { "slots": 2, "ctx": 16384, "gpu": 0.34375 },
+    "essentialai/rnj-1": { "slots": 2, "ctx": 16384, "gpu": 0.65625 },
+    "google/gemma-4-e4b": { "slots": 4, "repeats": 20, "ctx": 16384, "gpu": 0.5476190476190477 },
+    "qwen/qwen3.5-9b": { "slots": 2, "ctx": 16384, "gpu": 0.5625 },
+    "google/gemma-4-12b": { "slots": 2, "ctx": 16384, "gpu": 0.5625 },
+    "zai-org/glm-4.6v-flash": { "slots": 2, "ctx": 16384, "gpu": 0.5 }
   },
   "skip": []
 }

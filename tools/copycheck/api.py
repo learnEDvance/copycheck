@@ -188,8 +188,13 @@ def _lms(*args, timeout=180):
         return -1, "", str(e)
 
 
-def lms_load(key, parallel=1):
-    return _lms("load", key, "--parallel", parallel, "-y")
+def lms_load(key, parallel=1, ctx=None, gpu=None):
+    args = ["load", key, "--parallel", parallel, "-y"]
+    if ctx:
+        args += ["-c", str(ctx)]
+    if gpu:
+        args += ["--gpu", str(gpu)]
+    return _lms(*args)
 
 
 def lms_unload(key):

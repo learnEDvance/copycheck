@@ -18,6 +18,7 @@ import json
 import os
 import shutil
 import sys
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 
@@ -26,6 +27,7 @@ import api
 import corpus
 import metrics
 import render
+import tui
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -128,7 +130,8 @@ def model_tuning(key, size_bytes, cfg):
     else:
         slots = 8
     repeats = int(over.get("repeats", REPEATS_DEFAULT))
-    return {"slots": slots, "repeats": repeats, "est_gb": est_gb}
+    return {"slots": slots, "repeats": repeats, "est_gb": est_gb,
+            "ctx": over.get("ctx"), "gpu": over.get("gpu")}
 
 
 def _write_atomic(path, text):
@@ -152,16 +155,18 @@ def load_records():
     p = os.path.join(OUT, "requests.jsonl")
     if not os.path.exists(p):
         return []
-    recs = []
+    recs = {}
     with open(p, encoding="utf-8") as fh:
         for ln in fh:
             ln = ln.strip()
             if ln:
                 try:
-                    recs.append(json.loads(ln))
+                    r = json.loads(ln)
                 except Exception:
                     continue
-    return recs
+                key = (r.get("model"), r.get("cell"), r.get("variant"), r.get("rep"))
+                recs[key] = r
+    return list(recs.values())
 
 
 def load_progress():
@@ -185,6 +190,113 @@ def append_jsonl(rec):
     p = os.path.join(OUT, "requests.jsonl")
     with open(p, "a", encoding="utf-8") as fh:
         fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+
+
+class StopSignal:
+    def __init__(self):
+        self.event = threading.Event()
+
+
+def start_space_listener(sig):
+    """Daemon thread: watch stdin (cbreak) for a SPACE keypress -> safe-stop signal."""
+    try:
+        import select
+        import termios
+        import tty
+    except Exception as e:
+        log(f"space-stop disabled: {e}")
+        return None
+    try:
+        fd = sys.stdin.fileno()
+    except Exception:
+        return None
+    if not os.isatty(fd):
+        log("space-stop disabled: stdin is not a terminal (no SPACE, Ctrl-C only)")
+        return None
+
+    def _listen():
+        old = None
+        try:
+            old = termios.tcgetattr(fd)
+            tty.setcbreak(fd)
+            while not sig.event.is_set():
+                r, _, _ = select.select([sys.stdin], [], [], 0.25)
+                if r:
+                    try:
+                        chunk = os.read(fd, 64)
+                    except Exception:
+                        break
+                    if b" " in chunk:
+                        log("SAFE-STOP: SPACE pressed")
+                        sig.event.set()
+                        return
+        finally:
+            if old is not None:
+                try:
+                    termios.tcsetattr(fd, termios.TCSADRAIN, old)
+                except Exception:
+                    pass
+
+    th = threading.Thread(target=_listen, daemon=True)
+    th.start()
+    return th
+
+
+def stop_space_listener(thread):
+    if thread is not None:
+        thread.join(timeout=2.0)
+
+
+def _purge_cell(model_key, cell, state):
+    """Drop a partially-processed cell so it will be redone on resume."""
+    d_out = os.path.join(OUT, "outputs", render.dir_name(model_key), cell)
+    d_prompts = os.path.join(OUT, "prompts", render.dir_name(model_key), cell)
+    for d in (d_out, d_prompts):
+        if os.path.isdir(d):
+            shutil.rmtree(d)
+    state.records[:] = [r for r in state.records
+                        if not (r.get("model") == model_key and r.get("cell") == cell)]
+    state.failures[:] = [f for f in state.failures
+                         if not (f.get("model") == model_key and f.get("cell") == cell)]
+    p = os.path.join(OUT, "requests.jsonl")
+    if os.path.exists(p):
+        keep = None
+        try:
+            with open(p, encoding="utf-8") as fh:
+                keep = []
+                for ln in fh:
+                    ln = ln.strip()
+                    if not ln:
+                        continue
+                    try:
+                        r = json.loads(ln)
+                    except Exception:
+                        continue
+                    if r.get("model") == model_key and r.get("cell") == cell:
+                        continue
+                    keep.append(ln)
+        except Exception as e:
+            log(f"purge: could not scan requests.jsonl ({e}); resume will dedup")
+            keep = None
+        if keep is not None:
+            with open(p, "w", encoding="utf-8") as fh:
+                if keep:
+                    fh.write("\n".join(keep) + "\n")
+
+
+def _write_stopped(state, reason):
+    with open(os.path.join(OUT, "STOPPED.json"), "w", encoding="utf-8") as fh:
+        json.dump({"ts": datetime.datetime.now().isoformat(timespec="seconds"),
+                   "reason": reason,
+                   "commit_global": state.progress.get("commit_global", 0)},
+                  fh, indent=2)
+
+
+def _rep_tps(rec):
+    usage = rec.get("usage")
+    ct = (usage.get("completion_tokens") or 0) if isinstance(usage, dict) else 0
+    wall = rec.get("wall_total_s") or 0
+    return ct / wall if wall > 0 else None
 
 
 def save_sample_files(rec):
@@ -558,16 +670,26 @@ def run(opts):
     active = [m["key"] for m in subjects if not any(s["model"] == m["key"] for s in skipped)]
     log(f"subjects: {active}")
 
+    stop_sig = StopSignal()
+    sig_thread = start_space_listener(stop_sig)
+    tui.header(f"{len(active)} engines · 5-prompt grid · temp 0 · resume-safe · mission → out/")
+
     try:
+        in_flight = None
+        stop_reason = None
         for model_key in active:
+            if stop_sig.event.is_set():
+                log("SAFE-STOP at model boundary")
+                break
             if not api._server_up(BASE):
                 log(f"server down before {model_key}; skipping")
                 save_progress(state)
                 continue
             t = tunings[model_key]
+            tui.model_card(model_key, t)
             log(f"== MODEL {model_key} == slots={t['slots']} reps={t['repeats']} ==")
             api.lms_unload_all()
-            api.lms_load(model_key, parallel=t["slots"])
+            api.lms_load(model_key, parallel=t["slots"], ctx=t.get("ctx"), gpu=t.get("gpu"))
             if not api._server_up(BASE, tries=6, wait=4):
                 log(f"  load failed for {model_key}; skipping")
                 state.progress["skipped"].append({"model": model_key, "reason": "load_failed",
@@ -589,11 +711,15 @@ def run(opts):
             consec_fail = 0
             model_abort = None
             for cell in cells_iter:
+                if stop_sig.event.is_set():
+                    log("SAFE-STOP at cell boundary")
+                    break
                 if cell in done_cells:
                     log(f"  skip (done) {cell}")
                     continue
                 src = cells[cell]
                 repeats = t["repeats"]
+                in_flight = (model_key, cell)
                 log(f"  cell {cell} ({len(src)} chars) x{repeats}")
 
                 p_out = os.path.join(OUT, "outputs", render.dir_name(model_key), cell)
@@ -604,6 +730,7 @@ def run(opts):
 
                 empty_streak = 0
                 aborted = False
+                stopped = False
                 ex = ThreadPoolExecutor(max_workers=t["slots"])
                 futs = [ex.submit(run_sample, state, model_key, cell, src,
                                   rep, endpoint, "baseline")
@@ -639,6 +766,7 @@ def run(opts):
                             empty_streak = empty_streak + 1 if bad else 0
                             log(f"    rep {rep}: ok={rec['ok']} cer={m.get('cer', 0):.4f} "
                                 f"exact={m.get('exact')} wall={rec.get('wall_total_s')}s")
+                            tui.cell_scan(rep, repeats, m.get("cer", 0), _rep_tps(rec))
                             if empty_streak >= EMPTY_ABORT and rep < repeats:
                                 log(f"    EARLY ABORT: {EMPTY_ABORT} consecutive "
                                     "empty/reasoning-only/garbage reps")
@@ -646,8 +774,25 @@ def run(opts):
                                 for f in futs[rep:]:
                                     f.cancel()
                                 break
+                        if stop_sig.event.is_set():
+                            log("SAFE-STOP requested (SPACE); discarding partial cell "
+                                "so it will be redone")
+                            stopped = True
+                            stop_reason = f"{model_key} / {cell} (in-flight discarded for redo)"
+                            for f in futs[rep:]:
+                                f.cancel()
+                            break
+                except KeyboardInterrupt:
+                    stopped = True
+                    raise
                 finally:
-                    ex.shutdown(wait=True, cancel_futures=True)
+                    ex.shutdown(wait=(not stopped), cancel_futures=True)
+                tui.scan_done()
+
+                if stopped:
+                    _purge_cell(model_key, cell, state)
+                    in_flight = None
+                    break
 
                 if model_abort:
                     state.progress["skipped"].append(
@@ -675,15 +820,36 @@ def run(opts):
                         m = rec.get("metrics", {})
                         log(f"    variant {variant}: cer={m.get('cer', 0):.4f} "
                             f"exact={m.get('exact')}")
+                        if stop_sig.event.is_set():
+                            stopped = True
+                            stop_reason = f"{model_key} / {cell} (variant grid interrupted)"
+                            break
+
+                if stopped:
+                    _purge_cell(model_key, cell, state)
+                    in_flight = None
+                    break
 
                 done_cells.add(cell)
+                in_flight = None
                 state.progress["models"].setdefault(model_key, {})
                 state.progress["models"][model_key]["done_cells"] = sorted(done_cells)
                 save_progress(state)
                 msg = commit_cell(state, model_key)
                 render_readme(state, model_key, do_commit=True, message=msg)
+                tui.event("CELL", f"{len(done_cells)}/{len(cells_iter)} · {cell}")
 
             api.lms_unload(model_key)
+            if stop_sig.event.is_set():
+                break
+
+        if stop_sig.event.is_set():
+            api.lms_unload_all()
+            stop_space_listener(sig_thread)
+            _write_stopped(state, stop_reason or "safe-stop at boundary")
+            log("SAFE-STOP: models unloaded; progress saved; nothing committed")
+            tui.closing(stop_reason or "safe-stop at boundary")
+            sys.exit(0)
 
         render_readme(state, None, do_commit=True)
         log("==== RUN COMPLETE ====")
@@ -691,10 +857,16 @@ def run(opts):
         with open(os.path.join(OUT, "FAILED.txt"), "w", encoding="utf-8") as fh:
             fh.write(json.dumps(state.failures, indent=2))
         save_progress(state)
+        stop_space_listener(sig_thread)
     except KeyboardInterrupt:
-        log("interrupted; progress saved")
+        log("interrupt received; saving progress without commit")
+        if in_flight is not None:
+            _purge_cell(in_flight[0], in_flight[1], state)
+        api.lms_unload_all()
+        stop_space_listener(sig_thread)
         save_progress(state)
-        render_readme(state, None, do_commit=True)
+        _write_stopped(state, "keyboard-interrupt")
+        log("progress saved to out/progress.json; nothing committed; models unloaded")
         sys.exit(130)
 
 
