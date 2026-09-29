@@ -1,0 +1,107 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T21:46:10",
+  "model": "liquid/lfm2.5-1.2b",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 48,
+  "variant": "baseline",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\nCOPYEND",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 126,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 1,
+    "deletions": 0,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 125,
+    "pct_conserved": 1.0,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 1.008
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 120,
+    "completion_tokens": 32,
+    "total_tokens": 152,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790698570,
+  "id": "chatcmpl-hcu2t6zp3fqx6nrb860q",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 1019.9,
+    "ttft_ms": 1020.0,
+    "wall_ms": 3249.7,
+    "delta_count": 31,
+    "deltas": [
+      1020.0,
+      1099.1,
+      1181.7,
+      1236.4,
+      1314.1,
+      1383.0,
+      1447.5,
+      1521.0,
+      1585.7,
+      1657.9,
+      1723.2,
+      1787.3,
+      1859.3,
+      1925.1,
+      1991.5,
+      2062.8,
+      2132.1,
+      2196.7,
+      2262.8,
+      2335.2,
+      2399.7,
+      2477.6,
+      2544.8,
+      2612.6,
+      2683.7,
+      2750.9,
+      2809.7,
+      2886.6,
+      2959.1,
+      3068.9,
+      3134.9
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "liquid/lfm2.5-1.2b",
+  "wall_total_s": 0.0
+}
