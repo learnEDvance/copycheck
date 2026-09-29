@@ -1,0 +1,26 @@
+### SOURCE
+Distributed systems are distinguished less by their topology than by the contracts they impose on failure, and none is more consequential than the acknowledgement. When a leader confirms a write before its peers have committed the same entry, it borrows durability from a promise that the protocol may later be forced to revoke. We therefore model every replica as a state machine that advances only through a totally ordered log, and we treat an inflight entry as provisional until a quorum of voters has persisted it. In our implementation the follower applies the entry lazily and reports its durable watermark back to the leader at intervals of at most one hundred milliseconds.
+
+### EXTRACTED OUTPUT
+
+Distributed systems are distinguished less by their topology than by the contracts they impose on failure, and none is more consequential than the acknowledgement. When a leader confirms a write before its peers have committed the same entry, it borrows durability from a promise that the protocol may later be forced to revoke. We therefore model every replica as a state machine that advances only through a totally ordered log, and we treat an inflight entry as provisional until a quorum of voters has persisted it. In our implementation the follower applies the entry lazily and reports its durable watermark back to the leader at intervals of at most one hundred milliseconds.
+### METRICS
+{
+  "src_len": 683,
+  "out_len": 683,
+  "edit_distance": 2,
+  "cer": 0.0029282576866764276,
+  "exact": false,
+  "insertions": 1,
+  "deletions": 1,
+  "substitutions": 0,
+  "lcp": 0,
+  "lcs_len": 682,
+  "pct_conserved": 0.9985,
+  "first_divergence": 0,
+  "exact_pct": 0.0,
+  "len_ratio": 1.0
+}
+### FIRST DIVERGENCE
+  src: 'Distributed systems are distinguished less by their topology'
+  out: '\nDistributed systems are distinguished less by their topolog'
