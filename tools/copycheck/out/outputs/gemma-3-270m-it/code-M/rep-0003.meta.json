@@ -1,0 +1,79 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T21:33:11",
+  "model": "gemma-3-270m-it",
+  "cell": "code-M",
+  "type": "code",
+  "size": "M",
+  "rep": 3,
+  "variant": "baseline",
+  "src": "\"\"\"Event ordering helpers for the collector agents.\"\"\"\n\nimport itertools\nimport time\nfrom dataclasses import dataclass\n\n\n@dataclass(frozen=True)\nclass Event:\n    \"\"\"A single observed mutation with its causal token.\"\"\"\n\n    seq: int\n    source_id: str\n    payload: str\n    received_at: float = time.monotonic()\n\n\ndef order_events(events: Iterator[Event]) -> Iterator[Event]:\n    \"\"\"Group events by source, preserving sequence.\"\"\"\n    key = lambda e: e.source_id\n    for source_id, group in itertools.groupby(events, key):\n        for event in sorted(group, key=lambda e: e.seq):\n            if event.seq < 0:\n                raise ValueError(f\"negative sequence {event.seq!r}\")\n            yield event\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\n\"\"\"Event ordering helpers for the collector agents.\"\"\"\n\nimport itertools\nimport time\nfrom dataclasses import dataclass\n\n\n@dataclass(frozen=True)\nclass Event:\n    \"\"\"A single observed mutation with its causal token.\"\"\"\n\n    seq: int\n    source_id: str\n    payload: str\n    received_at: float = time.monotonic()\n\n\ndef order_events(events: Iterator[Event]) -> Iterator[Event]:\n    \"\"\"Group events by source, preserving sequence.\"\"\"\n    key = lambda e: e.source_id\n    for source_id, group in itertools.groupby(events, key):\n        for event in sorted(group, key=lambda e: e.seq):\n            if event.seq < 0:\n                raise ValueError(f\"negative sequence {event.seq!r}\")\n            yield event\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 3436,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\n",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "",
+  "metrics": {
+    "src_len": 701,
+    "out_len": 0,
+    "edit_distance": 701,
+    "cer": 1.0,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 701,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 0,
+    "pct_conserved": 0.0,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 0.0
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 263,
+    "completion_tokens": 4,
+    "total_tokens": 267,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790697791,
+  "id": "chatcmpl-koqjt2ejzqxcy8mq60hrm",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 522.2,
+    "ttft_ms": 522.3,
+    "wall_ms": 1276.3,
+    "delta_count": 3,
+    "deltas": [
+      522.3,
+      1002.1,
+      1158.7
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "gemma-3-270m-it",
+  "wall_total_s": 0.0
+}

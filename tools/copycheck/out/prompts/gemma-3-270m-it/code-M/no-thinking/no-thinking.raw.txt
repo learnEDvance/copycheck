@@ -1,0 +1,2 @@
+COPYSTART
+"""Event ordering helpers for the collector agents."""

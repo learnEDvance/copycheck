@@ -1,0 +1,89 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T21:33:14",
+  "model": "gemma-3-270m-it",
+  "cell": "code-M",
+  "type": "code",
+  "size": "M",
+  "rep": 1,
+  "variant": "codeblock",
+  "src": "\"\"\"Event ordering helpers for the collector agents.\"\"\"\n\nimport itertools\nimport time\nfrom dataclasses import dataclass\n\n\n@dataclass(frozen=True)\nclass Event:\n    \"\"\"A single observed mutation with its causal token.\"\"\"\n\n    seq: int\n    source_id: str\n    payload: str\n    received_at: float = time.monotonic()\n\n\ndef order_events(events: Iterator[Event]) -> Iterator[Event]:\n    \"\"\"Group events by source, preserving sequence.\"\"\"\n    key = lambda e: e.source_id\n    for source_id, group in itertools.groupby(events, key):\n        for event in sorted(group, key=lambda e: e.seq):\n            if event.seq < 0:\n                raise ValueError(f\"negative sequence {event.seq!r}\")\n            yield event\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Copy the text between COPYSTART and COPYEND verbatim into a single fenced code block, character for character. Output nothing outside the code block."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\n\"\"\"Event ordering helpers for the collector agents.\"\"\"\n\nimport itertools\nimport time\nfrom dataclasses import dataclass\n\n\n@dataclass(frozen=True)\nclass Event:\n    \"\"\"A single observed mutation with its causal token.\"\"\"\n\n    seq: int\n    source_id: str\n    payload: str\n    received_at: float = time.monotonic()\n\n\ndef order_events(events: Iterator[Event]) -> Iterator[Event]:\n    \"\"\"Group events by source, preserving sequence.\"\"\"\n    key = lambda e: e.source_id\n    for source_id, group in itertools.groupby(events, key):\n        for event in sorted(group, key=lambda e: e.seq):\n            if event.seq < 0:\n                raise ValueError(f\"negative sequence {event.seq!r}\")\n            yield event\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 3436,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\n\"\"\"Event ordering helpers for the collector agents.\"\"\"\n",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\n\"\"\"Event ordering helpers for the collector agents.\"\"\"",
+  "metrics": {
+    "src_len": 701,
+    "out_len": 55,
+    "edit_distance": 648,
+    "cer": 0.9243937232524965,
+    "exact": false,
+    "insertions": 1,
+    "deletions": 647,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 54,
+    "pct_conserved": 0.077,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 0.0785
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 235,
+    "completion_tokens": 14,
+    "total_tokens": 249,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790697794,
+  "id": "chatcmpl-2augfk7rqp7ofbk6fbx91",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 65.7,
+    "ttft_ms": 65.8,
+    "wall_ms": 171.9,
+    "delta_count": 13,
+    "deltas": [
+      65.8,
+      78.4,
+      86.8,
+      94.4,
+      102.8,
+      109.5,
+      116.9,
+      125.0,
+      130.7,
+      138.5,
+      146.0,
+      154.2,
+      161.7
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "gemma-3-270m-it",
+  "wall_total_s": 0.21
+}
