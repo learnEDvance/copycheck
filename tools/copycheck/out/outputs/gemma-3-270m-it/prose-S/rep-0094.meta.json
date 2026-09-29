@@ -1,0 +1,99 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T21:29:14",
+  "model": "gemma-3-270m-it",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 94,
+  "variant": "baseline",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 104,
+    "completion_tokens": 24,
+    "total_tokens": 128,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790697554,
+  "id": "chatcmpl-yjnzntrp7icort75ul71u",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 540.8,
+    "ttft_ms": 540.8,
+    "wall_ms": 2741.0,
+    "delta_count": 23,
+    "deltas": [
+      540.8,
+      645.9,
+      740.9,
+      830.1,
+      922.5,
+      1010.5,
+      1101.6,
+      1195.2,
+      1289.7,
+      1382.4,
+      1487.3,
+      1605.7,
+      1754.2,
+      1895.0,
+      2012.0,
+      2110.6,
+      2201.5,
+      2286.3,
+      2367.2,
+      2455.0,
+      2525.7,
+      2602.4,
+      2665.9
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "gemma-3-270m-it",
+  "wall_total_s": 0.0
+}
