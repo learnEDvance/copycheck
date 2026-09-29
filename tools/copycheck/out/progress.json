@@ -1,7 +1,7 @@
 {
   "start_ts": 1790697345.0642164,
   "run_id": "20260929-212545",
-  "commit_global": 36,
+  "commit_global": 37,
   "models": {
     "gemma-3-270m-it": {
       "done_cells": [
@@ -71,8 +71,10 @@
     },
     "nvidia/nemotron-3-nano-4b": {
       "done_cells": [
+        "gibberish-M",
         "gibberish-S"
-      ]
+      ],
+      "commits": 1
     }
   },
   "models_cfg": {
