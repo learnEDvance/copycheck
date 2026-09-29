@@ -1,0 +1,115 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T23:01:24",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "table-S",
+  "type": "table",
+  "size": "S",
+  "rep": 1,
+  "variant": "no-thinking",
+  "src": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Do not think out loud. Do not reason. Do not plan. Simply output the text between COPYSTART and COPYEND verbatim and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2710,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "reasoning": "We need to output only the text between COPYSTART and COPYEND verbatim, nothing else. So we must output:\n\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nNo extra spaces? Should be exactly that block. No markdown formatting? The user gave it as plain text with markdown table. We output same. Ensure no extra characters.\n",
+  "reasoning_only": false,
+  "extracted": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "metrics": {
+    "src_len": 120,
+    "out_len": 119,
+    "edit_distance": 1,
+    "cer": 0.008333333333333333,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 119,
+    "lcs_len": 119,
+    "pct_conserved": 0.9917,
+    "first_divergence": 119,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9917
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 104,
+    "completion_tokens": 141,
+    "total_tokens": 245,
+    "completion_tokens_details": {
+      "reasoning_tokens": 99
+    }
+  },
+  "created": 1790703084,
+  "id": "chatcmpl-11qckpk146v0fzjknl1loe",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 323.3,
+    "ttft_ms": 3064.0,
+    "wall_ms": 4117.9,
+    "delta_count": 39,
+    "deltas": [
+      3064.0,
+      3091.5,
+      3118.0,
+      3145.6,
+      3171.3,
+      3199.2,
+      3226.1,
+      3253.7,
+      3281.1,
+      3308.3,
+      3336.5,
+      3362.7,
+      3389.9,
+      3416.3,
+      3444.4,
+      3470.6,
+      3497.9,
+      3525.5,
+      3552.3,
+      3580.5,
+      3607.2,
+      3634.5,
+      3661.7,
+      3688.3,
+      3715.6,
+      3741.6,
+      3768.7,
+      3794.9,
+      3822.1,
+      3849.0,
+      3875.7,
+      3902.9,
+      3930.2,
+      3957.4,
+      3984.0,
+      4011.0,
+      4038.8,
+      4065.6,
+      4092.4
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 4.12
+}

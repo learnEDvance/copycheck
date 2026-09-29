@@ -1,0 +1,9 @@
+```text
+The table shows the default service ports.
+
+| Service | Port |
+| ------- | ---- |
+| copy    | 8080 |
+| sync    | 9091 |
+
+```

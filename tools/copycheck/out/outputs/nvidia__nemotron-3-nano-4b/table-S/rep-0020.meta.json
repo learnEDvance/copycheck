@@ -1,0 +1,115 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T23:01:06",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "table-S",
+  "type": "table",
+  "size": "S",
+  "rep": 20,
+  "variant": "baseline",
+  "src": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2710,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "reasoning": "We need to output only the copied text between markers, character for character. The user says: \"Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND\"\n\nWe must output only that text, no extra. So we need to produce exactly:\n\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nBut note there is a blank line after \"ports.\"? The original includes a blank line before the markdown table. Let's see: \"The table shows the default service ports.\n\n| Service | Port |\n...\"\n\nSo output should include that blank line (i.e., newline). So final output:\n\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nMake sure no extra spaces or lines. Also no markdown fences. Just plain text.\n",
+  "reasoning_only": false,
+  "extracted": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "metrics": {
+    "src_len": 120,
+    "out_len": 119,
+    "edit_distance": 1,
+    "cer": 0.008333333333333333,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 119,
+    "lcs_len": 119,
+    "pct_conserved": 0.9917,
+    "first_divergence": 119,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9917
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 135,
+    "completion_tokens": 290,
+    "total_tokens": 425,
+    "completion_tokens_details": {
+      "reasoning_tokens": 248
+    }
+  },
+  "created": 1790703066,
+  "id": "chatcmpl-jf7bmwed1gntv5i0t7q0w",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 396.3,
+    "ttft_ms": 13327.2,
+    "wall_ms": 14602.5,
+    "delta_count": 39,
+    "deltas": [
+      13327.2,
+      13376.3,
+      13425.6,
+      13475.7,
+      13522.8,
+      13566.7,
+      13609.3,
+      13650.7,
+      13691.4,
+      13727.9,
+      13766.2,
+      13800.2,
+      13834.0,
+      13868.4,
+      13902.3,
+      13934.3,
+      13967.8,
+      14001.7,
+      14030.1,
+      14057.6,
+      14084.7,
+      14110.4,
+      14138.0,
+      14165.5,
+      14191.6,
+      14217.7,
+      14245.9,
+      14273.1,
+      14301.8,
+      14330.0,
+      14356.9,
+      14383.4,
+      14410.0,
+      14437.5,
+      14466.0,
+      14492.9,
+      14520.8,
+      14548.1,
+      14575.6
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 0.35
+}

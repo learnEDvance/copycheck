@@ -1,0 +1,115 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T23:00:36",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "table-S",
+  "type": "table",
+  "size": "S",
+  "rep": 10,
+  "variant": "baseline",
+  "src": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2710,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "reasoning": "We need to output only the copied text between markers, character for character. The user says: \"Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND\"\n\nWe must output only that text, no extra. So we need to produce exactly:\n\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nBut note there is a blank line after \"ports.\"? The original includes a blank line before the markdown table. Let's see: After \"ports.\" then newline, then \"| Service ...\". So output should include that blank line.\n\nThus final answer: exactly:\n\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nNo extra spaces or lines. Ensure no markdown fences.\n",
+  "reasoning_only": false,
+  "extracted": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "metrics": {
+    "src_len": 120,
+    "out_len": 119,
+    "edit_distance": 1,
+    "cer": 0.008333333333333333,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 119,
+    "lcs_len": 119,
+    "pct_conserved": 0.9917,
+    "first_divergence": 119,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9917
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 135,
+    "completion_tokens": 278,
+    "total_tokens": 413,
+    "completion_tokens_details": {
+      "reasoning_tokens": 236
+    }
+  },
+  "created": 1790703036,
+  "id": "chatcmpl-2hoere40l86o93j5n1vpx",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 543.3,
+    "ttft_ms": 23674.2,
+    "wall_ms": 27554.2,
+    "delta_count": 39,
+    "deltas": [
+      23674.2,
+      23770.1,
+      23862.7,
+      23952.8,
+      24047.4,
+      24139.6,
+      24232.7,
+      24326.8,
+      24418.1,
+      24511.4,
+      24605.0,
+      24700.6,
+      24792.1,
+      24887.0,
+      24979.0,
+      25070.6,
+      25158.8,
+      25253.1,
+      25344.7,
+      25439.1,
+      25530.0,
+      25620.6,
+      25715.8,
+      25808.7,
+      25906.8,
+      25999.9,
+      26095.3,
+      26211.6,
+      26302.5,
+      26395.8,
+      26487.8,
+      26593.2,
+      26668.6,
+      26982.7,
+      27081.8,
+      27179.0,
+      27270.7,
+      27365.6,
+      27458.4
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 0.8
+}
