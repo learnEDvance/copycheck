@@ -1,0 +1,119 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T21:52:55",
+  "model": "liquid/lfm2.5-1.2b",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 28,
+  "variant": "baseline",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\n",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 118,
+    "edit_distance": 2,
+    "cer": 0.017241379310344827,
+    "exact": false,
+    "insertions": 2,
+    "deletions": 0,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 116,
+    "pct_conserved": 1.0,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 1.0172
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 131,
+    "completion_tokens": 44,
+    "total_tokens": 175,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790698975,
+  "id": "chatcmpl-ryo365afxbyprgf4d8h9",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 1369.6,
+    "ttft_ms": 1369.7,
+    "wall_ms": 4334.6,
+    "delta_count": 43,
+    "deltas": [
+      1369.7,
+      1423.9,
+      1491.8,
+      1554.4,
+      1621.9,
+      1680.8,
+      1745.5,
+      1808.5,
+      1870.9,
+      1940.5,
+      2005.5,
+      2071.7,
+      2131.8,
+      2198.1,
+      2271.4,
+      2341.7,
+      2412.3,
+      2479.0,
+      2551.0,
+      2607.7,
+      2672.2,
+      2738.9,
+      2807.5,
+      2870.8,
+      2933.9,
+      2994.1,
+      3065.2,
+      3122.4,
+      3191.3,
+      3252.3,
+      3313.1,
+      3381.6,
+      3441.0,
+      3510.3,
+      3585.6,
+      3661.1,
+      3706.5,
+      3776.5,
+      3847.8,
+      3915.4,
+      3987.3,
+      4039.8,
+      4304.1
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "liquid/lfm2.5-1.2b",
+  "wall_total_s": 0.0
+}
