@@ -1,0 +1,2 @@
+
+Every distributed ledger we operate is, at bottom, a single append

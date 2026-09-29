@@ -1,0 +1,4 @@
+
+Every distributed ledger we operate is, at bottom, a single append-only file partitioned across a fleet of ordinary machines, and the elegance of that arrangement is that correctness flows from one narrow rule: an entry is committed only once a majority of voters have acknowledged it from persistent storage. Everything else in the stack, from the leader election timer to the background compactor, exists to make that rule cheap enough to honour at line rate. This report summarises how the current generation satisfies the rule in production, what we measured, and where the headroom lies.
+
+We begin with the acknowledgement path. A client request is parsed, checksummed, and handed to the append pipeline, which has two stages. The first stage serialises the entry into the local write-ahead log and returns a durable offset once the fsync completes;
