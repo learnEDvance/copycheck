@@ -1,7 +1,7 @@
 {
   "start_ts": 1790697345.0642164,
   "run_id": "20260929-212545",
-  "commit_global": 17,
+  "commit_global": 18,
   "models": {
     "gemma-3-270m-it": {
       "done_cells": [
@@ -24,7 +24,7 @@
         "table-M",
         "table-S"
       ],
-      "commits": 17,
+      "commits": 18,
       "no_content": [
         "gibberish-M",
         "gibberish-L",
@@ -34,6 +34,11 @@
         "table-L",
         "data-M",
         "data-L"
+      ]
+    },
+    "liquid/lfm2.5-1.2b": {
+      "done_cells": [
+        "gibberish-S"
       ]
     }
   },
