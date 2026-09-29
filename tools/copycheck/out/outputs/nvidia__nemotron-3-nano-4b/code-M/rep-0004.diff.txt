@@ -1,0 +1,73 @@
+### SOURCE
+"""Event ordering helpers for the collector agents."""
+
+import itertools
+import time
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class Event:
+    """A single observed mutation with its causal token."""
+
+    seq: int
+    source_id: str
+    payload: str
+    received_at: float = time.monotonic()
+
+
+def order_events(events: Iterator[Event]) -> Iterator[Event]:
+    """Group events by source, preserving sequence."""
+    key = lambda e: e.source_id
+    for source_id, group in itertools.groupby(events, key):
+        for event in sorted(group, key=lambda e: e.seq):
+            if event.seq < 0:
+                raise ValueError(f"negative sequence {event.seq!r}")
+            yield event
+
+### EXTRACTED OUTPUT
+"""Event ordering helpers for the collector agents."""
+
+import itertools
+import time
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class Event:
+    """A single observed mutation with its causal token."""
+
+    seq: int
+    source_id: str
+    payload: str
+    received_at: float = time.monotonic()
+
+
+def order_events(events: Iterator[Event]) -> Iterator[Event]:
+    """Group events by source, preserving sequence."""
+    key = lambda e: e.source_id
+    for source_id, group in itertools.groupby(events, key):
+        for event in sorted(group, key=lambda e: e.seq):
+            if event.seq < 0:
+                raise ValueError(f"negative sequence {event.seq!r}")
+            yield event
+### METRICS
+{
+  "src_len": 701,
+  "out_len": 700,
+  "edit_distance": 1,
+  "cer": 0.0014265335235378032,
+  "exact": false,
+  "insertions": 0,
+  "deletions": 1,
+  "substitutions": 0,
+  "lcp": 700,
+  "lcs_len": 700,
+  "pct_conserved": 0.9986,
+  "first_divergence": 700,
+  "exact_pct": 0.0,
+  "len_ratio": 0.9986
+}
+### FIRST DIVERGENCE
+  src: '\n'
+  out: ''
