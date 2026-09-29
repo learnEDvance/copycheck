@@ -15,34 +15,35 @@ A *copy-fidelity* benchmark. Each model is shown 18 fixed texts — 6 content ty
 <pre>
 ┌─CopyCheck live run · refresh: every cell commit──────────────────────┐
 ├────────────────────────────┬─────────────────────────────────────────┤
-│ loaded model               │ lfm2.5-1.2b                             │
-│ samples done               │ 2202 / 7632  <span style="color:#8a8a8a">██████</span><span style="color:#3a3a3a">░░░░░░░░░░░░░░</span>       │
-│ elapsed                    │ 00:37:47                                │
-│ last update                │ 2026-09-29 22:03:32                     │
-│ last commit                │ #36                                     │
+│ loaded model               │ nemotron-3-nano-4b                      │
+│ samples done               │ 2226 / 7632  <span style="color:#8a8a8a">██████</span><span style="color:#3a3a3a">░░░░░░░░░░░░░░</span>       │
+│ elapsed                    │ 00:41:11                                │
+│ last update                │ 2026-09-29 22:06:55                     │
+│ last commit                │ #37                                     │
 ├────────────────────────────┼──────────┼──────────┼───────────────────┤
 │ model                      │ <span style="color:#3a3a3a">CER</span>      │ <span style="color:#3a3a3a">exact%</span>   │ <span style="color:#3a3a3a">bar</span>               │
 │ gemma-3-270m-it            │ <span style="color:#ff4d4d">28.22%</span>   │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#ff4d4d">██████████</span><span style="color:#3a3a3a">░░░░</span>    │
 │ lfm2.5-1.2b                │ <span style="color:#ffb300">6.60%</span>    │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#ffb300">█████████████</span><span style="color:#3a3a3a">░</span>    │
-│ <span style="color:#3a3a3a">pending models: nemotron-3-nano-4b, granite-4-h-tiny, gemma-4-e2b, bonsai-27b, rnj-1, gemma-4-e4b, qwen3.5-9b, gemma-4-12b, glm-4.6v-flash</span>│
+│ nemotron-3-nano-4b         │ <span style="color:#00cc66">0.83%</span>    │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#00cc66">██████████████</span>    │
+│ <span style="color:#3a3a3a">pending models: granite-4-h-tiny, gemma-4-e2b, bonsai-27b, rnj-1, gemma-4-e4b, qwen3.5-9b, gemma-4-12b, glm-4.6v-flash</span>│
 ├──────────────────────────────────────────────────────────────────────┤
 │ <span style="color:#3a3a3a">by type</span>                                                             │
 ├────────────────────────────┼──────────┼──────────┼───────────────────┤
 │ type                      │ <span style="color:#3a3a3a">CER</span>      │ <span style="color:#3a3a3a">exact%</span>   │ <span style="color:#3a3a3a">bar</span>               │
-│ gibberish                  │ <span style="color:#ffb300">8.92%</span>    │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#ffb300">█████████████</span><span style="color:#3a3a3a">░</span>    │
+│ gibberish                  │ <span style="color:#ffb300">8.23%</span>    │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#ffb300">█████████████</span><span style="color:#3a3a3a">░</span>    │
 │ prose                      │ <span style="color:#ff4d4d">19.35%</span>   │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#ff4d4d">███████████</span><span style="color:#3a3a3a">░░░</span>    │
 │ code                       │ <span style="color:#ffb300">4.09%</span>    │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#ffb300">█████████████</span><span style="color:#3a3a3a">░</span>    │
 │ list                       │ <span style="color:#ffb300">4.99%</span>    │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#ffb300">█████████████</span><span style="color:#3a3a3a">░</span>    │
 │ table                      │ <span style="color:#ff4d4d">39.91%</span>   │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#ff4d4d">████████</span><span style="color:#3a3a3a">░░░░░░</span>    │
 │ data                       │ <span style="color:#ff4d4d">21.08%</span>   │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#ff4d4d">███████████</span><span style="color:#3a3a3a">░░░</span>    │
 ├──────────────────────────────────────────────────────────────────────┤
-│ Best copier so far: lfm2.5-1.2b @ 6.60% CER (0.0% exact). Worst:     │
-│ gemma-3-270m-it @ 28.22%. The prompt-variant grid below shows        │
-│ whether a different sys…                                             │
+│ Best copier so far: nemotron-3-nano-4b @ 0.83% CER (0.0% exact).     │
+│ Worst: gemma-3-270m-it @ 28.22%. The prompt-variant grid below shows │
+│ whether a differ…                                                    │
 └──────────────────────────────────────────────────────────────────────┘
 </pre>
 
-**Run ID:** `20260929-212545`  ·  **Last update:** 2026-09-29 22:03:32  ·  **Elapsed:** 00:37:47  ·  **Commits:** 36
+**Run ID:** `20260929-212545`  ·  **Last update:** 2026-09-29 22:06:55  ·  **Elapsed:** 00:41:11  ·  **Commits:** 37
 
 ## How to read the results
 
@@ -72,12 +73,13 @@ A *copy-fidelity* benchmark. Each model is shown 18 fixed texts — 6 content ty
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | gemma-3-270m-it | <span style="color:#ff4d4d">28.22%</span> | <span style="color:#00cc66">0.00%</span> | 1025 | 5 | 0 | 0.14 |
 | lfm2.5-1.2b | <span style="color:#ffb300">6.60%</span> | <span style="color:#00cc66">0.00%</span> | 1033 | 1 | 0 | 0.24 |
+| nemotron-3-nano-4b | <span style="color:#00cc66">0.83%</span> | <span style="color:#00cc66">0.00%</span> | 20 | 0 | 0 | 6.32 |
 
 ## Content-type summary
 
 | Type | CER | exact% | samples |
 | --- | ---: | ---: | ---: |
-| gibberish | <span style="color:#ffb300">8.92%</span> | <span style="color:#00cc66">0.00%</span> | 216 |
+| gibberish | <span style="color:#ffb300">8.23%</span> | <span style="color:#00cc66">0.00%</span> | 236 |
 | prose | <span style="color:#ff4d4d">19.35%</span> | <span style="color:#00cc66">0.00%</span> | 505 |
 | code | <span style="color:#ffb300">4.09%</span> | <span style="color:#00cc66">0.00%</span> | 309 |
 | list | <span style="color:#ffb300">4.99%</span> | <span style="color:#00cc66">0.00%</span> | 406 |
@@ -90,7 +92,7 @@ A *copy-fidelity* benchmark. Each model is shown 18 fixed texts — 6 content ty
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | **gemma-3-270m-it** | <span style="color:#00cc66">1%</span> | <span style="color:#ff4d4d">99%</span> | <span style="color:#ff4d4d">100%</span> | <span style="color:#00cc66">1%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#ff4d4d">90%</span> | <span style="color:#00cc66">2%</span> | <span style="color:#ff4d4d">100%</span> | <span style="color:#ff4d4d">100%</span> | <span style="color:#00cc66">2%</span> | <span style="color:#ff4d4d">10%</span> | <span style="color:#ff4d4d">100%</span> | <span style="color:#ff4d4d">66%</span> | <span style="color:#ff4d4d">64%</span> | <span style="color:#ff4d4d">100%</span> | <span style="color:#ff4d4d">28%</span> | <span style="color:#ff4d4d">100%</span> | <span style="color:#ff4d4d">100%</span> |
 | **lfm2.5-1.2b** | <span style="color:#ffb300">2%</span> | <span style="color:#ff4d4d">99%</span> | <span style="color:#ff4d4d">100%</span> | <span style="color:#00cc66">1%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#ff4d4d">99%</span> | <span style="color:#00cc66">2%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#ff4d4d">100%</span> | <span style="color:#00cc66">2%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#ff4d4d">99%</span> | <span style="color:#00cc66">2%</span> | <span style="color:#ff4d4d">24%</span> | <span style="color:#ff4d4d">100%</span> | <span style="color:#00cc66">2%</span> | <span style="color:#ff4d4d">99%</span> | <span style="color:#ff4d4d">100%</span> |
-| **nemotron-3-nano-4b** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
+| **nemotron-3-nano-4b** | <span style="color:#00cc66">1%</span> | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
 | **granite-4-h-tiny** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
 | **gemma-4-e2b** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
 | **bonsai-27b** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
@@ -148,6 +150,29 @@ A *copy-fidelity* benchmark. Each model is shown 18 fixed texts — 6 content ty
 | data-M | <span style="color:#ff4d4d">99.42%</span> | <span style="color:#00cc66">0.00%</span> | 7 | 0 | 0 | 0.57 |
 | data-L | <span style="color:#ff4d4d">99.61%</span> | <span style="color:#00cc66">0.00%</span> | 3 | 1 | 0 | 1.34 |
 
+### nemotron-3-nano-4b
+
+| Cell | CER | exact% | samples | empty | reasoning-only | avg wall (s) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| gibberish-S | <span style="color:#00cc66">0.83%</span> | <span style="color:#00cc66">0.00%</span> | 20 | 0 | 0 | 6.32 |
+| gibberish-M | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| gibberish-L | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| prose-S | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| prose-M | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| prose-L | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| code-S | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| code-M | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| code-L | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| list-S | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| list-M | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| list-L | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| table-S | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| table-M | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| table-L | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| data-S | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| data-M | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| data-L | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+
 
 ## Prompt-variant comparison
 
@@ -163,6 +188,10 @@ One temperature-0 sample per variant per cell, to see which system prompt gets t
 | lfm2.5-1.2b | echo | <span style="color:#ffb300">3.33%</span> | 0.00% | 18 |
 | lfm2.5-1.2b | few-shot | <span style="color:#ff4d4d">15.89%</span> | 0.00% | 18 |
 | lfm2.5-1.2b | no-thinking | <span style="color:#ffb300">3.64%</span> | 0.00% | 18 |
+| nemotron-3-nano-4b | codeblock | <span style="color:#00cc66">0.83%</span> | 0.00% | 1 |
+| nemotron-3-nano-4b | echo | <span style="color:#00cc66">0.83%</span> | 0.00% | 1 |
+| nemotron-3-nano-4b | few-shot | <span style="color:#00cc66">0.83%</span> | 0.00% | 1 |
+| nemotron-3-nano-4b | no-thinking | <span style="color:#00cc66">0.83%</span> | 0.00% | 1 |
 
 ## Skipped / failed models
 
@@ -170,28 +199,28 @@ _No models skipped._
 
 ## Conclusion
 
-Best copier so far: lfm2.5-1.2b @ 6.60% CER (0.0% exact). Worst: gemma-3-270m-it @ 28.22%. The prompt-variant grid below shows whether a different system prompt rescues the weaker copiers.
+Best copier so far: nemotron-3-nano-4b @ 0.83% CER (0.0% exact). Worst: gemma-3-270m-it @ 28.22%. The prompt-variant grid below shows whether a different system prompt rescues the weaker copiers.
 
 <details>
 <summary><b>Machine-readable status</b></summary>
 
 ```
 run_id = 20260929-212545
-loaded_model = lfm2.5-1.2b
-samples_done = 2202
+loaded_model = nemotron-3-nano-4b
+samples_done = 2226
 total_samples = 7632
-elapsed_sec = 2267.3759260177612
-last_update = 2026-09-29 22:03:32
-commit_num = 36
+elapsed_sec = 2470.5086488723755
+last_update = 2026-09-29 22:06:55
+commit_num = 37
 model.gemma-3-270m-it.cer = 0.2822283384963726
 model.gemma-3-270m-it.exact_pct = 0.0
 model.gemma-3-270m-it.samples = 1025
 model.lfm2.5-1.2b.cer = 0.06597858577505032
 model.lfm2.5-1.2b.exact_pct = 0.0
 model.lfm2.5-1.2b.samples = 1033
-model.nemotron-3-nano-4b.cer = 0.0
+model.nemotron-3-nano-4b.cer = 0.008333333333333333
 model.nemotron-3-nano-4b.exact_pct = 0.0
-model.nemotron-3-nano-4b.samples = 0
+model.nemotron-3-nano-4b.samples = 20
 model.granite-4-h-tiny.cer = 0.0
 model.granite-4-h-tiny.exact_pct = 0.0
 model.granite-4-h-tiny.samples = 0
