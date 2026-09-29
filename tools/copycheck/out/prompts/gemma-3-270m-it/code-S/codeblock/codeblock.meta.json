@@ -1,0 +1,121 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T21:32:52",
+  "model": "gemma-3-270m-it",
+  "cell": "code-S",
+  "type": "code",
+  "size": "S",
+  "rep": 1,
+  "variant": "codeblock",
+  "src": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Copy the text between COPYSTART and COPYEND verbatim into a single fenced code block, character for character. Output nothing outside the code block."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2708,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)",
+  "metrics": {
+    "src_len": 119,
+    "out_len": 119,
+    "edit_distance": 2,
+    "cer": 0.01680672268907563,
+    "exact": false,
+    "insertions": 1,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 118,
+    "pct_conserved": 0.9916,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 1.0
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 95,
+    "completion_tokens": 46,
+    "total_tokens": 141,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790697772,
+  "id": "chatcmpl-qjr1pw9le35p44j3espxe",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 51.9,
+    "ttft_ms": 52.0,
+    "wall_ms": 382.0,
+    "delta_count": 45,
+    "deltas": [
+      52.0,
+      63.7,
+      72.0,
+      79.6,
+      87.9,
+      95.8,
+      103.5,
+      111.4,
+      120.1,
+      127.7,
+      135.5,
+      143.4,
+      151.0,
+      158.8,
+      167.5,
+      174.5,
+      183.0,
+      190.7,
+      198.8,
+      206.9,
+      214.2,
+      222.0,
+      228.6,
+      235.3,
+      241.8,
+      248.3,
+      254.4,
+      260.7,
+      267.5,
+      273.5,
+      280.9,
+      287.4,
+      293.4,
+      300.1,
+      306.1,
+      312.1,
+      319.2,
+      326.4,
+      333.3,
+      340.5,
+      347.1,
+      354.3,
+      361.2,
+      367.3,
+      373.7
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "gemma-3-270m-it",
+  "wall_total_s": 0.39
+}

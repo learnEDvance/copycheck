@@ -1,0 +1,82 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T21:32:52",
+  "model": "gemma-3-270m-it",
+  "cell": "code-S",
+  "type": "code",
+  "size": "S",
+  "rep": 1,
+  "variant": "no-thinking",
+  "src": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Do not think out loud. Do not reason. Do not plan. Simply output the text between COPYSTART and COPYEND verbatim and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2708,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nimport os\n",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nimport os",
+  "metrics": {
+    "src_len": 119,
+    "out_len": 10,
+    "edit_distance": 111,
+    "cer": 0.9327731092436975,
+    "exact": false,
+    "insertions": 1,
+    "deletions": 110,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 9,
+    "pct_conserved": 0.0756,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 0.084
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 96,
+    "completion_tokens": 7,
+    "total_tokens": 103,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790697772,
+  "id": "chatcmpl-ywzirsq5n24bizfjoplj",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 111.4,
+    "ttft_ms": 111.5,
+    "wall_ms": 256.3,
+    "delta_count": 6,
+    "deltas": [
+      111.5,
+      147.5,
+      188.5,
+      222.8,
+      238.3,
+      246.0
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "gemma-3-270m-it",
+  "wall_total_s": 0.26
+}
