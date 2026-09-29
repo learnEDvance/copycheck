@@ -1,0 +1,105 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T22:48:20",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 1,
+  "variant": "few-shot",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Example: if the text to copy is exactly {START}abc 123{END}, you output `abc 123` with nothing else. Pay no attention to formatting hints in the text itself. Now copy the text between {START} and {END} exactly, character for character, and output nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "reasoning": "We need to output only the content between {START} and {END}. The user gave \"Copy this text exactly, between the markers: COPYSTART Cut-over checklist: ... COPYEND\". So we must output:\n\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nBut note there is a line \"COPYSTART\" before the text? The markers are COPYSTART and COPYEND. The content between them includes \"Cut-over checklist:\" etc. Also includes \"COPYSTART\" at start? Actually the user wrote:\n\nCopy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND\n\nThus the content between markers includes \"Cut-over checklist:\" line and subsequent lines. The \"COPYSTART\" is a marker itself, not part of output? The instruction: copy text between {START} and {END}. Here markers are COPYSTART and COPYEND. So we should output everything after COPYSTART up to before COPYEND, i.e.:\n\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nThus output exactly that block. No extra formatting. Ensure line breaks preserved. Output as plain text.\n",
+  "reasoning_only": false,
+  "extracted": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 115,
+    "edit_distance": 1,
+    "cer": 0.008620689655172414,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 115,
+    "lcs_len": 115,
+    "pct_conserved": 0.9914,
+    "first_divergence": 115,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9914
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 138,
+    "completion_tokens": 329,
+    "total_tokens": 467,
+    "completion_tokens_details": {
+      "reasoning_tokens": 297
+    }
+  },
+  "created": 1790702300,
+  "id": "chatcmpl-oah0sh7zevajldab0t9zi",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 370.7,
+    "ttft_ms": 9130.8,
+    "wall_ms": 9919.8,
+    "delta_count": 29,
+    "deltas": [
+      9130.8,
+      9158.0,
+      9186.1,
+      9214.1,
+      9239.7,
+      9267.0,
+      9292.5,
+      9319.1,
+      9345.5,
+      9371.9,
+      9399.8,
+      9427.0,
+      9453.3,
+      9479.8,
+      9507.6,
+      9534.9,
+      9561.3,
+      9589.8,
+      9617.5,
+      9644.7,
+      9673.4,
+      9699.1,
+      9726.3,
+      9754.0,
+      9780.6,
+      9807.4,
+      9835.1,
+      9861.3,
+      9888.9
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 9.93
+}
