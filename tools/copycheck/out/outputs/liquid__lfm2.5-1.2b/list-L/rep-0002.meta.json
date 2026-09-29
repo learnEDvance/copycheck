@@ -1,0 +1,74 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T21:55:45",
+  "model": "liquid/lfm2.5-1.2b",
+  "cell": "list-L",
+  "type": "list",
+  "size": "L",
+  "rep": 2,
+  "variant": "baseline",
+  "src": "Operator checklist for the quarterly data centre migration:\n\n1. **Pre-flight checks (two weeks out).**\n   - Schedule maintenance on the staging cluster; agree the window with\n     the on-call roster so that no overlapping deploys are in flight.\n   - Confirm the network circuit between `dc-eu-west-1a` and\n     `dc-eu-west-1b` has a round-trip time under 3ms on 200 probes.\n   - Freeze the configuration repository and tag it `migrate-2026-09`.\n   - Notify the security desk so the access logs are rotated early.\n2. **Data movement (seven days out).**\n   - Snapshot each partition using `copycheck snapshot` with the locked\n     range option, and record the resulting manifest hashes.\n     a. The `orders` partition must finish its sync within 36 hours.\n     b. The `audit` partition may use the throttled bandwidth window.\n   - Verify checksum parity via the reconciliation job; any mismatch\n     fails the batch and writes a `REJECTED` marker to the control topic.\n3. **Cut-over day.**\n   - Place all producers into `readonly` mode and drain the ingress topic.\n   - Promote the follower; confirm the new leader reports `UP`.\n   - Run the equivalence probe for a 1% sampling of the records:\n     a. Compare `(key, seq, hash)` triples from both clusters.\n     b. Fail the switch if any triple differs after three retries.\n   - Switch the DNS record and verify round robin from edge sites.\n4. **Post-migration.**\n   - Leave the old cluster writable for 72 hours as a fallback.\n   - Monitor replication lag hourly; raise a ticket if it exceeds 5s.\n   - Announce the migration on the status page with the full runbook id.\n   - Publish the post-mortem and the as-run checklist to the wiki.\n5. **Rollback triggers.**\n   - Any unresolved `CONFLICT` on the control topic after two hours.\n   - A follower that cannot keep up with the daily compaction cadence.\n   - A verified checksum drift greater than 0.001% of total records.\n   - A DNS switch that does not converge within fifteen minutes.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nOperator checklist for the quarterly data centre migration:\n\n1. **Pre-flight checks (two weeks out).**\n   - Schedule maintenance on the staging cluster; agree the window with\n     the on-call roster so that no overlapping deploys are in flight.\n   - Confirm the network circuit between `dc-eu-west-1a` and\n     `dc-eu-west-1b` has a round-trip time under 3ms on 200 probes.\n   - Freeze the configuration repository and tag it `migrate-2026-09`.\n   - Notify the security desk so the access logs are rotated early.\n2. **Data movement (seven days out).**\n   - Snapshot each partition using `copycheck snapshot` with the locked\n     range option, and record the resulting manifest hashes.\n     a. The `orders` partition must finish its sync within 36 hours.\n     b. The `audit` partition may use the throttled bandwidth window.\n   - Verify checksum parity via the reconciliation job; any mismatch\n     fails the batch and writes a `REJECTED` marker to the control topic.\n3. **Cut-over day.**\n   - Place all producers into `readonly` mode and drain the ingress topic.\n   - Promote the follower; confirm the new leader reports `UP`.\n   - Run the equivalence probe for a 1% sampling of the records:\n     a. Compare `(key, seq, hash)` triples from both clusters.\n     b. Fail the switch if any triple differs after three retries.\n   - Switch the DNS record and verify round robin from edge sites.\n4. **Post-migration.**\n   - Leave the old cluster writable for 72 hours as a fallback.\n   - Monitor replication lag hourly; raise a ticket if it exceeds 5s.\n   - Announce the migration on the status page with the full runbook id.\n   - Publish the post-mortem and the as-run checklist to the wiki.\n5. **Rollback triggers.**\n   - Any unresolved `CONFLICT` on the control topic after two hours.\n   - A follower that cannot keep up with the daily compaction cadence.\n   - A verified checksum drift greater than 0.001% of total records.\n   - A DNS switch that does not converge within fifteen minutes.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 5042,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\n",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "",
+  "metrics": {
+    "src_len": 1986,
+    "out_len": 0,
+    "edit_distance": 1986,
+    "cer": 1.0,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1986,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 0,
+    "pct_conserved": 0.0,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 0.0
+  },
+  "finish_reason": null,
+  "usage": null,
+  "created": 1790699145,
+  "id": "chatcmpl-dru1950887fks0guclsjm",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 2128.5,
+    "ttft_ms": 2128.7,
+    "wall_ms": 4377.4,
+    "delta_count": 5,
+    "deltas": [
+      2128.7,
+      2630.7,
+      3151.3,
+      3682.3,
+      4254.2
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "liquid/lfm2.5-1.2b",
+  "wall_total_s": 0.0
+}
