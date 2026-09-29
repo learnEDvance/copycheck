@@ -1,0 +1,31 @@
+### SOURCE
+The table shows the default service ports.
+
+| Service | Port |
+| ------- | ---- |
+| copy    | 8080 |
+| sync    | 9091 |
+
+### EXTRACTED OUTPUT
+
+The table shows the default service ports.
+### METRICS
+{
+  "src_len": 120,
+  "out_len": 43,
+  "edit_distance": 79,
+  "cer": 0.6583333333333333,
+  "exact": false,
+  "insertions": 1,
+  "deletions": 78,
+  "substitutions": 0,
+  "lcp": 0,
+  "lcs_len": 42,
+  "pct_conserved": 0.35,
+  "first_divergence": 0,
+  "exact_pct": 0.0,
+  "len_ratio": 0.3583
+}
+### FIRST DIVERGENCE
+  src: 'The table shows the default service ports.\n\n| Service | Port'
+  out: '\nThe table shows the default service ports.'
