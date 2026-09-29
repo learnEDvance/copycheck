@@ -1,0 +1,125 @@
+{
+  "start_ts": 1790697345.0642164,
+  "run_id": "20260929-212545",
+  "commit_global": 0,
+  "models": {
+    "gemma-3-270m-it": {
+      "done_cells": [
+        "gibberish-S"
+      ]
+    }
+  },
+  "models_cfg": {
+    "gemma-3-270m-it": {
+      "slots": 32,
+      "repeats": 100,
+      "est_gb": 0.542834816,
+      "ctx": 16384,
+      "gpu": null,
+      "size": 542834816,
+      "est_total_gb": 0.505556640625,
+      "est_gpu_gb": 0.505556640625
+    },
+    "liquid/lfm2.5-1.2b": {
+      "slots": 32,
+      "repeats": 100,
+      "est_gb": 1.24633184,
+      "ctx": 16384,
+      "gpu": null,
+      "size": 1246331840,
+      "est_total_gb": 1.16,
+      "est_gpu_gb": 1.16
+    },
+    "nvidia/nemotron-3-nano-4b": {
+      "slots": 8,
+      "repeats": 20,
+      "est_gb": 2.837173509,
+      "ctx": 16384,
+      "gpu": null,
+      "size": 2837173509,
+      "est_total_gb": 2.64,
+      "est_gpu_gb": 2.64
+    },
+    "ibm/granite-4-h-tiny": {
+      "slots": 4,
+      "repeats": 20,
+      "est_gb": 4.231029544,
+      "ctx": 16384,
+      "gpu": 1.0,
+      "size": 4231029544,
+      "est_total_gb": 3.94,
+      "est_gpu_gb": 3.94
+    },
+    "google/gemma-4-e2b": {
+      "slots": 8,
+      "repeats": 20,
+      "est_gb": 4.414788475,
+      "ctx": 16384,
+      "gpu": 0.8571428571428571,
+      "size": 4414788475,
+      "est_total_gb": 4.11,
+      "est_gpu_gb": 4.11
+    },
+    "prism-ml/bonsai-27b": {
+      "slots": 2,
+      "repeats": 20,
+      "est_gb": 4.734614604,
+      "ctx": 16384,
+      "gpu": 0.34375,
+      "size": 4734614604,
+      "est_total_gb": 4.41,
+      "est_gpu_gb": 4.41
+    },
+    "essentialai/rnj-1": {
+      "slots": 2,
+      "repeats": 20,
+      "est_gb": 5.114143239,
+      "ctx": 16384,
+      "gpu": 0.65625,
+      "size": 5114143239,
+      "est_total_gb": 4.76,
+      "est_gpu_gb": 4.76
+    },
+    "google/gemma-4-e4b": {
+      "slots": 4,
+      "repeats": 20,
+      "est_gb": 6.326938154,
+      "ctx": 16384,
+      "gpu": 0.5476190476190477,
+      "size": 6326938154,
+      "est_total_gb": 5.89,
+      "est_gpu_gb": 5.89
+    },
+    "qwen/qwen3.5-9b": {
+      "slots": 2,
+      "repeats": 20,
+      "est_gb": 6.548927711,
+      "ctx": 16384,
+      "gpu": 0.5625,
+      "size": 6548927711,
+      "est_total_gb": 6.1,
+      "est_gpu_gb": 6.1
+    },
+    "google/gemma-4-12b": {
+      "slots": 2,
+      "repeats": 20,
+      "est_gb": 7.556572852,
+      "ctx": 16384,
+      "gpu": 0.5625,
+      "size": 7556572852,
+      "est_total_gb": 7.04,
+      "est_gpu_gb": 7.04
+    },
+    "zai-org/glm-4.6v-flash": {
+      "slots": 2,
+      "repeats": 20,
+      "est_gb": 7.953555436,
+      "ctx": 16384,
+      "gpu": 0.5,
+      "size": 7953555436,
+      "est_total_gb": 7.41,
+      "est_gpu_gb": 7.41
+    }
+  },
+  "skipped": []
+}
