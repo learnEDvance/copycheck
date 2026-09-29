@@ -1,0 +1,123 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T21:56:54",
+  "model": "liquid/lfm2.5-1.2b",
+  "cell": "table-S",
+  "type": "table",
+  "size": "S",
+  "rep": 85,
+  "variant": "baseline",
+  "src": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2710,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\n",
+  "metrics": {
+    "src_len": 120,
+    "out_len": 122,
+    "edit_distance": 2,
+    "cer": 0.016666666666666666,
+    "exact": false,
+    "insertions": 2,
+    "deletions": 0,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 120,
+    "pct_conserved": 1.0,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 1.0167
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 135,
+    "completion_tokens": 48,
+    "total_tokens": 183,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790699215,
+  "id": "chatcmpl-gv799hs4tamj8dz7zyuunp",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 1023.4,
+    "ttft_ms": 1023.5,
+    "wall_ms": 4192.1,
+    "delta_count": 47,
+    "deltas": [
+      1023.5,
+      1099.4,
+      1170.4,
+      1241.0,
+      1309.8,
+      1372.6,
+      1440.2,
+      1507.6,
+      1570.8,
+      1643.3,
+      1711.7,
+      1779.3,
+      1847.6,
+      1912.8,
+      1981.8,
+      2066.0,
+      2115.8,
+      2181.6,
+      2247.2,
+      2309.3,
+      2373.6,
+      2434.5,
+      2497.7,
+      2569.1,
+      2634.5,
+      2704.6,
+      2770.0,
+      2840.3,
+      2907.1,
+      2972.0,
+      3044.1,
+      3111.7,
+      3183.5,
+      3250.4,
+      3332.2,
+      3417.4,
+      3537.1,
+      3610.8,
+      3700.7,
+      3763.7,
+      3813.6,
+      3869.2,
+      3928.9,
+      3985.2,
+      4037.0,
+      4108.6,
+      4167.7
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "liquid/lfm2.5-1.2b",
+  "wall_total_s": 0.0
+}
