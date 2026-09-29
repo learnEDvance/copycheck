@@ -1,0 +1,55 @@
+### SOURCE
+Release verification checklist for build 4.2.1:
+
+1. **Artifact integrity.**
+   - Confirm the SHA-256 of `copycheck` matches the published digest.
+   - Spot-check the signature bundle `copycheck.sig` with the release key.
+2. **Configuration.**
+   - Verify `copycheck.toml` parses without warnings.
+   - Ensure the `output_dir` path is owned by the service user.
+3. **Battery.**
+   - Run the three-cell corpus and diff against the golden copy.
+     a. Byte-for-byte equality for the `gibberish` and `table` cells.
+     b. Normalised equality (LF only) for the `code` cell.
+4. **Rollback.**
+   - Keep the previous tarball in place until the smoke test passes.
+   - Document the `restore --from-tag` procedure in the runbook.
+
+### EXTRACTED OUTPUT
+
+Release verification checklist for build 4.2.1:
+1. **Artifact integrity.**
+   - Confirm the SHA-256 of `copycheck` matches the published digest.
+   - Spot-check the signature bundle `copycheck.sig` with the release key.
+2. **Configuration.**
+   - Verify `copycheck.toml` parses without warnings.
+   - Ensure the `output_dir` path is owned by the service user.
+3. **Battery.**
+   - Run the three-cell corpus and diff against the golden copy.
+     a. Byte-for-byte equality for the `gibberish` and `table` cells.
+     b. Normalised equality (LF only) for the `code` cell.
+4. **Rollback.**
+   - Keep the previous tarball in place until the smoke test passes.
+   - Document the `restore --from-tag` procedure in the runbook.
+
+
+### METRICS
+{
+  "src_len": 722,
+  "out_len": 723,
+  "edit_distance": 3,
+  "cer": 0.004155124653739612,
+  "exact": false,
+  "insertions": 2,
+  "deletions": 1,
+  "substitutions": 0,
+  "lcp": 0,
+  "lcs_len": 721,
+  "pct_conserved": 0.9986,
+  "first_divergence": 0,
+  "exact_pct": 0.0,
+  "len_ratio": 1.0014
+}
+### FIRST DIVERGENCE
+  src: 'Release verification checklist for build 4.2.1:\n\n1. **Artifa'
+  out: '\nRelease verification checklist for build 4.2.1:\n1. **Artifa'
