@@ -1,0 +1,100 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T22:23:46",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 1,
+  "variant": "codeblock",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Copy the text between COPYSTART and COPYEND verbatim into a single fenced code block, character for character. Output nothing outside the code block."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "```\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\n```",
+  "reasoning": "We need to output only a fenced code block with the text between COPYSTART and COPYEND verbatim. So include \"Two hundred milliseconds...\" etc. Must be exactly as given, including line breaks? The original: \n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND\n\nThus output:\n\n```text\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n```\n\nBut need to include the line breaks? The text includes a blank line after COPYSTART? Actually \"COPYSTART\\nTwo hundred...\". So code block should contain exactly that content: Two hundred... then newline then empty line? The original shows:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND\n\nThus after the sentence there's a blank line before COPYEND. So code block should have that blank line too. So output:\n\n```text\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\n```\n\nBut also include the preceding \"Two hundred...\" line? Actually the content between markers includes only the sentence and a blank line before COPYEND. So code block should contain that sentence then newline then empty line (i.e., two newlines). Let's produce:\n\n```text\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\n```\n\nThat matches. No extra spaces.\n",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 87,
+    "completion_tokens": 354,
+    "total_tokens": 441,
+    "completion_tokens_details": {
+      "reasoning_tokens": 327
+    }
+  },
+  "created": 1790700826,
+  "id": "chatcmpl-s5nus65b097r82a9d431vn",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 351.9,
+    "ttft_ms": 9322.3,
+    "wall_ms": 9985.4,
+    "delta_count": 24,
+    "deltas": [
+      9322.3,
+      9360.2,
+      9385.4,
+      9417.6,
+      9444.2,
+      9470.8,
+      9498.3,
+      9525.9,
+      9552.0,
+      9579.4,
+      9606.1,
+      9633.6,
+      9660.1,
+      9686.7,
+      9715.0,
+      9739.2,
+      9766.1,
+      9792.2,
+      9818.8,
+      9847.3,
+      9872.7,
+      9898.7,
+      9926.3,
+      9952.3
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 10.0
+}

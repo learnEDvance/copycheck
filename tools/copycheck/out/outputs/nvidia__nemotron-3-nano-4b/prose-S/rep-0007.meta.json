@@ -1,0 +1,98 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T22:22:39",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 7,
+  "variant": "baseline",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "reasoning": "We need to output only the copied text: \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n\nBut note there are line breaks? The markers include COPYSTART on its own line, then the sentence, then COPYEND. Should we include the line breaks? The instruction: \"Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break.\" So output includes the line breaks as they appear between markers. That is:\n\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nBut there are line breaks before and after? The text between markers includes \"Two hundred milliseconds...\" up to \"first.\" Then a newline then COPYEND. So the output should be exactly that sentence plus a trailing newline? Usually they'd want just the sentence without extra newline? But \"character for character\" includes line break at end maybe. Safer: output exactly the sentence with no extra characters, but there is a line break after it before COPYEND. The output should not include COPYSTART or COPYEND. So we output:\n\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nProbably that's it.\n",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 118,
+    "completion_tokens": 305,
+    "total_tokens": 423,
+    "completion_tokens_details": {
+      "reasoning_tokens": 280
+    }
+  },
+  "created": 1790700759,
+  "id": "chatcmpl-uyhm30gauygtgxhp3dq5m",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 2412.0,
+    "ttft_ms": 31087.1,
+    "wall_ms": 33120.8,
+    "delta_count": 22,
+    "deltas": [
+      31087.1,
+      31178.2,
+      31270.1,
+      31362.7,
+      31456.0,
+      31548.5,
+      31640.0,
+      31735.5,
+      31827.1,
+      31919.8,
+      32011.5,
+      32105.2,
+      32197.7,
+      32289.4,
+      32383.0,
+      32475.7,
+      32569.9,
+      32661.8,
+      32752.1,
+      32843.8,
+      32933.9,
+      33025.5
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 4.79
+}

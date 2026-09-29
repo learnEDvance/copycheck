@@ -1,0 +1,98 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T22:23:42",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 1,
+  "variant": "no-thinking",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Do not think out loud. Do not reason. Do not plan. Simply output the text between COPYSTART and COPYEND verbatim and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "reasoning": "We need to output only the text between COPYSTART and COPYEND verbatim. So we should output:\n\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nNo extra spaces? The markers are included in prompt but not in output. Just the text inside. Should be exactly that line. Probably include newline? It's a single sentence. Output just that.\n",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 87,
+    "completion_tokens": 110,
+    "total_tokens": 197,
+    "completion_tokens_details": {
+      "reasoning_tokens": 85
+    }
+  },
+  "created": 1790700822,
+  "id": "chatcmpl-yk49bshqo0fcc0pb461ng6",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 341.3,
+    "ttft_ms": 2676.2,
+    "wall_ms": 3270.7,
+    "delta_count": 22,
+    "deltas": [
+      2676.2,
+      2704.3,
+      2730.8,
+      2757.9,
+      2783.8,
+      2811.0,
+      2839.8,
+      2865.8,
+      2893.1,
+      2919.7,
+      2946.9,
+      2973.2,
+      2999.4,
+      3026.8,
+      3055.0,
+      3081.8,
+      3108.8,
+      3135.0,
+      3162.3,
+      3190.4,
+      3215.8,
+      3243.0
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 3.28
+}

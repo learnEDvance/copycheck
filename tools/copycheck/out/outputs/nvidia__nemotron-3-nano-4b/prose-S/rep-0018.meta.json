@@ -1,0 +1,98 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T22:23:14",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 18,
+  "variant": "baseline",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "reasoning": "We need to output only the copied text: \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n\nBut note there are line breaks? The original includes a blank line between sentences? Let's see:\n\n\"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\n\"\n\nThere is a period then newline then blank line? Actually the text: \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\\n\\n\"\n\nBut they said output only the copied text. Should we include the trailing newline? Probably yes, but it's just whitespace. The instruction: \"Output only the copied text.\" So produce exactly that string.\n\nThus answer:\n\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 118,
+    "completion_tokens": 207,
+    "total_tokens": 325,
+    "completion_tokens_details": {
+      "reasoning_tokens": 182
+    }
+  },
+  "created": 1790700794,
+  "id": "chatcmpl-fv9r6y5bh0pc3kh3kyw86i",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 665.5,
+    "ttft_ms": 16777.6,
+    "wall_ms": 18129.9,
+    "delta_count": 22,
+    "deltas": [
+      16777.6,
+      16841.0,
+      16906.9,
+      16967.8,
+      17030.1,
+      17090.3,
+      17151.5,
+      17213.6,
+      17273.5,
+      17335.1,
+      17398.6,
+      17459.3,
+      17520.6,
+      17580.1,
+      17640.0,
+      17701.9,
+      17761.5,
+      17822.6,
+      17885.1,
+      17945.9,
+      18007.3,
+      18067.2
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 0.0
+}

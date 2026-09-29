@@ -1,0 +1,98 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T22:22:39",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 2,
+  "variant": "baseline",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "reasoning": "We need to output only the copied text: \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n\nBut note there are line breaks? The markers include COPYSTART on one line, then the sentence, then COPYEND. Should we include line breaks? The instruction: \"Output only the copied text.\" The copied text includes the sentence and maybe line breaks between? The original text between markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND\n\nThus the output should be exactly that content without markers: \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n\nProbably no line breaks. So just one line.\n",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 118,
+    "completion_tokens": 192,
+    "total_tokens": 310,
+    "completion_tokens_details": {
+      "reasoning_tokens": 167
+    }
+  },
+  "created": 1790700759,
+  "id": "chatcmpl-4h4sx8ifilly648wd8rcco",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 2426.7,
+    "ttft_ms": 18736.7,
+    "wall_ms": 20858.7,
+    "delta_count": 22,
+    "deltas": [
+      18736.7,
+      18826.0,
+      18918.1,
+      19011.8,
+      19106.4,
+      19200.3,
+      19294.9,
+      19387.0,
+      19481.4,
+      19575.3,
+      19666.0,
+      19762.4,
+      19856.6,
+      19950.3,
+      20041.7,
+      20135.1,
+      20229.6,
+      20323.7,
+      20421.2,
+      20523.4,
+      20665.6,
+      20756.4
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 0.0
+}
