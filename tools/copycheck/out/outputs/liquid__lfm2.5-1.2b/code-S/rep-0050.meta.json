@@ -1,0 +1,121 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T21:49:27",
+  "model": "liquid/lfm2.5-1.2b",
+  "cell": "code-S",
+  "type": "code",
+  "size": "S",
+  "rep": 50,
+  "variant": "baseline",
+  "src": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2708,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nCOPYEND",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\n",
+  "metrics": {
+    "src_len": 119,
+    "out_len": 121,
+    "edit_distance": 2,
+    "cer": 0.01680672268907563,
+    "exact": false,
+    "insertions": 2,
+    "deletions": 0,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 119,
+    "pct_conserved": 1.0,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 1.0168
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 133,
+    "completion_tokens": 46,
+    "total_tokens": 179,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790698767,
+  "id": "chatcmpl-ygdpbncgplsmcydxfeclc",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 1212.3,
+    "ttft_ms": 1212.3,
+    "wall_ms": 4678.6,
+    "delta_count": 45,
+    "deltas": [
+      1212.3,
+      1292.6,
+      1365.0,
+      1440.1,
+      1509.8,
+      1585.0,
+      1652.4,
+      1722.8,
+      1794.1,
+      1866.5,
+      1954.3,
+      2013.1,
+      2083.4,
+      2153.5,
+      2225.8,
+      2300.1,
+      2369.0,
+      2435.8,
+      2509.5,
+      2579.4,
+      2647.7,
+      2718.9,
+      2791.0,
+      2862.2,
+      2933.8,
+      3004.6,
+      3074.4,
+      3148.6,
+      3217.0,
+      3284.7,
+      3357.8,
+      3430.7,
+      3494.0,
+      3621.6,
+      3692.5,
+      3793.2,
+      3874.3,
+      3964.5,
+      4021.1,
+      4086.3,
+      4166.4,
+      4244.1,
+      4335.1,
+      4425.3,
+      4510.5
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "liquid/lfm2.5-1.2b",
+  "wall_total_s": 0.0
+}

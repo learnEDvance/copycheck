@@ -1,0 +1,121 @@
+{
+  "run_id": "20260929-212545",
+  "ts": "2026-09-29T21:49:41",
+  "model": "liquid/lfm2.5-1.2b",
+  "cell": "code-S",
+  "type": "code",
+  "size": "S",
+  "rep": 1,
+  "variant": "echo",
+  "src": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim copier. Output only the text between COPYSTART and COPYEND, exactly as written. Nothing else. No markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2708,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nCOPYEND",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\n",
+  "metrics": {
+    "src_len": 119,
+    "out_len": 121,
+    "edit_distance": 2,
+    "cer": 0.01680672268907563,
+    "exact": false,
+    "insertions": 2,
+    "deletions": 0,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 119,
+    "pct_conserved": 1.0,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 1.0168
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 102,
+    "completion_tokens": 46,
+    "total_tokens": 148,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790698781,
+  "id": "chatcmpl-1n2dlsrrn2whzrzvjo9fkc",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 252.4,
+    "ttft_ms": 252.5,
+    "wall_ms": 668.8,
+    "delta_count": 45,
+    "deltas": [
+      252.5,
+      263.7,
+      276.6,
+      285.6,
+      294.4,
+      303.9,
+      312.5,
+      322.6,
+      331.9,
+      341.7,
+      350.8,
+      360.0,
+      369.9,
+      379.9,
+      388.1,
+      398.0,
+      407.4,
+      417.8,
+      427.5,
+      438.7,
+      446.1,
+      455.1,
+      463.4,
+      471.5,
+      483.7,
+      489.5,
+      498.1,
+      507.6,
+      517.1,
+      525.4,
+      534.7,
+      542.8,
+      551.6,
+      560.0,
+      568.2,
+      577.2,
+      585.8,
+      594.9,
+      603.2,
+      612.1,
+      620.9,
+      629.8,
+      638.2,
+      647.2,
+      655.7
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "liquid/lfm2.5-1.2b",
+  "wall_total_s": 0.68
+}
