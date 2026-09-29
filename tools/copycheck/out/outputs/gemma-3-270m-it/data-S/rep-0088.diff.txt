@@ -1,0 +1,32 @@
+### SOURCE
+customer_id,region,orders,revenue
+0041,eu-west,12,482.10
+0043,us-east,7,231.55
+0047,ap-south,19,1117.90
+0048,eu-west,3,64.00
+
+### EXTRACTED OUTPUT
+0041,eu-west,12,482.10
+0043,us-east,7,231.55
+0047,ap-south,19,1117.90
+0048,eu-west,3,64.00
+### METRICS
+{
+  "src_len": 125,
+  "out_len": 90,
+  "edit_distance": 35,
+  "cer": 0.28,
+  "exact": false,
+  "insertions": 0,
+  "deletions": 35,
+  "substitutions": 0,
+  "lcp": 0,
+  "lcs_len": 90,
+  "pct_conserved": 0.72,
+  "first_divergence": 0,
+  "exact_pct": 0.0,
+  "len_ratio": 0.72
+}
+### FIRST DIVERGENCE
+  src: 'customer_id,region,orders,revenue\n0041,eu-west,12,482.10\n004'
+  out: '0041,eu-west,12,482.10\n0043,us-east,7,231.55\n0047,ap-south,1'

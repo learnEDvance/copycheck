@@ -1,0 +1,34 @@
+### SOURCE
+customer_id,region,orders,revenue
+0041,eu-west,12,482.10
+0043,us-east,7,231.55
+0047,ap-south,19,1117.90
+0048,eu-west,3,64.00
+
+### EXTRACTED OUTPUT
+copystart
+customer_id,region,orders,revenue
+0041,eu-west,12,482.10
+0043,us-east,7,231.55
+0047,ap-south,19,1117.90
+0048,eu-west,3,64.00
+### METRICS
+{
+  "src_len": 125,
+  "out_len": 134,
+  "edit_distance": 11,
+  "cer": 0.088,
+  "exact": false,
+  "insertions": 10,
+  "deletions": 1,
+  "substitutions": 0,
+  "lcp": 1,
+  "lcs_len": 124,
+  "pct_conserved": 0.992,
+  "first_divergence": 1,
+  "exact_pct": 0.0,
+  "len_ratio": 1.072
+}
+### FIRST DIVERGENCE
+  src: 'ustomer_id,region,orders,revenue\n0041,eu-west,12,482.10\n0043'
+  out: 'opystart\ncustomer_id,region,orders,revenue\n0041,eu-west,12,4'
