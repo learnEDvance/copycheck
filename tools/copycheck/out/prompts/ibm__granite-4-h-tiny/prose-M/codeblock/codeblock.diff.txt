@@ -1,0 +1,25 @@
+### SOURCE
+Distributed systems are distinguished less by their topology than by the contracts they impose on failure, and none is more consequential than the acknowledgement. When a leader confirms a write before its peers have committed the same entry, it borrows durability from a promise that the protocol may later be forced to revoke. We therefore model every replica as a state machine that advances only through a totally ordered log, and we treat an inflight entry as provisional until a quorum of voters has persisted it. In our implementation the follower applies the entry lazily and reports its durable watermark back to the leader at intervals of at most one hundred milliseconds.
+
+### EXTRACTED OUTPUT
+
+### METRICS
+{
+  "src_len": 683,
+  "out_len": 0,
+  "edit_distance": 683,
+  "cer": 1.0,
+  "exact": false,
+  "insertions": 0,
+  "deletions": 683,
+  "substitutions": 0,
+  "lcp": 0,
+  "lcs_len": 0,
+  "pct_conserved": 0.0,
+  "first_divergence": 0,
+  "exact_pct": 0.0,
+  "len_ratio": 0.0
+}
+### FIRST DIVERGENCE
+  src: 'Distributed systems are distinguished less by their topology'
+  out: ''

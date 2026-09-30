@@ -1,0 +1,27 @@
+### SOURCE
+Distributed systems are distinguished less by their topology than by the contracts they impose on failure, and none is more consequential than the acknowledgement. When a leader confirms a write before its peers have committed the same entry, it borrows durability from a promise that the protocol may later be forced to revoke. We therefore model every replica as a state machine that advances only through a totally ordered log, and we treat an inflight entry as provisional until a quorum of voters has persisted it. In our implementation the follower applies the entry lazily and reports its durable watermark back to the leader at intervals of at most one hundred milliseconds.
+
+### EXTRACTED OUTPUT
+Distributed systems are distinguished less by their topology than by the contracts they impose on failure, and none is more consequential than the acknowledgement. When a leader confirms a write before its peers have committed the same entry, it borrows durability from a promise that the protocol may later be forced to revoke. We therefore model every replica as a state machine that advances only through a totally ordered log, and we treat an inflight entry as provisional until a quorum of voters has persisted it. In our implementation the follower applies the entry lazily and reports its durable watermark back to the leader at intervals of at most one hundred milliseconds.
+
+
+### METRICS
+{
+  "src_len": 683,
+  "out_len": 684,
+  "edit_distance": 1,
+  "cer": 0.0014641288433382138,
+  "exact": false,
+  "insertions": 1,
+  "deletions": 0,
+  "substitutions": 0,
+  "lcp": 683,
+  "lcs_len": 683,
+  "pct_conserved": 1.0,
+  "first_divergence": 683,
+  "exact_pct": 0.0,
+  "len_ratio": 1.0015
+}
+### FIRST DIVERGENCE
+  src: ''
+  out: '\n'
