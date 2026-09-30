@@ -1,0 +1,4 @@
+```
+COPYSTART
+Table 2 collates the integrity checks performed against the golden copy of the corpus on the last evening of the quarter. For every cell key we record the expected length in characters, the observed length, whether the two bytes matched exactly, and the digest of the file written to disk. The digest column reports the first twelve hex characters of the SHA-256 of each text, which suffices to distinguish any two cells in the corpus.
+```
