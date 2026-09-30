@@ -1,0 +1,37 @@
+```
+COPYSTART
+Operator checklist for the quarterly data centre migration:
+
+1. **Pre-flight checks (two weeks out).**
+   - Schedule maintenance on the staging cluster; agree the window with
+     the on-call roster so that no overlapping deploys are in flight.
+   - Confirm the network circuit between `dc-eu-west-1a` and
+     `dc-eu-west-1b` has a round-trip time under 3ms on 200 probes.
+   - Freeze the configuration repository and tag it `migrate-2026-09`.
+   - Notify the security desk so the access logs are rotated early.
+2. **Data movement (seven days out).**
+   - Snapshot each partition using `copycheck snapshot` with the locked
+     range option, and record the resulting manifest hashes.
+     a. The `orders` partition must finish its sync within 36 hours.
+     b. The `audit` partition may use the throttled bandwidth window.
+   - Verify checksum parity via the reconciliation job; any mismatch
+     fails the batch and writes a `REJECTED` marker to the control topic.
+3. **Cut-over day.**
+   - Place all producers into `readonly` mode and drain the ingress topic.
+   - Promote the follower; confirm the new leader reports `UP`.
+   - Run the equivalence probe for a 1% sampling of the records:
+     a. Compare `(key, seq, hash)` triples from both clusters.
+     b. Fail the switch if any triple differs after three retries.
+   - Switch the DNS record and verify round robin from edge sites.
+4. **Post-migration.**
+   - Leave the old cluster writable for 72 hours as a fallback.
+   - Monitor replication lag hourly; raise a ticket if it exceeds 5s.
+   - Announce the migration on the status page with the full runbook id.
+   - Publish the post-mortem and the as-run checklist to the wiki.
+5. **Rollback triggers.**
+   - Any unresolved `CONFLICT` on the control topic after two hours.
+   - A follower that cannot keep up with the daily compaction cadence.
+   - A verified checksum drift greater than 0.001% of total records.
+   - A DNS switch that does not converge within fifteen minutes.
+
+COPYEND
