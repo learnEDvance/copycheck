@@ -1,0 +1,98 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T21:41:07",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 5,
+  "variant": "baseline",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "reasoning": "We need to output only the copied text: \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n\nBut note there are line breaks? The markers show COPYSTART on one line, then the sentence, then COPYEND. So output should be exactly that sentence with no extra spaces or line breaks? Probably just the sentence.\n\nThus answer: Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 118,
+    "completion_tokens": 128,
+    "total_tokens": 246,
+    "completion_tokens_details": {
+      "reasoning_tokens": 103
+    }
+  },
+  "created": 1790784667,
+  "id": "chatcmpl-48phufxc5pxnl1ocn1bd2",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 2196.5,
+    "ttft_ms": 12008.9,
+    "wall_ms": 14058.1,
+    "delta_count": 22,
+    "deltas": [
+      12008.9,
+      12098.5,
+      12191.0,
+      12287.5,
+      12379.2,
+      12474.7,
+      12566.7,
+      12661.5,
+      12753.1,
+      12848.8,
+      12938.3,
+      13031.5,
+      13123.5,
+      13217.5,
+      13308.8,
+      13401.1,
+      13494.1,
+      13586.0,
+      13681.0,
+      13775.1,
+      13868.2,
+      13962.2
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 0.0
+}

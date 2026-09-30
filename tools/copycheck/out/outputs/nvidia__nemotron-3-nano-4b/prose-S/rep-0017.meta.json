@@ -1,0 +1,98 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T21:41:41",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 17,
+  "variant": "baseline",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "reasoning": "We need to output only the copied text: \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n\nBut note there are line breaks? The markers include COPYSTART on its own line, then the sentence, then COPYEND. Should we include the line breaks? The instruction: \"Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break.\" So output includes the line breaks as they appear between markers. That is:\n\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nBut there are line breaks before and after? The text between markers includes \"Two hundred milliseconds...\" up to \"first.\" Then a newline then COPYEND. So the output should be that sentence plus a newline? Usually they'd want just the sentence without extra newline at end maybe. But \"character for character\" includes line break after first period? There's a line break before COPYEND, but that is not part of the text between markers? The markers are on separate lines: COPYSTART (line), then sentence (line), then COPYEND (line). So the text between markers is just the sentence line. No trailing newline after it because next token is COPYEND. So output should be exactly \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\" with no extra spaces or newline.\n\nThus final answer: that sentence.\n",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 118,
+    "completion_tokens": 348,
+    "total_tokens": 466,
+    "completion_tokens_details": {
+      "reasoning_tokens": 323
+    }
+  },
+  "created": 1790784701,
+  "id": "chatcmpl-z60sxazbvwe8w0e09fzpq",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 806.9,
+    "ttft_ms": 23381.8,
+    "wall_ms": 24003.9,
+    "delta_count": 22,
+    "deltas": [
+      23381.8,
+      23432.7,
+      23458.3,
+      23489.1,
+      23515.9,
+      23542.4,
+      23568.6,
+      23596.5,
+      23621.7,
+      23647.7,
+      23675.0,
+      23701.8,
+      23731.0,
+      23757.8,
+      23783.9,
+      23811.9,
+      23839.5,
+      23867.1,
+      23894.2,
+      23922.1,
+      23948.3,
+      23975.1
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 3.7
+}

@@ -1,0 +1,98 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T21:41:32",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 13,
+  "variant": "baseline",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "reasoning": "We need to output only the copied text: \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n\nBut note there are line breaks? The markers include COPYSTART on its own line, then the sentence, then COPYEND. Should we include the line breaks? The instruction: \"Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break.\" So output includes the line breaks as they appear between markers. That is:\n\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nBut there are line breaks before and after? The text between markers includes \"Two hundred milliseconds...\" up to \"first.\" Then a newline then COPYEND. So the output should be exactly that sentence plus a trailing newline? Usually they'd want just the sentence without extra newline? But \"character for character\" includes line break at end maybe. Let's produce:\n\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nNo extra spaces or lines beyond that.\n",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 118,
+    "completion_tokens": 269,
+    "total_tokens": 387,
+    "completion_tokens_details": {
+      "reasoning_tokens": 244
+    }
+  },
+  "created": 1790784692,
+  "id": "chatcmpl-9jgmyqhf2qqoads3i2za",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 452.4,
+    "ttft_ms": 24451.4,
+    "wall_ms": 26035.9,
+    "delta_count": 22,
+    "deltas": [
+      24451.4,
+      24519.0,
+      24588.1,
+      24660.3,
+      24728.7,
+      24796.5,
+      24870.1,
+      24970.8,
+      25041.6,
+      25111.4,
+      25179.1,
+      25253.1,
+      25324.3,
+      25397.4,
+      25463.8,
+      25534.8,
+      25603.0,
+      25676.0,
+      25745.4,
+      25814.9,
+      25885.6,
+      25957.7
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 3.88
+}

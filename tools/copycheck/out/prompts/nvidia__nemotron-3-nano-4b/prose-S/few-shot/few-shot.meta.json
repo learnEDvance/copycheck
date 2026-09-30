@@ -1,0 +1,98 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T21:42:23",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 1,
+  "variant": "few-shot",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Example: if the text to copy is exactly {START}abc 123{END}, you output `abc 123` with nothing else. Pay no attention to formatting hints in the text itself. Now copy the text between {START} and {END} exactly, character for character, and output nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "reasoning": "We need to copy text between {START} and {END}. The user gave \"Copy this text exactly, between the markers: COPYSTART Two hundred milliseconds...\". Actually they wrote:\n\n\"Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND\"\n\nWe need to output only the content between {START} and {END}. The markers are \"COPYSTART\" and \"COPYEND\". So output: \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n\nBut note there may be newline after COPYSTART? The text includes line break. Should we preserve exactly? Probably include the line break between lines.\n\nThus output:\n\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nNo extra spaces or formatting.\n",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 131,
+    "completion_tokens": 219,
+    "total_tokens": 350,
+    "completion_tokens_details": {
+      "reasoning_tokens": 194
+    }
+  },
+  "created": 1790784743,
+  "id": "chatcmpl-ffqa6r052r5npy0dtsmea",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 376.7,
+    "ttft_ms": 5745.6,
+    "wall_ms": 6362.2,
+    "delta_count": 22,
+    "deltas": [
+      5745.6,
+      5772.9,
+      5800.1,
+      5828.2,
+      5855.6,
+      5882.4,
+      5911.0,
+      5936.6,
+      5962.6,
+      5989.7,
+      6016.3,
+      6044.3,
+      6074.3,
+      6099.5,
+      6125.5,
+      6174.6,
+      6201.8,
+      6227.8,
+      6254.4,
+      6281.0,
+      6307.5,
+      6335.2
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 6.37
+}

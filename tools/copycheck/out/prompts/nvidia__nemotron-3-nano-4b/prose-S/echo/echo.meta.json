@@ -1,0 +1,98 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T21:42:05",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 1,
+  "variant": "echo",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim copier. Output only the text between COPYSTART and COPYEND, exactly as written. Nothing else. No markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "reasoning": "We need to output only the text between COPYSTART and COPYEND, exactly as written. So we should output:\n\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nNo markers. No extra whitespace? Probably just that line. Ensure no leading/trailing spaces.\n",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 86,
+    "completion_tokens": 92,
+    "total_tokens": 178,
+    "completion_tokens_details": {
+      "reasoning_tokens": 67
+    }
+  },
+  "created": 1790784725,
+  "id": "chatcmpl-oq507or5abff4lqkyz8k",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 1072.0,
+    "ttft_ms": 2944.1,
+    "wall_ms": 3534.4,
+    "delta_count": 22,
+    "deltas": [
+      2944.1,
+      2970.0,
+      2998.6,
+      3023.4,
+      3049.2,
+      3076.8,
+      3103.2,
+      3129.4,
+      3156.2,
+      3183.9,
+      3211.3,
+      3237.3,
+      3263.9,
+      3291.2,
+      3317.7,
+      3344.9,
+      3373.1,
+      3398.2,
+      3426.0,
+      3452.6,
+      3481.3,
+      3507.4
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 3.54
+}
