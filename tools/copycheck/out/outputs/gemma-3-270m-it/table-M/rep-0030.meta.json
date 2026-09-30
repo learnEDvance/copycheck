@@ -1,0 +1,131 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T20:57:44",
+  "model": "gemma-3-270m-it",
+  "cell": "table-M",
+  "type": "table",
+  "size": "M",
+  "rep": 30,
+  "variant": "baseline",
+  "src": "Table 1 summarises the benchmark runs from the last release cycle. Each row records a single run of the corpus across one worker pool; the throughput column is expressed in cells per second and the float column is the ratio of passed runs to attempted runs.\n\n| Worker pool | Cells/s | Tail ms | Passed | Attempted | Ratio  |\n| ----------- | ------- | ------- | ------ | --------- | ------ |\n| small       | 41.20   | 38.1    | 120    | 120       | 1.0000 |\n| medium      | 38.47   | 41.9    | 114    | 118       | 0.9661 |\n| large       | 33.02   | 55.7    | 87     | 91        | 0.9560 |\n| gpu         | 61.88   | 27.3    | 90     | 92        | 0.9783 |\n| archive     | 12.05   | 109.2   | 45     | 49        | 0.9184 |\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTable 1 summarises the benchmark runs from the last release cycle. Each row records a single run of the corpus across one worker pool; the throughput column is expressed in cells per second and the float column is the ratio of passed runs to attempted runs.\n\n| Worker pool | Cells/s | Tail ms | Passed | Attempted | Ratio  |\n| ----------- | ------- | ------- | ------ | --------- | ------ |\n| small       | 41.20   | 38.1    | 120    | 120       | 1.0000 |\n| medium      | 38.47   | 41.9    | 114    | 118       | 0.9661 |\n| large       | 33.02   | 55.7    | 87     | 91        | 0.9560 |\n| gpu         | 61.88   | 27.3    | 90     | 92        | 0.9783 |\n| archive     | 12.05   | 109.2   | 45     | 49        | 0.9184 |\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 3461,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nTable 1 summarises the benchmark runs from the last release cycle. Each row records a single run of the corpus across one worker pool; the throughput column is expressed in cells per second and the float column is the ratio of passed runs to attempted runs.\n",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nTable 1 summarises the benchmark runs from the last release cycle. Each row records a single run of the corpus across one worker pool; the throughput column is expressed in cells per second and the float column is the ratio of passed runs to attempted runs.",
+  "metrics": {
+    "src_len": 721,
+    "out_len": 258,
+    "edit_distance": 465,
+    "cer": 0.6449375866851595,
+    "exact": false,
+    "insertions": 1,
+    "deletions": 464,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 257,
+    "pct_conserved": 0.3564,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 0.3578
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 362,
+    "completion_tokens": 56,
+    "total_tokens": 418,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790782064,
+  "id": "chatcmpl-0b9vjgwyy3hh03rez4ienbyd",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 1502.4,
+    "ttft_ms": 1502.4,
+    "wall_ms": 6742.1,
+    "delta_count": 55,
+    "deltas": [
+      1502.4,
+      1597.6,
+      1688.8,
+      1772.5,
+      1856.7,
+      1938.5,
+      2029.6,
+      2117.8,
+      2209.0,
+      2295.2,
+      2381.8,
+      2467.4,
+      2552.5,
+      2641.6,
+      2739.7,
+      2829.6,
+      2915.1,
+      3002.2,
+      3089.8,
+      3178.4,
+      3264.5,
+      3351.3,
+      3457.2,
+      3551.5,
+      3640.7,
+      3728.9,
+      3818.8,
+      3910.5,
+      4000.1,
+      4092.9,
+      4209.2,
+      4307.1,
+      4398.2,
+      4486.7,
+      4578.2,
+      4669.6,
+      4760.2,
+      4851.5,
+      4954.9,
+      5055.0,
+      5148.7,
+      5243.7,
+      5338.8,
+      5431.6,
+      5525.7,
+      5622.2,
+      5726.0,
+      5826.2,
+      5920.4,
+      6014.8,
+      6112.4,
+      6209.5,
+      6327.9,
+      6445.6,
+      6534.6
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "gemma-3-270m-it",
+  "wall_total_s": 0.0
+}

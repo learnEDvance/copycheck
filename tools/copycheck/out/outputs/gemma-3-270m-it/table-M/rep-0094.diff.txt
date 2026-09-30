@@ -1,0 +1,34 @@
+### SOURCE
+Table 1 summarises the benchmark runs from the last release cycle. Each row records a single run of the corpus across one worker pool; the throughput column is expressed in cells per second and the float column is the ratio of passed runs to attempted runs.
+
+| Worker pool | Cells/s | Tail ms | Passed | Attempted | Ratio  |
+| ----------- | ------- | ------- | ------ | --------- | ------ |
+| small       | 41.20   | 38.1    | 120    | 120       | 1.0000 |
+| medium      | 38.47   | 41.9    | 114    | 118       | 0.9661 |
+| large       | 33.02   | 55.7    | 87     | 91        | 0.9560 |
+| gpu         | 61.88   | 27.3    | 90     | 92        | 0.9783 |
+| archive     | 12.05   | 109.2   | 45     | 49        | 0.9184 |
+
+### EXTRACTED OUTPUT
+
+Table 1 summarises the benchmark runs from the last release cycle. Each row records a single run of the corpus across one worker pool; the throughput column is expressed in cells per second and the float column is the ratio of passed runs to attempted runs.
+### METRICS
+{
+  "src_len": 721,
+  "out_len": 258,
+  "edit_distance": 465,
+  "cer": 0.6449375866851595,
+  "exact": false,
+  "insertions": 1,
+  "deletions": 464,
+  "substitutions": 0,
+  "lcp": 0,
+  "lcs_len": 257,
+  "pct_conserved": 0.3564,
+  "first_divergence": 0,
+  "exact_pct": 0.0,
+  "len_ratio": 0.3578
+}
+### FIRST DIVERGENCE
+  src: 'Table 1 summarises the benchmark runs from the last release '
+  out: '\nTable 1 summarises the benchmark runs from the last release'
