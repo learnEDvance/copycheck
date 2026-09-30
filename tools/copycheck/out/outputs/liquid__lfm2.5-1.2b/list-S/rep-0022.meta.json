@@ -1,0 +1,119 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T21:11:35",
+  "model": "liquid/lfm2.5-1.2b",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 22,
+  "variant": "baseline",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\n",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 118,
+    "edit_distance": 2,
+    "cer": 0.017241379310344827,
+    "exact": false,
+    "insertions": 2,
+    "deletions": 0,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 116,
+    "pct_conserved": 1.0,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 1.0172
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 131,
+    "completion_tokens": 44,
+    "total_tokens": 175,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790782895,
+  "id": "chatcmpl-0lvuxw2weu5zs3nbyvzs9s",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 1526.0,
+    "ttft_ms": 1526.0,
+    "wall_ms": 4363.7,
+    "delta_count": 43,
+    "deltas": [
+      1526.0,
+      1587.1,
+      1647.2,
+      1712.7,
+      1767.3,
+      1832.9,
+      1887.9,
+      1948.5,
+      2014.6,
+      2074.2,
+      2132.9,
+      2197.3,
+      2257.2,
+      2320.1,
+      2382.5,
+      2443.9,
+      2504.7,
+      2566.3,
+      2625.7,
+      2686.7,
+      2745.6,
+      2811.3,
+      2875.7,
+      2943.1,
+      3012.7,
+      3088.9,
+      3153.3,
+      3216.5,
+      3297.6,
+      3380.5,
+      3429.7,
+      3490.4,
+      3552.7,
+      3631.8,
+      3685.8,
+      3762.3,
+      3818.6,
+      3881.8,
+      3947.4,
+      4022.8,
+      4088.5,
+      4149.8,
+      4358.1
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "liquid/lfm2.5-1.2b",
+  "wall_total_s": 0.0
+}

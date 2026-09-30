@@ -1,0 +1,119 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T21:11:55",
+  "model": "liquid/lfm2.5-1.2b",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 1,
+  "variant": "codeblock",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Copy the text between COPYSTART and COPYEND verbatim into a single fenced code block, character for character. Output nothing outside the code block."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\n",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 118,
+    "edit_distance": 2,
+    "cer": 0.017241379310344827,
+    "exact": false,
+    "insertions": 2,
+    "deletions": 0,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 116,
+    "pct_conserved": 1.0,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 1.0172
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 101,
+    "completion_tokens": 44,
+    "total_tokens": 145,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790782915,
+  "id": "chatcmpl-2nlcioqgicsj3298rkm1n",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 57.2,
+    "ttft_ms": 57.2,
+    "wall_ms": 426.5,
+    "delta_count": 43,
+    "deltas": [
+      57.2,
+      68.0,
+      77.6,
+      86.3,
+      94.6,
+      102.3,
+      110.2,
+      118.3,
+      126.4,
+      134.2,
+      143.4,
+      151.4,
+      160.0,
+      168.1,
+      177.3,
+      187.3,
+      194.5,
+      203.7,
+      215.5,
+      223.4,
+      231.6,
+      241.2,
+      248.7,
+      257.6,
+      265.5,
+      273.7,
+      283.4,
+      290.5,
+      299.5,
+      307.9,
+      316.1,
+      324.4,
+      332.4,
+      341.1,
+      349.7,
+      358.3,
+      367.0,
+      375.0,
+      383.1,
+      391.4,
+      400.3,
+      407.9,
+      416.6
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "liquid/lfm2.5-1.2b",
+  "wall_total_s": 0.43
+}
