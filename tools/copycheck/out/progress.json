@@ -1,13 +1,14 @@
 {
   "start_ts": 1790781320.957699,
   "run_id": "20260930-204520",
-  "commit_global": 16,
+  "commit_global": 17,
   "models": {
     "gemma-3-270m-it": {
       "done_cells": [
         "code-L",
         "code-M",
         "code-S",
+        "data-L",
         "data-M",
         "data-S",
         "gibberish-L",
@@ -23,7 +24,7 @@
         "table-M",
         "table-S"
       ],
-      "commits": 16,
+      "commits": 17,
       "no_content": [
         "gibberish-M",
         "gibberish-L",
@@ -32,7 +33,8 @@
         "code-L",
         "list-L",
         "table-L",
-        "data-M"
+        "data-M",
+        "data-L"
       ]
     }
   },
