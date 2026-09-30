@@ -1,0 +1,88 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T20:57:13",
+  "model": "gemma-3-270m-it",
+  "cell": "table-S",
+  "type": "table",
+  "size": "S",
+  "rep": 89,
+  "variant": "baseline",
+  "src": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2710,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nThe table shows the default service ports.\n",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nThe table shows the default service ports.",
+  "metrics": {
+    "src_len": 120,
+    "out_len": 43,
+    "edit_distance": 79,
+    "cer": 0.6583333333333333,
+    "exact": false,
+    "insertions": 1,
+    "deletions": 78,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 42,
+    "pct_conserved": 0.35,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 0.3583
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 124,
+    "completion_tokens": 13,
+    "total_tokens": 137,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790782034,
+  "id": "chatcmpl-ymlyzl376bgqb9279943js",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 622.5,
+    "ttft_ms": 622.5,
+    "wall_ms": 1756.4,
+    "delta_count": 12,
+    "deltas": [
+      622.5,
+      729.9,
+      840.3,
+      960.8,
+      1049.6,
+      1158.0,
+      1282.7,
+      1379.5,
+      1458.4,
+      1530.2,
+      1599.2,
+      1695.3
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "gemma-3-270m-it",
+  "wall_total_s": 0.0
+}
