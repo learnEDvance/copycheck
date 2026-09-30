@@ -1,0 +1,8 @@
+COPYSTART
+Table 1 summarises the benchmark runs from the last release cycle. Each row records a single run of the corpus across one worker pool; the throughput column is expressed in cells per second and the float column is the ratio of passed runs to attempted runs.
+
+| Worker pool | Cells/s | Tail ms | Passed | Attempted | Ratio  |
+| ----------- | ------- | ------- | ------ | --------- | ------ |
+| small       | 41.20   | 38.1    | 120    | 120       | 1.0000 |
+| medium      | 38.47   | 41.9    | 114    | 118       | 0.9661 |
+| large       | 33.02   | 55.7    | 87     | 91        |

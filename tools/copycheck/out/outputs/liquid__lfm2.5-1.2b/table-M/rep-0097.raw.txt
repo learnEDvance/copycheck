@@ -1,0 +1,2 @@
+COPYSTART
+Table 1 summarises the benchmark runs from the last release cycle. Each row records a single run of the corpus across one worker pool; the throughput column is
