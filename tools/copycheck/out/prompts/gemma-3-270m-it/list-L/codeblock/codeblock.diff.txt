@@ -1,0 +1,484 @@
+### SOURCE
+Operator checklist for the quarterly data centre migration:
+
+1. **Pre-flight checks (two weeks out).**
+   - Schedule maintenance on the staging cluster; agree the window with
+     the on-call roster so that no overlapping deploys are in flight.
+   - Confirm the network circuit between `dc-eu-west-1a` and
+     `dc-eu-west-1b` has a round-trip time under 3ms on 200 probes.
+   - Freeze the configuration repository and tag it `migrate-2026-09`.
+   - Notify the security desk so the access logs are rotated early.
+2. **Data movement (seven days out).**
+   - Snapshot each partition using `copycheck snapshot` with the locked
+     range option, and record the resulting manifest hashes.
+     a. The `orders` partition must finish its sync within 36 hours.
+     b. The `audit` partition may use the throttled bandwidth window.
+   - Verify checksum parity via the reconciliation job; any mismatch
+     fails the batch and writes a `REJECTED` marker to the control topic.
+3. **Cut-over day.**
+   - Place all producers into `readonly` mode and drain the ingress topic.
+   - Promote the follower; confirm the new leader reports `UP`.
+   - Run the equivalence probe for a 1% sampling of the records:
+     a. Compare `(key, seq, hash)` triples from both clusters.
+     b. Fail the switch if any triple differs after three retries.
+   - Switch the DNS record and verify round robin from edge sites.
+4. **Post-migration.**
+   - Leave the old cluster writable for 72 hours as a fallback.
+   - Monitor replication lag hourly; raise a ticket if it exceeds 5s.
+   - Announce the migration on the status page with the full runbook id.
+   - Publish the post-mortem and the as-run checklist to the wiki.
+5. **Rollback triggers.**
+   - Any unresolved `CONFLICT` on the control topic after two hours.
+   - A follower that cannot keep up with the daily compaction cadence.
+   - A verified checksum drift greater than 0.001% of total records.
+   - A DNS switch that does not converge within fifteen minutes.
+
+### EXTRACTED OUTPUT
+import copy
+import time
+import datetime
+
+# Define the data center migration schedule
+schedule = [
+    "Pre-flight checks (two weeks out).",
+    "Data movement (seven days out).",
+    "Cut-over day.",
+    "Post-migration."
+]
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1a"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1b"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data_center_id = "dc-eu-west-1a"
+data_center_name = "data_centre_eu_west_1b"
+data_center_version = "2026-09"
+data_center_backup_period = 36
+
+# Define the data center migration parameters
+data
+### METRICS
+{
+  "src_len": 1986,
+  "out_len": 13178,
+  "edit_distance": 11746,
+  "cer": 5.914400805639477,
+  "exact": false,
+  "insertions": 11193,
+  "deletions": 1,
+  "substitutions": 552,
+  "lcp": 0,
+  "lcs_len": 1452,
+  "pct_conserved": 0.7311,
+  "first_divergence": 0,
+  "exact_pct": 0.0,
+  "len_ratio": 6.6354
+}
+### FIRST DIVERGENCE
+  src: 'Operator checklist for the quarterly data centre migration:\n'
+  out: 'import copy\nimport time\nimport datetime\n\n# Define the data c'
