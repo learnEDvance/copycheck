@@ -1,0 +1,166 @@
+### SOURCE
+"""Replica state machine for the copy benchmark."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+from dataclasses import dataclass
+
+
+class ReplicaStateError(Exception):
+    """An entry arrived out of order."""
+
+    def __init__(self, expected: int, got: int) -> None:
+        self.expected = expected
+        self.got = got
+        super().__init__(f"expected seq {expected}, received {got}")
+
+
+@dataclass
+class LogEntry:
+    """A persistent entry within the write-ahead log."""
+
+    seq: int
+    term: int
+    data: bytes
+
+
+class Ledger:
+    """Coordinates appends and catch-up for one partition."""
+
+    def __init__(self, replica_id: str, voters: Sequence[str]) -> None:
+        self.replica_id = replica_id
+        self.voters = list(voters)
+        self._entries: list[LogEntry] = []
+        self._next_seq = 0
+
+    def append(self, data: bytes) -> int:
+        """Store a payload; return its sequence number."""
+        entry = LogEntry(seq=self._next_seq, term=1, data=data)
+        self._entries.append(entry)
+        self._next_seq += 1
+        return entry.seq
+
+    def catch_up(self, target: int) -> list[LogEntry]:
+        """Return entries up to and including ``target``."""
+        out = []
+        for entry in self._entries:
+            if entry.seq > target:
+                break
+            out.append(entry)
+        return out
+
+    def encode_log(self) -> bytes:
+        """Serialise the log to a compact, byte-stable form."""
+        rows = [
+            {"seq": e.seq, "term": e.term, "data": e.data.hex()}
+            for e in self._entries
+        ]
+        return json.dumps(rows, separators=(",", ":")).encode("utf-8")
+
+
+def replay(path: str) -> int:
+    # Apply a saved log file and return the count of restored records.
+    with open(path, "rb") as fh:
+        payload = json.load(fh)
+    applied = 0
+    for row in payload:
+        entry = LogEntry(seq=row["seq"], term=row["term"], data=bytes.fromhex(row["data"]))
+        if entry.seq != applied:
+            raise ReplicaStateError(applied, entry.seq)
+        applied += 1
+    return applied
+
+### EXTRACTED OUTPUT
+"""Replica state machine for the copy benchmark."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+from dataclasses import dataclass
+
+
+class ReplicaStateError(Exception):
+    """An entry arrived out of order."""
+
+    def __init__(self, expected: int, got: int) -> None:
+        self.expected = expected
+        self.got = got
+        super().__init__(f"expected seq {expected}, received {got}")
+
+
+@dataclass
+class LogEntry:
+    """A persistent entry within the write-ahead log."""
+
+    seq: int
+    term: int
+    data: bytes
+
+
+class Ledger:
+    """Coordinates appends and catch-up for one partition."""
+
+    def __init__(self, replica_id: str, voters: Sequence[str]) -> None:
+        self.replica_id = replica_id
+        self.voters = list(voters)
+        self._entries: list[LogEntry] = []
+        self._next_seq = 0
+
+    def append(self, data: bytes) -> int:
+        """Store a payload; return its sequence number."""
+        entry = LogEntry(seq=self._next_seq, term=1, data=data)
+        self._entries.append(entry)
+        self._next_seq += 1
+        return entry.seq
+
+    def catch_up(self, target: int) -> list[LogEntry]:
+        """Return entries up to and including ``target``."""
+        out = []
+        for entry in self._entries:
+            if entry.seq > target:
+                break
+            out.append(entry)
+        return out
+
+    def encode_log(self) -> bytes:
+        """Serialise the log to a compact, byte-stable form."""
+        rows = [
+            {"seq": e.seq, "term": e.term, "data": e.data.hex()}
+            for e in self._entries
+        ]
+        return json.dumps(rows, separators=(",", ":")).encode("utf-8")
+
+
+def replay(path: str) -> int:
+    # Apply a saved log file and return the count of restored records.
+    with open(path, "rb") as fh:
+        payload = json.load(fh)
+    applied = 0
+    for row in payload:
+        entry = LogEntry(seq=row["seq"], term=row["term"], data=bytes.fromhex(row["data"]))
+        if entry.seq != applied:
+            raise ReplicaStateError(applied, entry.seq)
+    return applied
+### METRICS
+{
+  "src_len": 2093,
+  "out_len": 2071,
+  "edit_distance": 22,
+  "cer": 0.01051122790253225,
+  "exact": false,
+  "insertions": 0,
+  "deletions": 22,
+  "substitutions": 0,
+  "lcp": 2057,
+  "lcs_len": 2071,
+  "pct_conserved": 0.9895,
+  "first_divergence": 2057,
+  "exact_pct": 0.0,
+  "len_ratio": 0.9895
+}
+### FIRST DIVERGENCE
+  src: '    applied += 1\n    return applied\n'
+  out: 'return applied'
