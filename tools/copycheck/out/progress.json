@@ -1,7 +1,7 @@
 {
   "start_ts": 1790781320.957699,
   "run_id": "20260930-204520",
-  "commit_global": 55,
+  "commit_global": 56,
   "models": {
     "gemma-3-270m-it": {
       "done_cells": [
@@ -99,10 +99,11 @@
     },
     "ibm/granite-4-h-tiny": {
       "done_cells": [
+        "gibberish-L",
         "gibberish-M",
         "gibberish-S"
       ],
-      "commits": 1
+      "commits": 2
     }
   },
   "models_cfg": {
