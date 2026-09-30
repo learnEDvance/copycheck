@@ -1,0 +1,73 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T21:20:02",
+  "model": "liquid/lfm2.5-1.2b",
+  "cell": "data-M",
+  "type": "data",
+  "size": "M",
+  "rep": 4,
+  "variant": "baseline",
+  "src": "report_date,shard,seq,source,status,latency_ms\n2026-09-21,s0,001,ingest,ok,12.4\n2026-09-21,s0,002,ingest,ok,11.9\n2026-09-21,s0,003,ingest,retry,34.7\n2026-09-21,s1,001,replay,ok,9.2\n2026-09-21,s1,002,replay,ok,8.8\n2026-09-21,s1,003,replay,failed,\n2026-09-22,s0,004,ingest,ok,10.1\n2026-09-22,s0,005,ingest,ok,13.0\n2026-09-22,s1,004,replay,ok,9.5\n2026-09-22,s2,001,manual,ok,41.2\n2026-09-22,s2,002,manual,ok,47.6\n2026-09-22,s2,003,manual,retry,52.9\n2026-09-22,s3,001,ingest,ok,9.0\n2026-09-23,s0,006,ingest,ok,11.2\n2026-09-23,s0,007,ingest,ok,10.7\n2026-09-23,s1,005,replay,ok,9.9\n2026-09-23,s2,004,manual,ok,48.1\n2026-09-23,s3,002,ingest,ok,9.6\n2026-09-23,s3,003,ingest,retry,12.3\n2026-09-24,s0,008,ingest,ok,10.9\n2026-09-24,s2,005,manual,ok,44.7\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nreport_date,shard,seq,source,status,latency_ms\n2026-09-21,s0,001,ingest,ok,12.4\n2026-09-21,s0,002,ingest,ok,11.9\n2026-09-21,s0,003,ingest,retry,34.7\n2026-09-21,s1,001,replay,ok,9.2\n2026-09-21,s1,002,replay,ok,8.8\n2026-09-21,s1,003,replay,failed,\n2026-09-22,s0,004,ingest,ok,10.1\n2026-09-22,s0,005,ingest,ok,13.0\n2026-09-22,s1,004,replay,ok,9.5\n2026-09-22,s2,001,manual,ok,41.2\n2026-09-22,s2,002,manual,ok,47.6\n2026-09-22,s2,003,manual,retry,52.9\n2026-09-22,s3,001,ingest,ok,9.0\n2026-09-23,s0,006,ingest,ok,11.2\n2026-09-23,s0,007,ingest,ok,10.7\n2026-09-23,s1,005,replay,ok,9.9\n2026-09-23,s2,004,manual,ok,48.1\n2026-09-23,s3,002,ingest,ok,9.6\n2026-09-23,s3,003,ingest,retry,12.3\n2026-09-24,s0,008,ingest,ok,10.9\n2026-09-24,s2,005,manual,ok,44.7\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 3488,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "",
+  "metrics": {
+    "src_len": 743,
+    "out_len": 0,
+    "edit_distance": 743,
+    "cer": 1.0,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 743,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 0,
+    "pct_conserved": 0.0,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 0.0
+  },
+  "finish_reason": null,
+  "usage": null,
+  "created": 1790783402,
+  "id": "chatcmpl-21s6ghvmj3pm68cmah1k2r",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 2635.4,
+    "ttft_ms": 2635.5,
+    "wall_ms": 4440.3,
+    "delta_count": 4,
+    "deltas": [
+      2635.5,
+      3163.7,
+      3750.3,
+      4294.5
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "liquid/lfm2.5-1.2b",
+  "wall_total_s": 0.0
+}
