@@ -1,0 +1,18 @@
+Table 2 collates the integrity checks performed against the golden copy of the corpus on the last evening of the quarter. For every cell key we record the expected length in characters, the observed length, whether the two bytes matched exactly, and the digest of the file written to disk. The digest column reports the first twelve hex characters of the SHA-256 of each text, which suffices to distinguish any two cells in the corpus.
+
+| Cell key       | Expected | Observed | Exact | Digest       | Disposition |
+| -------------- | -------- | -------- | ----- | ------------ | ----------- |
+| gibberish-S    | 120      | 119      | yes   | 9fa2c01bd113 | fixed       |
+| gibberish-M    | 700      | 701      | yes   | 4b3fe8c90a52 | fixed       |
+| gibberish-L    | 2000     | 1999     | yes   | c771de44bb50 | fixed       |
+| prose-S        | 121      | 121      | yes   | 1a9d2e55f884 | fixed       |
+| prose-M        | 698      | 699      | yes   | 0e78c9d1ba3f | fixed       |
+| prose-L        | 2003     | 2003     | yes   | 5dc8fb4aa19c | fixed       |
+| code-S         | 113      | 113      | yes   | 8b1f7dd0aa31 | fixed       |
+| code-M         | 702      | 704      | yes   | 2e63fc05a9bd | fixed       |
+| code-L         | 2010     | 2011     | yes   | 67b8af221d6e | fixed       |
+| list-S         | 116      | 117      | yes   | 4cd0fa9e7c45 | fixed       |
+| list-M         | 651      | 652      | yes   | dab01376e99f | fixed       |
+| list-L         | 1994     | 1996     | yes   | 3012e557d0b8 | manual      |
+| table-S        | 114      | 114      | yes   | 9e5a32c8db14 | fixed       |
+| table-M        | 699      | 700      | yes   | 23b77e04f5a1 | fixed      
