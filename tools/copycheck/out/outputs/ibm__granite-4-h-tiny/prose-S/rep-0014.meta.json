@@ -1,0 +1,103 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T23:48:23",
+  "model": "ibm/granite-4-h-tiny",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 14,
+  "variant": "baseline",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\n",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 127,
+    "edit_distance": 2,
+    "cer": 0.016,
+    "exact": false,
+    "insertions": 2,
+    "deletions": 0,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 125,
+    "pct_conserved": 1.0,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 1.016
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 107,
+    "completion_tokens": 28,
+    "total_tokens": 135,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790792303,
+  "id": "chatcmpl-i5lns64zzm94o4d448xj8",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 764.4,
+    "ttft_ms": 764.4,
+    "wall_ms": 7789.7,
+    "delta_count": 27,
+    "deltas": [
+      764.4,
+      930.9,
+      1516.3,
+      1777.5,
+      2034.5,
+      2283.6,
+      2522.6,
+      2764.2,
+      3013.2,
+      3252.9,
+      3508.6,
+      3759.3,
+      4014.6,
+      4266.5,
+      4515.7,
+      4758.1,
+      5000.6,
+      5243.1,
+      5494.9,
+      5738.2,
+      5979.9,
+      6224.6,
+      6466.8,
+      6736.0,
+      7008.6,
+      7270.4,
+      7520.2
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "ibm/granite-4-h-tiny",
+  "wall_total_s": 0.0
+}

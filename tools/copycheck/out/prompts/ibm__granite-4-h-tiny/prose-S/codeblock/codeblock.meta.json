@@ -1,0 +1,101 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T23:48:47",
+  "model": "ibm/granite-4-h-tiny",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 1,
+  "variant": "codeblock",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Copy the text between COPYSTART and COPYEND verbatim into a single fenced code block, character for character. Output nothing outside the code block."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "```\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n```",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 78,
+    "completion_tokens": 26,
+    "total_tokens": 104,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790792327,
+  "id": "chatcmpl-4whw9dlcriq43aqj4zxxrs",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 1148.7,
+    "ttft_ms": 1148.8,
+    "wall_ms": 3927.5,
+    "delta_count": 25,
+    "deltas": [
+      1148.8,
+      1271.9,
+      1383.5,
+      1496.8,
+      1600.4,
+      1711.2,
+      1821.2,
+      1927.3,
+      2045.6,
+      2156.7,
+      2274.0,
+      2386.5,
+      2495.7,
+      2605.8,
+      2705.7,
+      2814.9,
+      2927.8,
+      3032.8,
+      3142.7,
+      3258.1,
+      3363.7,
+      3475.5,
+      3586.9,
+      3705.7,
+      3822.4
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "ibm/granite-4-h-tiny",
+  "wall_total_s": 3.94
+}
