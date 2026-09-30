@@ -1,0 +1,18 @@
+Release verification checklist for build 4.2.1:
+
+1. **Artifact integrity.**
+   - Confirm the SHA-256 of `copycheck` matches the published digest.
+   - Spot-check the signature bundle `copycheck.sig` with the release key.
+
+2. **Configuration.**
+   - Verify `copycheck.toml` parses without warnings.
+   - Ensure the `output_dir` path is owned by the service user.
+
+3. **Battery.**
+   - Run the three-cell corpus and diff against the golden copy.
+     a. Byte-for-byte equality for the `gibberish` and `table` cells.
+     b. Normalised equality (LF only) for the `code` cell.
+
+4. **Rollback.**
+   - Keep the previous tarball in place until the smoke test passes.
+   - Document the `restore --from-tag` procedure in the runbook.
