@@ -1,0 +1,102 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T20:48:39",
+  "model": "gemma-3-270m-it",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 1,
+  "variant": "echo",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim copier. Output only the text between COPYSTART and COPYEND, exactly as written. Nothing else. No markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 125,
+    "edit_distance": 2,
+    "cer": 0.016,
+    "exact": false,
+    "insertions": 1,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 1.0
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 75,
+    "completion_tokens": 27,
+    "total_tokens": 102,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790781519,
+  "id": "chatcmpl-vt1yk8yg4pi0z48iba1w",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 122.7,
+    "ttft_ms": 122.7,
+    "wall_ms": 479.8,
+    "delta_count": 26,
+    "deltas": [
+      122.7,
+      167.1,
+      212.7,
+      254.0,
+      292.5,
+      299.7,
+      308.4,
+      318.8,
+      328.6,
+      336.0,
+      345.8,
+      353.1,
+      362.3,
+      370.7,
+      379.7,
+      388.3,
+      396.1,
+      404.1,
+      412.3,
+      420.8,
+      429.3,
+      437.2,
+      445.2,
+      454.0,
+      461.6,
+      470.7
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "gemma-3-270m-it",
+  "wall_total_s": 0.49
+}
