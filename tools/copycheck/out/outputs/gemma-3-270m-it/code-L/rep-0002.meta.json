@@ -1,0 +1,68 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T20:52:31",
+  "model": "gemma-3-270m-it",
+  "cell": "code-L",
+  "type": "code",
+  "size": "L",
+  "rep": 2,
+  "variant": "baseline",
+  "src": "\"\"\"Replica state machine for the copy benchmark.\"\"\"\n\nfrom __future__ import annotations\n\nimport hashlib\nimport json\nfrom dataclasses import dataclass\n\n\nclass ReplicaStateError(Exception):\n    \"\"\"An entry arrived out of order.\"\"\"\n\n    def __init__(self, expected: int, got: int) -> None:\n        self.expected = expected\n        self.got = got\n        super().__init__(f\"expected seq {expected}, received {got}\")\n\n\n@dataclass\nclass LogEntry:\n    \"\"\"A persistent entry within the write-ahead log.\"\"\"\n\n    seq: int\n    term: int\n    data: bytes\n\n\nclass Ledger:\n    \"\"\"Coordinates appends and catch-up for one partition.\"\"\"\n\n    def __init__(self, replica_id: str, voters: Sequence[str]) -> None:\n        self.replica_id = replica_id\n        self.voters = list(voters)\n        self._entries: list[LogEntry] = []\n        self._next_seq = 0\n\n    def append(self, data: bytes) -> int:\n        \"\"\"Store a payload; return its sequence number.\"\"\"\n        entry = LogEntry(seq=self._next_seq, term=1, data=data)\n        self._entries.append(entry)\n        self._next_seq += 1\n        return entry.seq\n\n    def catch_up(self, target: int) -> list[LogEntry]:\n        \"\"\"Return entries up to and including ``target``.\"\"\"\n        out = []\n        for entry in self._entries:\n            if entry.seq > target:\n                break\n            out.append(entry)\n        return out\n\n    def encode_log(self) -> bytes:\n        \"\"\"Serialise the log to a compact, byte-stable form.\"\"\"\n        rows = [\n            {\"seq\": e.seq, \"term\": e.term, \"data\": e.data.hex()}\n            for e in self._entries\n        ]\n        return json.dumps(rows, separators=(\",\", \":\")).encode(\"utf-8\")\n\n\ndef replay(path: str) -> int:\n    # Apply a saved log file and return the count of restored records.\n    with open(path, \"rb\") as fh:\n        payload = json.load(fh)\n    applied = 0\n    for row in payload:\n        entry = LogEntry(seq=row[\"seq\"], term=row[\"term\"], data=bytes.fromhex(row[\"data\"]))\n        if entry.seq != applied:\n            raise ReplicaStateError(applied, entry.seq)\n        applied += 1\n    return applied\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\n\"\"\"Replica state machine for the copy benchmark.\"\"\"\n\nfrom __future__ import annotations\n\nimport hashlib\nimport json\nfrom dataclasses import dataclass\n\n\nclass ReplicaStateError(Exception):\n    \"\"\"An entry arrived out of order.\"\"\"\n\n    def __init__(self, expected: int, got: int) -> None:\n        self.expected = expected\n        self.got = got\n        super().__init__(f\"expected seq {expected}, received {got}\")\n\n\n@dataclass\nclass LogEntry:\n    \"\"\"A persistent entry within the write-ahead log.\"\"\"\n\n    seq: int\n    term: int\n    data: bytes\n\n\nclass Ledger:\n    \"\"\"Coordinates appends and catch-up for one partition.\"\"\"\n\n    def __init__(self, replica_id: str, voters: Sequence[str]) -> None:\n        self.replica_id = replica_id\n        self.voters = list(voters)\n        self._entries: list[LogEntry] = []\n        self._next_seq = 0\n\n    def append(self, data: bytes) -> int:\n        \"\"\"Store a payload; return its sequence number.\"\"\"\n        entry = LogEntry(seq=self._next_seq, term=1, data=data)\n        self._entries.append(entry)\n        self._next_seq += 1\n        return entry.seq\n\n    def catch_up(self, target: int) -> list[LogEntry]:\n        \"\"\"Return entries up to and including ``target``.\"\"\"\n        out = []\n        for entry in self._entries:\n            if entry.seq > target:\n                break\n            out.append(entry)\n        return out\n\n    def encode_log(self) -> bytes:\n        \"\"\"Serialise the log to a compact, byte-stable form.\"\"\"\n        rows = [\n            {\"seq\": e.seq, \"term\": e.term, \"data\": e.data.hex()}\n            for e in self._entries\n        ]\n        return json.dumps(rows, separators=(\",\", \":\")).encode(\"utf-8\")\n\n\ndef replay(path: str) -> int:\n    # Apply a saved log file and return the count of restored records.\n    with open(path, \"rb\") as fh:\n        payload = json.load(fh)\n    applied = 0\n    for row in payload:\n        entry = LogEntry(seq=row[\"seq\"], term=row[\"term\"], data=bytes.fromhex(row[\"data\"]))\n        if entry.seq != applied:\n            raise ReplicaStateError(applied, entry.seq)\n        applied += 1\n    return applied\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 5176,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "",
+  "metrics": {
+    "src_len": 2093,
+    "out_len": 0,
+    "edit_distance": 2093,
+    "cer": 1.0,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 2093,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 0,
+    "pct_conserved": 0.0,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 0.0
+  },
+  "finish_reason": null,
+  "usage": null,
+  "created": null,
+  "id": null,
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 960.6,
+    "ttft_ms": null,
+    "wall_ms": 960.9,
+    "delta_count": 0,
+    "deltas": [],
+    "endpoint": "v0"
+  },
+  "model_returned": null,
+  "wall_total_s": 0.0
+}
