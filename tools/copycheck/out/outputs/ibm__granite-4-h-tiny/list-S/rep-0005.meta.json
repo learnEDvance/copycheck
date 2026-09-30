@@ -1,0 +1,110 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-10-01T00:30:19",
+  "model": "ibm/granite-4-h-tiny",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 5,
+  "variant": "baseline",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\n",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 118,
+    "edit_distance": 2,
+    "cer": 0.017241379310344827,
+    "exact": false,
+    "insertions": 2,
+    "deletions": 0,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 116,
+    "pct_conserved": 1.0,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 1.0172
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 114,
+    "completion_tokens": 35,
+    "total_tokens": 149,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790794819,
+  "id": "chatcmpl-tj69gzcp4agle13i83k2do",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 2708.1,
+    "ttft_ms": 2708.1,
+    "wall_ms": 8691.3,
+    "delta_count": 34,
+    "deltas": [
+      2708.1,
+      2884.7,
+      3057.1,
+      3221.7,
+      3390.1,
+      3558.6,
+      3723.7,
+      3892.1,
+      4063.0,
+      4226.0,
+      4391.7,
+      4557.3,
+      4722.6,
+      4890.8,
+      5066.0,
+      5240.0,
+      5406.9,
+      5575.9,
+      5743.4,
+      5909.7,
+      6078.1,
+      6243.9,
+      6411.8,
+      6579.5,
+      6747.4,
+      6912.2,
+      7077.8,
+      7247.9,
+      7417.0,
+      7580.3,
+      7748.7,
+      7913.5,
+      8091.2,
+      8196.2
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "ibm/granite-4-h-tiny",
+  "wall_total_s": 8.11
+}

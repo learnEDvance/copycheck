@@ -1,0 +1,108 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-10-01T00:30:55",
+  "model": "ibm/granite-4-h-tiny",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 1,
+  "variant": "codeblock",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Copy the text between COPYSTART and COPYEND verbatim into a single fenced code block, character for character. Output nothing outside the code block."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "```\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n```",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 115,
+    "edit_distance": 1,
+    "cer": 0.008620689655172414,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 115,
+    "lcs_len": 115,
+    "pct_conserved": 0.9914,
+    "first_divergence": 115,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9914
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 85,
+    "completion_tokens": 33,
+    "total_tokens": 118,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790794855,
+  "id": "chatcmpl-njvjjmct74hej55948h0f4",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 828.5,
+    "ttft_ms": 828.6,
+    "wall_ms": 3199.0,
+    "delta_count": 32,
+    "deltas": [
+      828.6,
+      913.4,
+      997.4,
+      1070.0,
+      1141.0,
+      1218.4,
+      1291.6,
+      1363.2,
+      1438.9,
+      1511.7,
+      1582.9,
+      1658.3,
+      1732.1,
+      1802.6,
+      1878.3,
+      1951.8,
+      2023.2,
+      2098.2,
+      2171.9,
+      2244.0,
+      2318.4,
+      2394.1,
+      2463.8,
+      2538.1,
+      2611.7,
+      2684.2,
+      2757.2,
+      2829.4,
+      2903.7,
+      2977.2,
+      3050.2,
+      3124.5
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "ibm/granite-4-h-tiny",
+  "wall_total_s": 3.21
+}
