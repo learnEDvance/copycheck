@@ -1,0 +1,115 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-10-01T00:07:46",
+  "model": "ibm/granite-4-h-tiny",
+  "cell": "code-S",
+  "type": "code",
+  "size": "S",
+  "rep": 4,
+  "variant": "baseline",
+  "src": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2708,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nCOPYEND",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\n",
+  "metrics": {
+    "src_len": 119,
+    "out_len": 121,
+    "edit_distance": 2,
+    "cer": 0.01680672268907563,
+    "exact": false,
+    "insertions": 2,
+    "deletions": 0,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 119,
+    "pct_conserved": 1.0,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 1.0168
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 119,
+    "completion_tokens": 40,
+    "total_tokens": 159,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790793466,
+  "id": "chatcmpl-kzsiv3qmnhpnvdc1nusik",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 6317.3,
+    "ttft_ms": 6317.4,
+    "wall_ms": 16329.2,
+    "delta_count": 39,
+    "deltas": [
+      6317.4,
+      6568.7,
+      6844.3,
+      7083.8,
+      7352.8,
+      7620.0,
+      7872.1,
+      8123.4,
+      8350.5,
+      8617.3,
+      8899.1,
+      9165.5,
+      9438.7,
+      9697.6,
+      9961.0,
+      10219.7,
+      10480.3,
+      10727.4,
+      10970.8,
+      11224.9,
+      11497.1,
+      11749.5,
+      12020.9,
+      12280.9,
+      12526.7,
+      12781.2,
+      13032.4,
+      13298.6,
+      13559.7,
+      13811.4,
+      14041.0,
+      14269.2,
+      14511.5,
+      14759.8,
+      15020.8,
+      15276.7,
+      15548.3,
+      15818.0,
+      16075.5
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "ibm/granite-4-h-tiny",
+  "wall_total_s": 0.0
+}
