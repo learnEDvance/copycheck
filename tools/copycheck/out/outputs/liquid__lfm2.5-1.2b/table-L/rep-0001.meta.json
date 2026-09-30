@@ -1,0 +1,76 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T21:18:00",
+  "model": "liquid/lfm2.5-1.2b",
+  "cell": "table-L",
+  "type": "table",
+  "size": "L",
+  "rep": 1,
+  "variant": "baseline",
+  "src": "Table 2 collates the integrity checks performed against the golden copy of the corpus on the last evening of the quarter. For every cell key we record the expected length in characters, the observed length, whether the two bytes matched exactly, and the digest of the file written to disk. The digest column reports the first twelve hex characters of the SHA-256 of each text, which suffices to distinguish any two cells in the corpus.\n\n| Cell key       | Expected | Observed | Exact | Digest       | Disposition |\n| -------------- | -------- | -------- | ----- | ------------ | ----------- |\n| gibberish-S    | 120      | 119      | yes   | 9fa2c01bd113 | fixed       |\n| gibberish-M    | 700      | 701      | yes   | 4b3fe8c90a52 | fixed       |\n| gibberish-L    | 2000     | 1999     | yes   | c771de44bb50 | fixed       |\n| prose-S        | 121      | 121      | yes   | 1a9d2e55f884 | fixed       |\n| prose-M        | 698      | 699      | yes   | 0e78c9d1ba3f | fixed       |\n| prose-L        | 2003     | 2003     | yes   | 5dc8fb4aa19c | fixed       |\n| code-S         | 113      | 113      | yes   | 8b1f7dd0aa31 | fixed       |\n| code-M         | 702      | 704      | yes   | 2e63fc05a9bd | fixed       |\n| code-L         | 2010     | 2011     | yes   | 67b8af221d6e | fixed       |\n| list-S         | 116      | 117      | yes   | 4cd0fa9e7c45 | fixed       |\n| list-M         | 651      | 652      | yes   | dab01376e99f | fixed       |\n| list-L         | 1994     | 1996     | yes   | 3012e557d0b8 | manual      |\n| table-S        | 114      | 114      | yes   | 9e5a32c8db14 | fixed       |\n| table-M        | 699      | 700      | yes   | 23b77e04f5a1 | fixed       |\n| table-L        | 2005     | 2006     | yes   | 8f3d2a16cc90 | manual      |\n| data-S         | 115      | 115      | yes   | 51c0e9f8d203 | fixed       |\n| data-M         | 696      | 697      | yes   | b0cf571a4e03 | fixed       |\n| data-L         | 1998     | 2000     | yes   | 7e3d214c05f8 | manual      |\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTable 2 collates the integrity checks performed against the golden copy of the corpus on the last evening of the quarter. For every cell key we record the expected length in characters, the observed length, whether the two bytes matched exactly, and the digest of the file written to disk. The digest column reports the first twelve hex characters of the SHA-256 of each text, which suffices to distinguish any two cells in the corpus.\n\n| Cell key       | Expected | Observed | Exact | Digest       | Disposition |\n| -------------- | -------- | -------- | ----- | ------------ | ----------- |\n| gibberish-S    | 120      | 119      | yes   | 9fa2c01bd113 | fixed       |\n| gibberish-M    | 700      | 701      | yes   | 4b3fe8c90a52 | fixed       |\n| gibberish-L    | 2000     | 1999     | yes   | c771de44bb50 | fixed       |\n| prose-S        | 121      | 121      | yes   | 1a9d2e55f884 | fixed       |\n| prose-M        | 698      | 699      | yes   | 0e78c9d1ba3f | fixed       |\n| prose-L        | 2003     | 2003     | yes   | 5dc8fb4aa19c | fixed       |\n| code-S         | 113      | 113      | yes   | 8b1f7dd0aa31 | fixed       |\n| code-M         | 702      | 704      | yes   | 2e63fc05a9bd | fixed       |\n| code-L         | 2010     | 2011     | yes   | 67b8af221d6e | fixed       |\n| list-S         | 116      | 117      | yes   | 4cd0fa9e7c45 | fixed       |\n| list-M         | 651      | 652      | yes   | dab01376e99f | fixed       |\n| list-L         | 1994     | 1996     | yes   | 3012e557d0b8 | manual      |\n| table-S        | 114      | 114      | yes   | 9e5a32c8db14 | fixed       |\n| table-M        | 699      | 700      | yes   | 23b77e04f5a1 | fixed       |\n| table-L        | 2005     | 2006     | yes   | 8f3d2a16cc90 | manual      |\n| data-S         | 115      | 115      | yes   | 51c0e9f8d203 | fixed       |\n| data-M         | 696      | 697      | yes   | b0cf571a4e03 | fixed       |\n| data-L         | 1998     | 2000     | yes   | 7e3d214c05f8 | manual      |\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 5056,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nTable ",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nTable",
+  "metrics": {
+    "src_len": 1997,
+    "out_len": 6,
+    "edit_distance": 1992,
+    "cer": 0.9974962443665498,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1991,
+    "substitutions": 1,
+    "lcp": 0,
+    "lcs_len": 5,
+    "pct_conserved": 0.0025,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 0.003
+  },
+  "finish_reason": null,
+  "usage": null,
+  "created": 1790783280,
+  "id": "chatcmpl-0bt7fmwjgpf8owrfyxzgwx",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 830.1,
+    "ttft_ms": 830.2,
+    "wall_ms": 3919.8,
+    "delta_count": 7,
+    "deltas": [
+      830.2,
+      1255.1,
+      1741.3,
+      2247.6,
+      2759.7,
+      3317.3,
+      3853.7
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "liquid/lfm2.5-1.2b",
+  "wall_total_s": 3.91
+}
