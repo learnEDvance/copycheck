@@ -1,0 +1,3 @@
+snapshot_id,customer_id,first_name,last_name,orders,total_spent,last_order
+snap-2026-09-01,1001,Alice,Wang,14,4187.65,2026-08-27
+snap-2026-09-01,1
