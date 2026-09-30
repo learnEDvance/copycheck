@@ -1,0 +1,111 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T20:53:31",
+  "model": "gemma-3-270m-it",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 1,
+  "variant": "no-thinking",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Do not think out loud. Do not reason. Do not plan. Simply output the text between COPYSTART and COPYEND verbatim and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nCut-over checklist:\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nCut-over checklist:\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 115,
+    "edit_distance": 3,
+    "cer": 0.02586206896551724,
+    "exact": false,
+    "insertions": 1,
+    "deletions": 2,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 114,
+    "pct_conserved": 0.9828,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9914
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 86,
+    "completion_tokens": 36,
+    "total_tokens": 122,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790781811,
+  "id": "chatcmpl-wtllsufdc7kke15un4ncj",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 58.7,
+    "ttft_ms": 58.7,
+    "wall_ms": 322.5,
+    "delta_count": 35,
+    "deltas": [
+      58.7,
+      69.1,
+      79.7,
+      87.5,
+      95.2,
+      102.1,
+      109.9,
+      117.0,
+      123.2,
+      130.4,
+      137.7,
+      145.1,
+      151.9,
+      159.0,
+      166.4,
+      174.1,
+      180.5,
+      188.4,
+      195.9,
+      203.4,
+      210.6,
+      218.5,
+      226.0,
+      233.0,
+      241.0,
+      248.7,
+      255.9,
+      262.5,
+      270.0,
+      277.9,
+      285.7,
+      291.7,
+      298.9,
+      306.5,
+      313.0
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "gemma-3-270m-it",
+  "wall_total_s": 0.33
+}

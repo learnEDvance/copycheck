@@ -1,0 +1,105 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T20:53:16",
+  "model": "gemma-3-270m-it",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 34,
+  "variant": "baseline",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Cut-over checklist: 1. Freeze `schema_migrations`.\nPromote the standby replica.\nRun `--strict` verification.\n",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "Cut-over checklist: 1. Freeze `schema_migrations`.\nPromote the standby replica.\nRun `--strict` verification.",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 108,
+    "edit_distance": 9,
+    "cer": 0.07758620689655173,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 8,
+    "substitutions": 1,
+    "lcp": 19,
+    "lcs_len": 107,
+    "pct_conserved": 0.9224,
+    "first_divergence": 19,
+    "exact_pct": 0.0,
+    "len_ratio": 0.931
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 113,
+    "completion_tokens": 30,
+    "total_tokens": 143,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790781796,
+  "id": "chatcmpl-vj8nc6d3qujmk1l3mavaep",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 252.2,
+    "ttft_ms": 252.2,
+    "wall_ms": 3098.9,
+    "delta_count": 29,
+    "deltas": [
+      252.2,
+      419.1,
+      573.0,
+      738.3,
+      738.3,
+      817.9,
+      949.4,
+      1088.1,
+      1193.9,
+      1302.5,
+      1404.9,
+      1491.1,
+      1581.6,
+      1672.3,
+      1766.9,
+      1859.1,
+      1952.0,
+      2043.1,
+      2129.6,
+      2217.0,
+      2305.8,
+      2396.4,
+      2483.6,
+      2572.3,
+      2658.2,
+      2746.1,
+      2832.6,
+      2918.9,
+      3004.2
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "gemma-3-270m-it",
+  "wall_total_s": 0.0
+}
