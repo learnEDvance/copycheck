@@ -1,0 +1,105 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T22:05:55",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 1,
+  "variant": "baseline",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "reasoning": "We need to output only the copied text: \"Cut-over checklist:\\n\\n1. Freeze `schema_migrations`.\\n2. Promote the standby replica.\\n3. Run `--strict` verification.\"\n\nBut note there are line breaks after each item? The original includes blank lines between items? Let's see:\n\n\"Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\"\n\nThere is a blank line after \"Checklist:\" then \"1.\" etc. So output exactly that.\n\nThus final answer: \n\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nNo extra spaces or markers.\n",
+  "reasoning_only": false,
+  "extracted": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 115,
+    "edit_distance": 1,
+    "cer": 0.008620689655172414,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 115,
+    "lcs_len": 115,
+    "pct_conserved": 0.9914,
+    "first_divergence": 115,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9914
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 125,
+    "completion_tokens": 190,
+    "total_tokens": 315,
+    "completion_tokens_details": {
+      "reasoning_tokens": 158
+    }
+  },
+  "created": 1790786155,
+  "id": "chatcmpl-76g8ei8gi8s9458145h3y6",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 2155.0,
+    "ttft_ms": 17362.8,
+    "wall_ms": 20118.7,
+    "delta_count": 29,
+    "deltas": [
+      17362.8,
+      17458.4,
+      17552.9,
+      17646.2,
+      17741.7,
+      17836.0,
+      17928.4,
+      18022.4,
+      18116.6,
+      18209.0,
+      18305.2,
+      18400.0,
+      18495.3,
+      18587.9,
+      18681.3,
+      18774.1,
+      18872.4,
+      18968.6,
+      19063.1,
+      19154.9,
+      19252.7,
+      19347.5,
+      19442.9,
+      19540.3,
+      19632.0,
+      19725.2,
+      19818.8,
+      19913.6,
+      20007.1
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 20.11
+}

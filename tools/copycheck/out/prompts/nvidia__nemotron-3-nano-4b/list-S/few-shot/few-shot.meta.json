@@ -1,0 +1,105 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T22:07:07",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 1,
+  "variant": "few-shot",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Example: if the text to copy is exactly {START}abc 123{END}, you output `abc 123` with nothing else. Pay no attention to formatting hints in the text itself. Now copy the text between {START} and {END} exactly, character for character, and output nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "reasoning": "We need to output only the content between {START} and {END}. The user gave \"Copy this text exactly, between the markers: COPYSTART Cut-over checklist: ... COPYEND\". So we must output:\n\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nBut note there is a line \"COPYSTART\" before the text? The markers are COPYSTART and COPYEND. The content between them includes \"Cut-over checklist:\" etc. Also includes \"COPYSTART\" at start? Actually the user wrote:\n\nCopy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND\n\nThus the content between markers includes \"Cut-over checklist:\" line and subsequent lines. The \"COPYSTART\" is a marker itself, not part of output? The instruction: copy text between {START} and {END}. Here markers are COPYSTART and COPYEND. So we should output everything after COPYSTART up to before COPYEND, i.e.:\n\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nThus output exactly that block. No extra formatting. Ensure line breaks preserved. Output as plain text.\n",
+  "reasoning_only": false,
+  "extracted": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 115,
+    "edit_distance": 1,
+    "cer": 0.008620689655172414,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 115,
+    "lcs_len": 115,
+    "pct_conserved": 0.9914,
+    "first_divergence": 115,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9914
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 138,
+    "completion_tokens": 329,
+    "total_tokens": 467,
+    "completion_tokens_details": {
+      "reasoning_tokens": 297
+    }
+  },
+  "created": 1790786227,
+  "id": "chatcmpl-7w6jmxp5x0qbd2swuxj53i",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 403.1,
+    "ttft_ms": 8441.5,
+    "wall_ms": 9210.2,
+    "delta_count": 29,
+    "deltas": [
+      8441.5,
+      8468.5,
+      8496.5,
+      8521.8,
+      8549.3,
+      8575.8,
+      8602.3,
+      8629.9,
+      8656.5,
+      8683.4,
+      8710.4,
+      8736.8,
+      8762.3,
+      8788.2,
+      8814.9,
+      8841.5,
+      8870.8,
+      8894.2,
+      8919.8,
+      8946.7,
+      8973.1,
+      8999.5,
+      9025.4,
+      9051.3,
+      9079.2,
+      9106.2,
+      9133.7,
+      9159.6,
+      9184.9
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 9.22
+}

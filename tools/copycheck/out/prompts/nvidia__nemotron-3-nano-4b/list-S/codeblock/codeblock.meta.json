@@ -1,0 +1,109 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T22:07:02",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 1,
+  "variant": "codeblock",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Copy the text between COPYSTART and COPYEND verbatim into a single fenced code block, character for character. Output nothing outside the code block."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "``` \nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\n```",
+  "reasoning": "We need to output only a fenced code block with the text verbatim between COPYSTART and COPYEND, character for character. No other output. So produce:\n\n``` \nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\n```\n\nMake sure it's exactly as given: includes line breaks, spaces. The text between markers is:\n\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nYes. Output only that block.\n",
+  "reasoning_only": false,
+  "extracted": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 115,
+    "edit_distance": 1,
+    "cer": 0.008620689655172414,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 115,
+    "lcs_len": 115,
+    "pct_conserved": 0.9914,
+    "first_divergence": 115,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9914
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 94,
+    "completion_tokens": 160,
+    "total_tokens": 254,
+    "completion_tokens_details": {
+      "reasoning_tokens": 124
+    }
+  },
+  "created": 1790786222,
+  "id": "chatcmpl-mps9lo276ibnz2gco3k7wr",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 328.6,
+    "ttft_ms": 3755.9,
+    "wall_ms": 4659.1,
+    "delta_count": 33,
+    "deltas": [
+      3755.9,
+      3799.2,
+      3824.1,
+      3850.6,
+      3877.9,
+      3906.3,
+      3934.1,
+      3960.3,
+      3987.6,
+      4014.2,
+      4042.2,
+      4069.7,
+      4095.4,
+      4122.0,
+      4149.5,
+      4176.5,
+      4204.5,
+      4232.3,
+      4260.1,
+      4286.9,
+      4311.9,
+      4338.4,
+      4364.9,
+      4391.0,
+      4418.6,
+      4444.2,
+      4471.2,
+      4497.6,
+      4524.1,
+      4550.5,
+      4579.6,
+      4606.2,
+      4633.2
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 4.67
+}

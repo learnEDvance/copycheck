@@ -1,0 +1,105 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T22:06:15",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 10,
+  "variant": "baseline",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "reasoning": "We need to output only the copied text: \"Cut-over checklist:\\n\\n1. Freeze `schema_migrations`.\\n2. Promote the standby replica.\\n3. Run `--strict` verification.\"\n\nBut note there are line breaks after each item? The original includes line breaks between items and after list. Let's capture exactly:\n\n\"Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\"\n\nThere is a blank line after \"checklist:\"? Actually text: \"Cut-over checklist:\\n\\n1. ...\". So there are two newlines after colon, then \"1.\" etc.\n\nThus output exactly that string with line breaks as in original.\n\nLet's produce:\n\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nMake sure no extra spaces or markers.\n",
+  "reasoning_only": false,
+  "extracted": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 115,
+    "edit_distance": 1,
+    "cer": 0.008620689655172414,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 115,
+    "lcs_len": 115,
+    "pct_conserved": 0.9914,
+    "first_divergence": 115,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9914
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 125,
+    "completion_tokens": 225,
+    "total_tokens": 350,
+    "completion_tokens_details": {
+      "reasoning_tokens": 193
+    }
+  },
+  "created": 1790786175,
+  "id": "chatcmpl-h2ulwwimmwn5grgq0eyu",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 924.3,
+    "ttft_ms": 20442.9,
+    "wall_ms": 23156.3,
+    "delta_count": 29,
+    "deltas": [
+      20442.9,
+      20541.2,
+      20636.9,
+      20729.3,
+      20825.1,
+      20920.6,
+      21006.9,
+      21097.6,
+      21194.5,
+      21285.2,
+      21379.4,
+      21473.3,
+      21570.1,
+      21657.8,
+      21754.1,
+      21847.6,
+      21941.9,
+      22032.9,
+      22128.9,
+      22220.4,
+      22315.6,
+      22412.4,
+      22505.7,
+      22594.5,
+      22688.0,
+      22781.9,
+      22871.2,
+      22964.1,
+      23059.3
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 0.0
+}
