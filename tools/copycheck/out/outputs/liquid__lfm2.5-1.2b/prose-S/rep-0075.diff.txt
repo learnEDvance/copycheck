@@ -1,0 +1,28 @@
+### SOURCE
+Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.
+
+### EXTRACTED OUTPUT
+
+Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.
+
+
+### METRICS
+{
+  "src_len": 125,
+  "out_len": 127,
+  "edit_distance": 2,
+  "cer": 0.016,
+  "exact": false,
+  "insertions": 2,
+  "deletions": 0,
+  "substitutions": 0,
+  "lcp": 0,
+  "lcs_len": 125,
+  "pct_conserved": 1.0,
+  "first_divergence": 0,
+  "exact_pct": 0.0,
+  "len_ratio": 1.016
+}
+### FIRST DIVERGENCE
+  src: 'Two hundred milliseconds of replication lag is fine for stag'
+  out: '\nTwo hundred milliseconds of replication lag is fine for sta'

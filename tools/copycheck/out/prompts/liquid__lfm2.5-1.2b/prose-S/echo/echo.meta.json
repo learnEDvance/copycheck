@@ -1,0 +1,107 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T21:05:22",
+  "model": "liquid/lfm2.5-1.2b",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 1,
+  "variant": "echo",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim copier. Output only the text between COPYSTART and COPYEND, exactly as written. Nothing else. No markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": " Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\n",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 127,
+    "edit_distance": 2,
+    "cer": 0.016,
+    "exact": false,
+    "insertions": 2,
+    "deletions": 0,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 125,
+    "pct_conserved": 1.0,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 1.016
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 89,
+    "completion_tokens": 32,
+    "total_tokens": 121,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790782522,
+  "id": "chatcmpl-z6xvv4wvy3aj2ihmicgf",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 288.9,
+    "ttft_ms": 289.0,
+    "wall_ms": 604.1,
+    "delta_count": 31,
+    "deltas": [
+      289.0,
+      321.2,
+      334.1,
+      343.3,
+      352.8,
+      362.2,
+      372.1,
+      381.2,
+      390.5,
+      399.8,
+      409.2,
+      418.4,
+      428.0,
+      437.1,
+      446.0,
+      455.3,
+      464.6,
+      474.0,
+      483.1,
+      493.6,
+      503.4,
+      512.3,
+      521.3,
+      530.9,
+      540.0,
+      548.7,
+      557.5,
+      567.1,
+      575.0,
+      583.7,
+      593.0
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "liquid/lfm2.5-1.2b",
+  "wall_total_s": 0.61
+}

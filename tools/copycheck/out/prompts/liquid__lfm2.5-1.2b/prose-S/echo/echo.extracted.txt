@@ -1,0 +1,2 @@
+ Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.
+
