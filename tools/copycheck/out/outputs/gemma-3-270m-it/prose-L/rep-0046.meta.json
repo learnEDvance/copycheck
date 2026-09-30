@@ -1,0 +1,95 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T20:50:34",
+  "model": "gemma-3-270m-it",
+  "cell": "prose-L",
+  "type": "prose",
+  "size": "L",
+  "rep": 46,
+  "variant": "baseline",
+  "src": "Every distributed ledger we operate is, at bottom, a single append-only file partitioned across a fleet of ordinary machines, and the elegance of that arrangement is that correctness flows from one narrow rule: an entry is committed only once a majority of voters have acknowledged it from persistent storage. Everything else in the stack, from the leader election timer to the background compactor, exists to make that rule cheap enough to honour at line rate. This report summarises how the current generation satisfies the rule in production, what we measured, and where the headroom lies.\n\nWe begin with the acknowledgement path. A client request is parsed, checksummed, and handed to the append pipeline, which has two stages. The first stage serialises the entry into the local write-ahead log and returns a durable offset once the fsync completes; the second stage broadcasts the same entry to the voter set and awaits replies. We do not interleave the two stages, because doing so would allow a fast follower to outrun the writer and produce a non-causal order of application. In practice the pipeline sustains thirty-eight thousand acknowledgements per second per partition, with a tail latency at the ninety-ninth percentile of eighty-one milliseconds including the network round trip.\n\nA second concern is the interaction between snapshotting and the recovery scan. When a replica falls behind, the compactor emits a snapshot that embeds the exact offset of the last included entry, so that the lagging peer can skip the log and commence from a checkpoint. We had historically treated this as a benign optimisation, but a throttled reader revealed a subtle bug: the snapshot interrupts the log reader's batching loop mid-token, and unless the interrupted batch is requeued atomically, the follower acknowledges a state that includes the snapshot's entries without having applied the interrupted batch's final byte. The fix was to make batch advancement compare-and-swap on the durable offset, and we added a property test that drives recovery with random interleavings.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nEvery distributed ledger we operate is, at bottom, a single append-only file partitioned across a fleet of ordinary machines, and the elegance of that arrangement is that correctness flows from one narrow rule: an entry is committed only once a majority of voters have acknowledged it from persistent storage. Everything else in the stack, from the leader election timer to the background compactor, exists to make that rule cheap enough to honour at line rate. This report summarises how the current generation satisfies the rule in production, what we measured, and where the headroom lies.\n\nWe begin with the acknowledgement path. A client request is parsed, checksummed, and handed to the append pipeline, which has two stages. The first stage serialises the entry into the local write-ahead log and returns a durable offset once the fsync completes; the second stage broadcasts the same entry to the voter set and awaits replies. We do not interleave the two stages, because doing so would allow a fast follower to outrun the writer and produce a non-causal order of application. In practice the pipeline sustains thirty-eight thousand acknowledgements per second per partition, with a tail latency at the ninety-ninth percentile of eighty-one milliseconds including the network round trip.\n\nA second concern is the interaction between snapshotting and the recovery scan. When a replica falls behind, the compactor emits a snapshot that embeds the exact offset of the last included entry, so that the lagging peer can skip the log and commence from a checkpoint. We had historically treated this as a benign optimisation, but a throttled reader revealed a subtle bug: the snapshot interrupts the log reader's batching loop mid-token, and unless the interrupted batch is requeued atomically, the follower acknowledges a state that includes the snapshot's entries without having applied the interrupted batch's final byte. The fix was to make batch advancement compare-and-swap on the durable offset, and we added a property test that drives recovery with random interleavings.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 5161,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nEvery distributed ledger we operate is, at bottom, a single append-only file partitioned across a fleet of ordinary machines",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nEvery distributed ledger we operate is, at bottom, a single append-only file partitioned across a fleet of ordinary machines",
+  "metrics": {
+    "src_len": 2081,
+    "out_len": 125,
+    "edit_distance": 1958,
+    "cer": 0.940893801057184,
+    "exact": false,
+    "insertions": 1,
+    "deletions": 1957,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 124,
+    "pct_conserved": 0.0596,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 0.0601
+  },
+  "finish_reason": null,
+  "usage": null,
+  "created": 1790781635,
+  "id": "chatcmpl-6dwrcbiizfonfhapakcj7",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 391.5,
+    "ttft_ms": 391.6,
+    "wall_ms": 3546.4,
+    "delta_count": 26,
+    "deltas": [
+      391.6,
+      462.8,
+      462.8,
+      590.2,
+      590.3,
+      636.4,
+      688.8,
+      795.4,
+      1009.8,
+      1352.9,
+      1908.4,
+      2047.7,
+      2161.7,
+      2258.9,
+      2350.4,
+      2439.8,
+      2530.2,
+      2624.4,
+      2726.2,
+      2823.4,
+      2916.9,
+      3009.7,
+      3102.1,
+      3192.7,
+      3283.2,
+      3373.1
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "gemma-3-270m-it",
+  "wall_total_s": 0.0
+}
