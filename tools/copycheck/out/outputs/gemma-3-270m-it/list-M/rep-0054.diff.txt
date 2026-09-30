@@ -1,0 +1,43 @@
+### SOURCE
+Release verification checklist for build 4.2.1:
+
+1. **Artifact integrity.**
+   - Confirm the SHA-256 of `copycheck` matches the published digest.
+   - Spot-check the signature bundle `copycheck.sig` with the release key.
+2. **Configuration.**
+   - Verify `copycheck.toml` parses without warnings.
+   - Ensure the `output_dir` path is owned by the service user.
+3. **Battery.**
+   - Run the three-cell corpus and diff against the golden copy.
+     a. Byte-for-byte equality for the `gibberish` and `table` cells.
+     b. Normalised equality (LF only) for the `code` cell.
+4. **Rollback.**
+   - Keep the previous tarball in place until the smoke test passes.
+   - Document the `restore --from-tag` procedure in the runbook.
+
+### EXTRACTED OUTPUT
+Release verification checklist for build 4.2.1:
+1. Artifact integrity.
+2. Configuration.
+3. Battery.
+4. Rollback.
+### METRICS
+{
+  "src_len": 722,
+  "out_len": 113,
+  "edit_distance": 609,
+  "cer": 0.8434903047091413,
+  "exact": false,
+  "insertions": 0,
+  "deletions": 609,
+  "substitutions": 0,
+  "lcp": 48,
+  "lcs_len": 113,
+  "pct_conserved": 0.1565,
+  "first_divergence": 48,
+  "exact_pct": 0.0,
+  "len_ratio": 0.1565
+}
+### FIRST DIVERGENCE
+  src: '\n1. **Artifact integrity.**\n   - Confirm the SHA-256 of `cop'
+  out: '1. Artifact integrity.\n2. Configuration.\n3. Battery.\n4. Roll'

@@ -1,0 +1,111 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T20:54:28",
+  "model": "gemma-3-270m-it",
+  "cell": "list-M",
+  "type": "list",
+  "size": "M",
+  "rep": 74,
+  "variant": "baseline",
+  "src": "Release verification checklist for build 4.2.1:\n\n1. **Artifact integrity.**\n   - Confirm the SHA-256 of `copycheck` matches the published digest.\n   - Spot-check the signature bundle `copycheck.sig` with the release key.\n2. **Configuration.**\n   - Verify `copycheck.toml` parses without warnings.\n   - Ensure the `output_dir` path is owned by the service user.\n3. **Battery.**\n   - Run the three-cell corpus and diff against the golden copy.\n     a. Byte-for-byte equality for the `gibberish` and `table` cells.\n     b. Normalised equality (LF only) for the `code` cell.\n4. **Rollback.**\n   - Keep the previous tarball in place until the smoke test passes.\n   - Document the `restore --from-tag` procedure in the runbook.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nRelease verification checklist for build 4.2.1:\n\n1. **Artifact integrity.**\n   - Confirm the SHA-256 of `copycheck` matches the published digest.\n   - Spot-check the signature bundle `copycheck.sig` with the release key.\n2. **Configuration.**\n   - Verify `copycheck.toml` parses without warnings.\n   - Ensure the `output_dir` path is owned by the service user.\n3. **Battery.**\n   - Run the three-cell corpus and diff against the golden copy.\n     a. Byte-for-byte equality for the `gibberish` and `table` cells.\n     b. Normalised equality (LF only) for the `code` cell.\n4. **Rollback.**\n   - Keep the previous tarball in place until the smoke test passes.\n   - Document the `restore --from-tag` procedure in the runbook.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 3462,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Release verification checklist for build 4.2.1:\n1. Artifact integrity.\n2. Configuration.\n3. Battery.\n4. Rollback.\n",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "Release verification checklist for build 4.2.1:\n1. Artifact integrity.\n2. Configuration.\n3. Battery.\n4. Rollback.",
+  "metrics": {
+    "src_len": 722,
+    "out_len": 113,
+    "edit_distance": 609,
+    "cer": 0.8434903047091413,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 609,
+    "substitutions": 0,
+    "lcp": 48,
+    "lcs_len": 113,
+    "pct_conserved": 0.1565,
+    "first_divergence": 48,
+    "exact_pct": 0.0,
+    "len_ratio": 0.1565
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 283,
+    "completion_tokens": 36,
+    "total_tokens": 319,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790781868,
+  "id": "chatcmpl-1d2y7pd39c46nlja0x08gc",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 266.1,
+    "ttft_ms": 266.1,
+    "wall_ms": 3759.7,
+    "delta_count": 35,
+    "deltas": [
+      266.1,
+      368.4,
+      503.9,
+      609.3,
+      703.7,
+      798.0,
+      891.0,
+      987.0,
+      1089.7,
+      1195.3,
+      1292.2,
+      1388.6,
+      1486.9,
+      1584.1,
+      1676.8,
+      1771.8,
+      1868.0,
+      1968.4,
+      2063.0,
+      2157.1,
+      2253.6,
+      2347.8,
+      2444.1,
+      2538.4,
+      2644.0,
+      2745.2,
+      2846.2,
+      2958.1,
+      3060.3,
+      3157.5,
+      3258.6,
+      3350.0,
+      3452.8,
+      3543.2,
+      3639.4
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "gemma-3-270m-it",
+  "wall_total_s": 0.0
+}

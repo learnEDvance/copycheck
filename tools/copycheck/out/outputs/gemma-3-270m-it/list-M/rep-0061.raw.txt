@@ -1,0 +1,5 @@
+Release verification checklist for build 4.2.1:
+1. Artifact integrity.
+2. Configuration.
+3. Battery.
+4. Rollback.
