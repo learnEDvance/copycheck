@@ -1,0 +1,38 @@
+### SOURCE
+import os
+
+
+def peek(path: str) -> int:
+    with open(path, "rb") as fh:
+        data = fh.read()
+    return len(data)
+
+### EXTRACTED OUTPUT
+
+import os
+
+
+def peek(path: str) -> int:
+    with open(path, "rb") as fh:
+        data = fh.read()
+    return len(data)
+### METRICS
+{
+  "src_len": 119,
+  "out_len": 119,
+  "edit_distance": 2,
+  "cer": 0.01680672268907563,
+  "exact": false,
+  "insertions": 1,
+  "deletions": 1,
+  "substitutions": 0,
+  "lcp": 0,
+  "lcs_len": 118,
+  "pct_conserved": 0.9916,
+  "first_divergence": 0,
+  "exact_pct": 0.0,
+  "len_ratio": 1.0
+}
+### FIRST DIVERGENCE
+  src: 'import os\n\n\ndef peek(path: str) -> int:\n    with open(path, '
+  out: '\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path,'

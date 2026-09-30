@@ -1,0 +1,121 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T20:51:46",
+  "model": "gemma-3-270m-it",
+  "cell": "code-S",
+  "type": "code",
+  "size": "S",
+  "rep": 61,
+  "variant": "baseline",
+  "src": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2708,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)",
+  "metrics": {
+    "src_len": 119,
+    "out_len": 119,
+    "edit_distance": 2,
+    "cer": 0.01680672268907563,
+    "exact": false,
+    "insertions": 1,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 118,
+    "pct_conserved": 0.9916,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 1.0
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 123,
+    "completion_tokens": 46,
+    "total_tokens": 169,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790781706,
+  "id": "chatcmpl-h56nrdhbtnh7h25x99d4ol",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 752.2,
+    "ttft_ms": 752.2,
+    "wall_ms": 5359.1,
+    "delta_count": 45,
+    "deltas": [
+      752.2,
+      850.3,
+      945.4,
+      1035.6,
+      1128.6,
+      1219.5,
+      1314.2,
+      1403.2,
+      1489.1,
+      1574.1,
+      1660.6,
+      1747.3,
+      1833.9,
+      1921.5,
+      2007.5,
+      2091.9,
+      2178.0,
+      2265.7,
+      2350.0,
+      2435.4,
+      2520.6,
+      2607.7,
+      2696.3,
+      2782.7,
+      2870.5,
+      2959.6,
+      3046.2,
+      3133.1,
+      3221.4,
+      3314.5,
+      3414.6,
+      3592.5,
+      3703.5,
+      3807.3,
+      3901.3,
+      3989.5,
+      4082.7,
+      4177.9,
+      4403.1,
+      4489.9,
+      4657.3,
+      4763.6,
+      4955.4,
+      5086.8,
+      5228.7
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "gemma-3-270m-it",
+  "wall_total_s": 0.0
+}
