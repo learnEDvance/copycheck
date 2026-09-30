@@ -1,0 +1,112 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T21:53:05",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "code-S",
+  "type": "code",
+  "size": "S",
+  "rep": 18,
+  "variant": "baseline",
+  "src": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2708,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)",
+  "reasoning": "We need to output only the copied text exactly between COPYSTART and COPYEND markers. That includes everything from after \"import os\" line? Let's see: The block:\n\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nWe need to output exactly that text, character for character. Should we include the blank lines? Yes.\n\nSo output:\n\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nMake sure no extra spaces or newlines beyond what's there. The original has two blank lines after import os line? Actually \"import os\\n\\n\\ndef ...\" So yes.\n\nThus output exactly that.\n",
+  "reasoning_only": false,
+  "extracted": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)",
+  "metrics": {
+    "src_len": 119,
+    "out_len": 118,
+    "edit_distance": 1,
+    "cer": 0.008403361344537815,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 118,
+    "lcs_len": 118,
+    "pct_conserved": 0.9916,
+    "first_divergence": 118,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9916
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 132,
+    "completion_tokens": 214,
+    "total_tokens": 346,
+    "completion_tokens_details": {
+      "reasoning_tokens": 175
+    }
+  },
+  "created": 1790785385,
+  "id": "chatcmpl-4ov3jwh7igsy4ki4ad68m",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 431.1,
+    "ttft_ms": 17077.2,
+    "wall_ms": 19555.4,
+    "delta_count": 36,
+    "deltas": [
+      17077.2,
+      17148.9,
+      17218.5,
+      17290.6,
+      17360.8,
+      17427.3,
+      17497.0,
+      17565.8,
+      17636.3,
+      17705.9,
+      17772.7,
+      17844.0,
+      17910.7,
+      17983.1,
+      18051.6,
+      18121.4,
+      18187.7,
+      18259.6,
+      18330.5,
+      18401.8,
+      18468.5,
+      18538.1,
+      18607.4,
+      18677.8,
+      18751.3,
+      18823.0,
+      18891.1,
+      18960.0,
+      19028.6,
+      19098.5,
+      19169.4,
+      19245.9,
+      19305.7,
+      19371.3,
+      19432.7,
+      19495.3
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 0.0
+}

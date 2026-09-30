@@ -1,0 +1,112 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T21:52:14",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "code-S",
+  "type": "code",
+  "size": "S",
+  "rep": 3,
+  "variant": "baseline",
+  "src": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2708,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)",
+  "reasoning": "We need to output only the copied text exactly between COPYSTART and COPYEND markers. That includes everything from after \"import os\" line? The markers are included? It says reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary.\n\nThus output should be:\n\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nBut note there are blank lines between import os and def? The original shows:\n\nimport os\n\n\ndef peek(path: str) -> int:\n...\n\nThere is a blank line after import os then another blank line before def. So we need to include those.\n\nThus output exactly:\n\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nMake sure no extra spaces or newlines beyond that. Also no markers. Just the text.\n",
+  "reasoning_only": false,
+  "extracted": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)",
+  "metrics": {
+    "src_len": 119,
+    "out_len": 118,
+    "edit_distance": 1,
+    "cer": 0.008403361344537815,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 118,
+    "lcs_len": 118,
+    "pct_conserved": 0.9916,
+    "first_divergence": 118,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9916
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 132,
+    "completion_tokens": 268,
+    "total_tokens": 400,
+    "completion_tokens_details": {
+      "reasoning_tokens": 229
+    }
+  },
+  "created": 1790785334,
+  "id": "chatcmpl-qwcnujlhk4jpbq68njkawq",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 2616.8,
+    "ttft_ms": 24635.3,
+    "wall_ms": 27998.4,
+    "delta_count": 36,
+    "deltas": [
+      24635.3,
+      24727.7,
+      24820.3,
+      24914.3,
+      25009.9,
+      25105.1,
+      25192.8,
+      25284.0,
+      25373.6,
+      25465.2,
+      25558.5,
+      25649.0,
+      25739.8,
+      25833.2,
+      25928.0,
+      26020.7,
+      26119.7,
+      26216.6,
+      26311.3,
+      26404.9,
+      26498.1,
+      26590.9,
+      26686.4,
+      26780.2,
+      26872.8,
+      26966.4,
+      27058.8,
+      27150.5,
+      27244.3,
+      27337.3,
+      27430.8,
+      27525.9,
+      27617.7,
+      27713.8,
+      27809.7,
+      27903.2
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 0.0
+}

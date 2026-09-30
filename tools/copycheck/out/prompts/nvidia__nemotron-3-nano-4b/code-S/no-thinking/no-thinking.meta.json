@@ -1,0 +1,112 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T21:53:42",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "code-S",
+  "type": "code",
+  "size": "S",
+  "rep": 1,
+  "variant": "no-thinking",
+  "src": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Do not think out loud. Do not reason. Do not plan. Simply output the text between COPYSTART and COPYEND verbatim and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2708,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)",
+  "reasoning": "We need to output only the text between COPYSTART and COPYEND verbatim. So we should output:\n\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nNo extra spaces? The original includes blank lines. We'll output exactly that.\n",
+  "reasoning_only": false,
+  "extracted": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)",
+  "metrics": {
+    "src_len": 119,
+    "out_len": 118,
+    "edit_distance": 1,
+    "cer": 0.008403361344537815,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 118,
+    "lcs_len": 118,
+    "pct_conserved": 0.9916,
+    "first_divergence": 118,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9916
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 101,
+    "completion_tokens": 114,
+    "total_tokens": 215,
+    "completion_tokens_details": {
+      "reasoning_tokens": 75
+    }
+  },
+  "created": 1790785422,
+  "id": "chatcmpl-jkzwlhf0g7q44b4oliojxs",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 349.6,
+    "ttft_ms": 2440.2,
+    "wall_ms": 3427.0,
+    "delta_count": 36,
+    "deltas": [
+      2440.2,
+      2468.2,
+      2505.5,
+      2531.1,
+      2561.4,
+      2588.7,
+      2614.5,
+      2640.7,
+      2668.6,
+      2695.3,
+      2723.3,
+      2750.6,
+      2777.2,
+      2805.0,
+      2831.4,
+      2859.4,
+      2886.0,
+      2913.0,
+      2939.6,
+      2967.1,
+      2993.5,
+      3021.2,
+      3047.7,
+      3075.2,
+      3102.5,
+      3128.9,
+      3156.7,
+      3183.3,
+      3211.0,
+      3238.2,
+      3266.3,
+      3292.9,
+      3320.5,
+      3347.3,
+      3374.2,
+      3400.7
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 3.44
+}
