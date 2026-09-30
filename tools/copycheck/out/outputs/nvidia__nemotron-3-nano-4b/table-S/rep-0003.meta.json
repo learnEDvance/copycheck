@@ -1,0 +1,115 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T22:18:40",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "table-S",
+  "type": "table",
+  "size": "S",
+  "rep": 3,
+  "variant": "baseline",
+  "src": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2710,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "reasoning": "We need to output only the copied text between markers, character for character. The user says: \"Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND\"\n\nWe must output only that text, no extra. So we need to produce exactly:\n\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nBut note there is a blank line after \"ports.\"? The original includes a blank line before the markdown table. Let's see: \"The table shows the default service ports.\n\n| Service | Port |\n...\"\n\nSo output should include that blank line (i.e., an empty line). Also after the table, there is a blank line before COPYEND. So we need to output exactly:\n\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nBut also note that there might be no trailing newline? Usually output includes newline at end. We'll just output as is.\n\nThus final answer: exactly that block.\n",
+  "reasoning_only": false,
+  "extracted": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "metrics": {
+    "src_len": 120,
+    "out_len": 119,
+    "edit_distance": 1,
+    "cer": 0.008333333333333333,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 119,
+    "lcs_len": 119,
+    "pct_conserved": 0.9917,
+    "first_divergence": 119,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9917
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 135,
+    "completion_tokens": 325,
+    "total_tokens": 460,
+    "completion_tokens_details": {
+      "reasoning_tokens": 283
+    }
+  },
+  "created": 1790786920,
+  "id": "chatcmpl-ehg9isetrdhpvr75gqye8",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 2364.9,
+    "ttft_ms": 30103.8,
+    "wall_ms": 34584.2,
+    "delta_count": 39,
+    "deltas": [
+      30103.8,
+      30194.4,
+      30292.7,
+      30387.1,
+      30489.0,
+      30538.5,
+      30592.4,
+      31370.7,
+      31586.5,
+      31748.5,
+      31842.8,
+      31938.6,
+      32033.6,
+      32127.1,
+      32220.4,
+      32315.6,
+      32411.7,
+      32505.3,
+      32597.8,
+      32691.6,
+      32786.0,
+      32876.3,
+      32975.9,
+      33068.6,
+      33163.0,
+      33260.9,
+      33361.8,
+      33456.2,
+      33550.1,
+      33644.2,
+      33736.7,
+      33830.6,
+      33926.4,
+      34021.0,
+      34112.9,
+      34206.5,
+      34298.4,
+      34393.2,
+      34487.5
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 3.76
+}

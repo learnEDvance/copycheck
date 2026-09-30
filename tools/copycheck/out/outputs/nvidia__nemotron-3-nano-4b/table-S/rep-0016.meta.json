@@ -1,0 +1,115 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T22:19:14",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "table-S",
+  "type": "table",
+  "size": "S",
+  "rep": 16,
+  "variant": "baseline",
+  "src": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2710,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "reasoning": "We need to output only the copied text between markers, character for character. The user says: \"Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND\"\n\nWe must output only that text, no extra. So we need to produce exactly:\n\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nBut note there is a blank line after \"ports.\"? The original includes a blank line before the markdown table. Let's see: \"The table shows the default service ports.\n\n| Service | Port |\n...\"\n\nThere is an empty line between \"ports.\" and the table. So we need to include that newline. Also after the table there is a blank line before COPYEND? The original includes:\n\n| sync    | 9091 |\n\nCOPYEND\n\nSo after the last row, there is a blank line then COPYEND. But we only output up to the end of the table content (the line with \"sync    | 9091 |\"). Should we include the trailing newline? The text includes that newline before COPYEND. So output should have that newline.\n\nThus final output:\n\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nMake sure no extra spaces or characters. Also ensure we don't include any markdown fences. Just plain text.\n\nLet's produce that.\n",
+  "reasoning_only": false,
+  "extracted": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "metrics": {
+    "src_len": 120,
+    "out_len": 119,
+    "edit_distance": 1,
+    "cer": 0.008333333333333333,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 119,
+    "lcs_len": 119,
+    "pct_conserved": 0.9917,
+    "first_divergence": 119,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9917
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 135,
+    "completion_tokens": 407,
+    "total_tokens": 542,
+    "completion_tokens_details": {
+      "reasoning_tokens": 365
+    }
+  },
+  "created": 1790786954,
+  "id": "chatcmpl-7g6eam7c3i6jfg66phrzwl",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 442.0,
+    "ttft_ms": 33171.1,
+    "wall_ms": 35862.4,
+    "delta_count": 39,
+    "deltas": [
+      33171.1,
+      33238.6,
+      33308.5,
+      33377.9,
+      33446.9,
+      33516.8,
+      33585.0,
+      33655.6,
+      33724.3,
+      33792.5,
+      33860.2,
+      33930.0,
+      33999.0,
+      34066.9,
+      34136.5,
+      34206.9,
+      34274.2,
+      34342.6,
+      34411.7,
+      34479.9,
+      34547.2,
+      34617.0,
+      34684.0,
+      34752.0,
+      34820.0,
+      34888.5,
+      34957.9,
+      35027.2,
+      35094.9,
+      35164.8,
+      35234.8,
+      35303.4,
+      35371.7,
+      35440.8,
+      35511.2,
+      35582.5,
+      35651.3,
+      35722.2,
+      35792.3
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 0.0
+}

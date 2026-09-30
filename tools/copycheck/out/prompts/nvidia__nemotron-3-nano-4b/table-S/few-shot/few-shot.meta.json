@@ -1,0 +1,115 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T22:20:16",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "table-S",
+  "type": "table",
+  "size": "S",
+  "rep": 1,
+  "variant": "few-shot",
+  "src": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Example: if the text to copy is exactly {START}abc 123{END}, you output `abc 123` with nothing else. Pay no attention to formatting hints in the text itself. Now copy the text between {START} and {END} exactly, character for character, and output nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2710,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "reasoning": "We need to output only the text between {START} and {END}. The user gave markers COPYSTART and COPYEND. So we must output exactly:\n\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nBut note there is a blank line after \"COPYSTART\"? The text between markers includes everything from after COPYSTART to before COPYEND. Let's capture exactly:\n\n\"The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\"\n\nThere is a trailing space? The line ends with \"9091 |\". Actually there is a space after 9091? In the original: \"| sync    | 9091 |\" includes a space before pipe. So output exactly that.\n\nThus final answer should be:\n\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nNo extra formatting.\n",
+  "reasoning_only": false,
+  "extracted": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "metrics": {
+    "src_len": 120,
+    "out_len": 119,
+    "edit_distance": 1,
+    "cer": 0.008333333333333333,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 119,
+    "lcs_len": 119,
+    "pct_conserved": 0.9917,
+    "first_divergence": 119,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9917
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 148,
+    "completion_tokens": 293,
+    "total_tokens": 441,
+    "completion_tokens_details": {
+      "reasoning_tokens": 251
+    }
+  },
+  "created": 1790787016,
+  "id": "chatcmpl-d30p2svplp9fsj5x1sbj7",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 382.6,
+    "ttft_ms": 7353.6,
+    "wall_ms": 8396.8,
+    "delta_count": 39,
+    "deltas": [
+      7353.6,
+      7380.5,
+      7408.6,
+      7436.3,
+      7462.8,
+      7489.6,
+      7515.7,
+      7542.9,
+      7568.2,
+      7594.1,
+      7621.2,
+      7648.3,
+      7674.8,
+      7701.7,
+      7727.9,
+      7756.6,
+      7783.0,
+      7810.8,
+      7837.3,
+      7864.1,
+      7890.9,
+      7916.7,
+      7944.8,
+      7971.5,
+      7999.6,
+      8027.1,
+      8051.6,
+      8078.2,
+      8105.1,
+      8131.9,
+      8157.6,
+      8185.0,
+      8212.3,
+      8238.5,
+      8264.1,
+      8290.8,
+      8318.2,
+      8344.4,
+      8371.4
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 8.4
+}

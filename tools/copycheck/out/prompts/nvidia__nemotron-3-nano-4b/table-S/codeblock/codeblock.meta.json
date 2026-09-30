@@ -1,0 +1,119 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-09-30T22:20:11",
+  "model": "nvidia/nemotron-3-nano-4b",
+  "cell": "table-S",
+  "type": "table",
+  "size": "S",
+  "rep": 1,
+  "variant": "codeblock",
+  "src": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Copy the text between COPYSTART and COPYEND verbatim into a single fenced code block, character for character. Output nothing outside the code block."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2710,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "```text\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\n```",
+  "reasoning": "We need to output only a fenced code block with the text between COPYSTART and COPYEND, character for character. No extra output.\n\nSo produce:\n\n```text\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\n```\n\nMake sure no extra spaces before/after? The text includes line breaks. Should be exactly as given, including blank lines. Provide fenced code block with language maybe \"text\". Output only that.\n",
+  "reasoning_only": false,
+  "extracted": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "metrics": {
+    "src_len": 120,
+    "out_len": 119,
+    "edit_distance": 1,
+    "cer": 0.008333333333333333,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 119,
+    "lcs_len": 119,
+    "pct_conserved": 0.9917,
+    "first_divergence": 119,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9917
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 104,
+    "completion_tokens": 162,
+    "total_tokens": 266,
+    "completion_tokens_details": {
+      "reasoning_tokens": 116
+    }
+  },
+  "created": 1790787011,
+  "id": "chatcmpl-rtk1prgyg9gwsffu8rf1v",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 348.3,
+    "ttft_ms": 3568.2,
+    "wall_ms": 4743.0,
+    "delta_count": 43,
+    "deltas": [
+      3568.2,
+      3592.8,
+      3630.3,
+      3655.8,
+      3682.7,
+      3709.6,
+      3738.2,
+      3765.3,
+      3792.2,
+      3818.0,
+      3844.6,
+      3871.7,
+      3897.9,
+      3926.6,
+      3954.8,
+      3980.8,
+      4009.0,
+      4035.3,
+      4062.8,
+      4090.7,
+      4118.8,
+      4149.9,
+      4176.7,
+      4203.2,
+      4229.7,
+      4256.5,
+      4283.0,
+      4310.4,
+      4335.6,
+      4361.6,
+      4389.1,
+      4415.2,
+      4442.2,
+      4467.4,
+      4494.8,
+      4524.5,
+      4554.2,
+      4582.0,
+      4607.3,
+      4635.4,
+      4662.8,
+      4689.1,
+      4715.6
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "nvidia/nemotron-3-nano-4b",
+  "wall_total_s": 4.75
+}
