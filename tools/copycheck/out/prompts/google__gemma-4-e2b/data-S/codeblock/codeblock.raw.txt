@@ -1,0 +1,7 @@
+```
+customer_id,region,orders,revenue
+0041,eu-west,12,482.10
+0043,us-east,7,231.55
+0047,ap-south,19,1117.90
+0048,eu-west,3,64.00
+```
