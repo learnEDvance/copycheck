@@ -1,0 +1,118 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-10-01T16:44:53",
+  "model": "google/gemma-4-e2b",
+  "cell": "table-S",
+  "type": "table",
+  "size": "S",
+  "rep": 3,
+  "variant": "baseline",
+  "src": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2710,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "reasoning": "Thinking Process:\n1.  **Analyze the Request:** The user wants me to act as a verbatim text copier and reproduce the text located between `COPYSTART` and `COPYEND`.\n2.  **Identify Markers:**\n    *   Start marker: `COPYSTART`\n    *   End marker: `COPYEND`\n3.  **Extract Target Text:** The text to be copied is:\n    The table shows the default service ports.\n\n    | Service | Port |\n    | ------- | ---- |\n    | copy    | 8080 |\n    | sync    | 9091 |\n4.  **Verify Output Requirement:** The instruction is to reproduce it exactly, character for character.\n5.  **Final Output Generation:** Produce the extracted text only.",
+  "reasoning_only": false,
+  "extracted": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "metrics": {
+    "src_len": 120,
+    "out_len": 119,
+    "edit_distance": 1,
+    "cer": 0.008333333333333333,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 119,
+    "lcs_len": 119,
+    "pct_conserved": 0.9917,
+    "first_divergence": 119,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9917
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 130,
+    "completion_tokens": 215,
+    "total_tokens": 345,
+    "completion_tokens_details": {
+      "reasoning_tokens": 168
+    }
+  },
+  "created": 1790853293,
+  "id": "chatcmpl-38qzvxok3d8anz4xltilvh",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 1199.6,
+    "ttft_ms": 15119.0,
+    "wall_ms": 19102.2,
+    "delta_count": 42,
+    "deltas": [
+      15119.0,
+      15203.4,
+      15284.1,
+      15366.6,
+      15471.7,
+      15553.4,
+      15635.1,
+      15713.8,
+      15797.9,
+      15885.8,
+      15967.5,
+      16048.0,
+      16133.0,
+      16220.7,
+      16305.6,
+      16390.4,
+      16476.8,
+      16564.3,
+      16679.9,
+      16764.9,
+      16852.5,
+      16939.2,
+      17025.4,
+      17114.0,
+      17204.9,
+      17289.4,
+      17375.0,
+      17463.4,
+      17551.1,
+      17637.0,
+      17716.9,
+      17823.3,
+      17906.1,
+      17996.0,
+      18081.5,
+      18175.8,
+      18266.0,
+      18349.0,
+      18429.3,
+      18499.0,
+      18898.6,
+      18994.6
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "google/gemma-4-e2b",
+  "wall_total_s": 0.0
+}
