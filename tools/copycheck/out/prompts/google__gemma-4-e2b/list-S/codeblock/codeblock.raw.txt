@@ -1,0 +1,7 @@
+```
+Cut-over checklist:
+
+1. Freeze `schema_migrations`.
+2. Promote the standby replica.
+3. Run `--strict` verification.
+```

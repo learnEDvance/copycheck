@@ -1,0 +1,107 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-10-01T16:34:25",
+  "model": "google/gemma-4-e2b",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 12,
+  "variant": "baseline",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "reasoning": "Thinking Process:\n1.  **Analyze the Request:** The user wants me to act as a verbatim text copier and reproduce the text found between `COPYSTART` and `COPYEND` markers exactly.\n2.  **Identify Markers:**\n    *   Start marker: `COPYSTART`\n    *   End marker: `COPYEND`\n3.  **Extract Target Text:** The text to be copied is:\n    Cut-over checklist:\n\n    1. Freeze `schema_migrations`.\n    2. Promote the standby replica.\n    3. Run `--strict` verification.\n4.  **Verify Constraints:** The instruction requires reproducing the text exactly, character for character.\n5.  **Final Output Generation:** Produce only the extracted text.",
+  "reasoning_only": false,
+  "extracted": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 115,
+    "edit_distance": 1,
+    "cer": 0.008620689655172414,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 115,
+    "lcs_len": 115,
+    "pct_conserved": 0.9914,
+    "first_divergence": 115,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9914
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 119,
+    "completion_tokens": 194,
+    "total_tokens": 313,
+    "completion_tokens_details": {
+      "reasoning_tokens": 158
+    }
+  },
+  "created": 1790852665,
+  "id": "chatcmpl-fx6i2b4wiu8jghzm4tylzp",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 743.4,
+    "ttft_ms": 13635.1,
+    "wall_ms": 16371.1,
+    "delta_count": 31,
+    "deltas": [
+      13635.1,
+      13714.9,
+      13795.7,
+      13875.6,
+      13954.9,
+      14060.5,
+      14144.2,
+      14236.8,
+      14318.7,
+      14401.7,
+      14488.7,
+      14555.9,
+      14711.9,
+      14794.2,
+      14882.7,
+      14966.0,
+      15054.5,
+      15139.7,
+      15225.7,
+      15324.2,
+      15408.4,
+      15497.5,
+      15587.6,
+      15672.0,
+      15756.7,
+      15849.6,
+      15931.8,
+      16018.8,
+      16109.5,
+      16194.9,
+      16281.6
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "google/gemma-4-e2b",
+  "wall_total_s": 0.0
+}

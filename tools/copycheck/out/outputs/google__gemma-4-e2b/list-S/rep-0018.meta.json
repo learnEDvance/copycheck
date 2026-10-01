@@ -1,0 +1,107 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-10-01T16:34:41",
+  "model": "google/gemma-4-e2b",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 18,
+  "variant": "baseline",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "reasoning": "Thinking Process:\n1.  **Analyze the Request:** The user wants me to act as a verbatim text copier and reproduce the text found between `COPYSTART` and `COPYEND` markers exactly.\n2.  **Identify Markers:**\n    *   Start marker: `COPYSTART`\n    *   End marker: `COPYEND`\n3.  **Extract Target Text:** The text to be copied is:\n    Cut-over checklist:\n\n    1. Freeze `schema_migrations`.\n    2. Promote the standby replica.\n    3. Run `--strict` verification.\n4.  **Verify Constraints:** The instruction requires reproducing the text exactly, character for character, with no commentary or extra formatting.\n5.  **Final Output Generation:** Produce only the extracted text.",
+  "reasoning_only": false,
+  "extracted": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 115,
+    "edit_distance": 1,
+    "cer": 0.008620689655172414,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 115,
+    "lcs_len": 115,
+    "pct_conserved": 0.9914,
+    "first_divergence": 115,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9914
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 119,
+    "completion_tokens": 201,
+    "total_tokens": 320,
+    "completion_tokens_details": {
+      "reasoning_tokens": 165
+    }
+  },
+  "created": 1790852681,
+  "id": "chatcmpl-2z1w4yaapsri4pzokj4b4",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 826.5,
+    "ttft_ms": 8242.2,
+    "wall_ms": 9330.8,
+    "delta_count": 31,
+    "deltas": [
+      8242.2,
+      8277.6,
+      8309.0,
+      8342.9,
+      8377.0,
+      8410.6,
+      8459.8,
+      8497.3,
+      8532.5,
+      8566.1,
+      8599.7,
+      8635.1,
+      8673.8,
+      8708.6,
+      8746.2,
+      8782.4,
+      8816.8,
+      8853.2,
+      8887.3,
+      8921.4,
+      8954.2,
+      8988.8,
+      9022.9,
+      9058.5,
+      9093.7,
+      9125.7,
+      9160.2,
+      9193.1,
+      9229.1,
+      9263.1,
+      9298.0
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "google/gemma-4-e2b",
+  "wall_total_s": 1.62
+}

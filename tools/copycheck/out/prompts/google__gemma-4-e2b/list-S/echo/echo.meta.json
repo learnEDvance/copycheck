@@ -1,0 +1,107 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-10-01T16:34:51",
+  "model": "google/gemma-4-e2b",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 1,
+  "variant": "echo",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim copier. Output only the text between COPYSTART and COPYEND, exactly as written. Nothing else. No markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "reasoning": "Thinking Process:\n\n1.  **Analyze the Request:** The user wants me to act as a verbatim copier and reproduce the text found between `COPYSTART` and `COPYEND`.\n2.  **Examine the Input Text:**\n    ```\n    COPYSTART\n    Cut-over checklist:\n\n    1. Freeze `schema_migrations`.\n    2. Promote the standby replica.\n    3. Run `--strict` verification.\n\n    COPYEND\n    ```\n3.  **Perform Copying (Verbatim):** I must output exactly what is between the markers, including all formatting and line breaks.\n4.  **Final Output Generation:** Produce only the copied text.",
+  "reasoning_only": false,
+  "extracted": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 115,
+    "edit_distance": 1,
+    "cer": 0.008620689655172414,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 115,
+    "lcs_len": 115,
+    "pct_conserved": 0.9914,
+    "first_divergence": 115,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9914
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 90,
+    "completion_tokens": 179,
+    "total_tokens": 269,
+    "completion_tokens_details": {
+      "reasoning_tokens": 143
+    }
+  },
+  "created": 1790852691,
+  "id": "chatcmpl-6ue0vdqx3ews1vvr9d16l",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 437.2,
+    "ttft_ms": 3716.1,
+    "wall_ms": 4434.7,
+    "delta_count": 31,
+    "deltas": [
+      3716.1,
+      3738.5,
+      3760.9,
+      3783.3,
+      3805.2,
+      3829.2,
+      3851.6,
+      3873.3,
+      3895.6,
+      3918.7,
+      3941.6,
+      3964.2,
+      3988.4,
+      4011.3,
+      4033.6,
+      4056.4,
+      4079.9,
+      4102.8,
+      4124.5,
+      4146.5,
+      4177.6,
+      4204.5,
+      4228.0,
+      4250.6,
+      4274.6,
+      4296.3,
+      4319.4,
+      4341.5,
+      4363.7,
+      4387.3,
+      4411.6
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "google/gemma-4-e2b",
+  "wall_total_s": 4.44
+}
