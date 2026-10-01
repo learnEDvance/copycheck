@@ -1,0 +1,98 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-10-01T16:13:20",
+  "model": "google/gemma-4-e2b",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 1,
+  "variant": "echo",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim copier. Output only the text between COPYSTART and COPYEND, exactly as written. Nothing else. No markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "reasoning": "Thinking Process:\n\n1.  **Analyze the Request:** The user wants me to act as a verbatim copier and reproduce the text found between `COPYSTART` and `COPYEND`.\n2.  **Examine the Input Text:**\n    ```\n    COPYSTART\n    Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\n    COPYEND\n    ```\n3.  **Perform the Copying Task (Verbatim):** I must output only the content between the markers.\n4.  **Final Output Generation:** Extract the content: \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 81,
+    "completion_tokens": 174,
+    "total_tokens": 255,
+    "completion_tokens_details": {
+      "reasoning_tokens": 147
+    }
+  },
+  "created": 1790851400,
+  "id": "chatcmpl-cfwwnia5kp4qpfroxkhig",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 539.6,
+    "ttft_ms": 3929.1,
+    "wall_ms": 4433.6,
+    "delta_count": 22,
+    "deltas": [
+      3929.1,
+      3952.2,
+      3975.0,
+      3997.0,
+      4019.7,
+      4043.8,
+      4066.6,
+      4089.5,
+      4114.2,
+      4137.5,
+      4160.4,
+      4184.1,
+      4206.5,
+      4229.6,
+      4252.2,
+      4275.1,
+      4298.1,
+      4319.8,
+      4342.6,
+      4365.6,
+      4389.7,
+      4411.8
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "google/gemma-4-e2b",
+  "wall_total_s": 4.44
+}
