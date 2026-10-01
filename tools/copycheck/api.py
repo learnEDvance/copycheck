@@ -168,6 +168,13 @@ def chat(base, model, messages, endpoint=None, max_tokens=2048,
             pass
 
     wall_ms = (time.monotonic() - t0) * 1000
+    if finish is None:
+        # The stream ended without a terminal chunk: the server dropped the
+        # sequence (usually KV-pool exhaustion), so the text we have is a
+        # truncated prefix. Fail loudly so the caller retries instead of
+        # recording a partial answer as a measurement.
+        raise ChatError(0, "stream ended without finish_reason "
+                           f"(deltas={deltas}, chars={len(''.join(content))})", url)
     return {
         "endpoint": endpoint, "id": rid, "created": created, "model": model_ret,
         "content_raw": "".join(content), "reasoning_raw": "".join(reasoning),
@@ -225,9 +232,20 @@ def _parse_gb_section(text: str, label: str):
     return None
 
 
-def lms_load_estimate(key, timeout=180):
-    """Return {'gpu_gb', 'total_gb', 'rc', 'out'} from `lms load --estimate-only`."""
-    rc, out, err = _lms("load", key, "--estimate-only")
+def lms_load_estimate(key, parallel=None, ctx=None, gpu=None, timeout=180):
+    """Return {'gpu_gb', 'total_gb', 'rc', 'out'} from `lms load --estimate-only`.
+
+    parallel/ctx/gpu must mirror the flags used for the real load, otherwise the
+    estimate covers weights only and wildly understates the KV pool.
+    """
+    args = ["load", key, "--estimate-only"]
+    if ctx:
+        args += ["-c", str(int(ctx))]
+    if parallel:
+        args += ["--parallel", str(int(parallel))]
+    if gpu is not None:
+        args += ["--gpu", str(gpu)]
+    rc, out, err = _lms(*args, timeout=timeout)
     blob = (out or "") + "\n" + (err or "")
     gpu_gb = _parse_gb_section(blob, r"Estimated\s+GPU\s+Memory")
     total_gb = _parse_gb_section(blob, r"Estimated\s+Total\s+Memory")

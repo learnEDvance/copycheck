@@ -3,13 +3,17 @@
 
 v2:
 - models discovered live from LM Studio (auto-include every LLM)
-- per-model tuning (parallel slots, repeats) via bench_models.json + size buckets
-- OOM preflight via `lms load --estimate-only`
+- per-model tuning (max_par, repeats) via bench_models.json + size buckets
+- heavy models run first (sorted on size_bytes, descending)
+- OOM preflight via `lms load --estimate-only` (mirrors the real load flags)
 - reasoning_content captured; generous max_tokens for thinking models
 - system-prompt variant grid (always): baseline/echo/no-thinking/codeblock/few-shot
 - empty-content early-abort per cell
-- parallel baseline reps via ThreadPoolExecutor
-- atomic resumable rep-file writes
+- per-cell concurrency ladder (L=1, M=max_par/2, S=max_par) so the shared KV
+  pool is never oversubscribed; auto-halves max_par if a stream is truncated
+- save point after every rep + `s` key for a manual checkpoint; resume continues
+  a cell at the next missing rep instead of redoing it
+- atomic resumable rep-file writes (fsync'd)
 """
 
 import argparse
@@ -20,7 +24,7 @@ import shutil
 import sys
 import threading
 import time
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, wait as futures_wait, FIRST_COMPLETED
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import api
@@ -120,17 +124,19 @@ def load_bench_cfg():
 
 
 def model_tuning(key, size_bytes, cfg):
-    """Return {'slots': int, 'repeats': int} for a model key."""
+    """Return {'max_par': int, 'repeats': int, ...} for a model key."""
     over = cfg["models"].get(key, {})
     est_gb = size_bytes / 1e9 if size_bytes else None
-    if "slots" in over:
-        slots = int(over["slots"])
+    if "max_par" in over:
+        max_par = int(over["max_par"])
+    elif "slots" in over:  # legacy key
+        max_par = int(over["slots"])
     elif est_gb is not None and est_gb > 8.0:
-        slots = 4
+        max_par = 4
     else:
-        slots = 8
+        max_par = 8
     repeats = int(over.get("repeats", REPEATS_DEFAULT))
-    return {"slots": slots, "repeats": repeats, "est_gb": est_gb,
+    return {"max_par": max_par, "repeats": repeats, "est_gb": est_gb,
             "ctx": over.get("ctx"), "gpu": over.get("gpu")}
 
 
@@ -139,15 +145,20 @@ def _write_atomic(path, text):
     tmp = path + ".tmp"
     with open(tmp, "w", encoding="utf-8") as fh:
         fh.write(text)
+        fh.flush()
+        os.fsync(fh.fileno())
     os.replace(tmp, path)
+
+
+def _progress_default():
+    return {"start_ts": None, "run_id": None, "commit_global": 0,
+            "models": {}, "models_cfg": {}, "skipped": [], "concurrency": {}}
 
 
 class State:
     def __init__(self):
         self.records = []
-        self.progress = {"start_ts": None, "run_id": None,
-                         "commit_global": 0, "models": {},
-                         "models_cfg": {}, "skipped": []}
+        self.progress = _progress_default()
         self.failures = []
 
 
@@ -173,9 +184,11 @@ def load_progress():
     p = os.path.join(OUT, "progress.json")
     if os.path.exists(p):
         with open(p, encoding="utf-8") as fh:
-            return json.load(fh)
-    return {"start_ts": None, "run_id": None, "commit_global": 0,
-            "models": {}, "models_cfg": {}, "skipped": []}
+            prog = json.load(fh)
+        for k, v in _progress_default().items():
+            prog.setdefault(k, v)
+        return prog
+    return _progress_default()
 
 
 def save_progress(state):
@@ -183,6 +196,8 @@ def save_progress(state):
     tmp = p + ".tmp"
     with open(tmp, "w", encoding="utf-8") as fh:
         json.dump(state.progress, fh, indent=2)
+        fh.flush()
+        os.fsync(fh.fileno())
     os.replace(tmp, p)
 
 
@@ -190,6 +205,8 @@ def append_jsonl(rec):
     p = os.path.join(OUT, "requests.jsonl")
     with open(p, "a", encoding="utf-8") as fh:
         fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        fh.flush()
+        os.fsync(fh.fileno())
 
 
 class StopSignal:
@@ -197,22 +214,32 @@ class StopSignal:
         self.event = threading.Event()
 
 
-def start_space_listener(sig):
-    """Daemon thread: watch stdin (cbreak) for a SPACE keypress -> safe-stop signal."""
+class SaveSignal:
+    def __init__(self):
+        self.event = threading.Event()
+
+
+def start_key_listener(sig, save_sig):
+    """Daemon thread: stdin (cbreak) -> SPACE = safe-stop, S = save checkpoint.
+
+    The thread only sets events; all writing happens on the main thread.
+    """
     try:
         import select
         import termios
         import tty
     except Exception as e:
-        log(f"space-stop disabled: {e}")
+        log(f"key listener disabled: {e}")
         return None
     try:
         fd = sys.stdin.fileno()
     except Exception:
         return None
     if not os.isatty(fd):
-        log("space-stop disabled: stdin is not a terminal (no SPACE, Ctrl-C only)")
+        log("key listener disabled: stdin is not a terminal (SPACE/S unavailable, "
+            "Ctrl-C only)")
         return None
+    log("keys: SPACE = safe-stop (keeps finished reps) · S = save checkpoint now")
 
     def _listen():
         old = None
@@ -226,6 +253,10 @@ def start_space_listener(sig):
                         chunk = os.read(fd, 64)
                     except Exception:
                         break
+                    low = chunk.lower()
+                    if b"s" in low:
+                        log("SAVE: S pressed (checkpoint after current rep)")
+                        save_sig.event.set()
                     if b" " in chunk:
                         log("SAFE-STOP: SPACE pressed")
                         sig.event.set()
@@ -242,13 +273,144 @@ def start_space_listener(sig):
     return th
 
 
-def stop_space_listener(thread):
+def cell_workers(cell, max_par):
+    """Per-cell concurrency ladder.
+
+    The KV pool is shared across concurrent sequences, so a cell's aggregate
+    demand must fit inside ctx. L cells peak at ~6.7k tokens/req, M at ~2.2k,
+    S at ~0.9k; inside a 16k pool that means 1 / ctx-slots-ish / full width.
+    """
+    size = cell.rsplit("-", 1)[-1]
+    if size == "L":
+        return 1
+    if size == "M":
+        return max(1, max_par // 2)
+    return max(1, max_par)
+
+
+def _done_reps(state, model_key, cell, variant="baseline"):
+    """Reps already recorded for this model/cell/variant.
+
+    Union of the progress bookkeeping and whatever is actually on disk, so a
+    stale or lost progress.json still resumes correctly.
+    """
+    done = set()
+    prog = state.progress.get("models", {}).get(model_key, {})
+    for cell_done in prog.get("reps_done", {}).get(cell, []):
+        if cell_done.get("variant", "baseline") == variant:
+            done.add(int(cell_done.get("rep")))
+    for r in state.records:
+        if (r.get("model") == model_key and r.get("cell") == cell
+                and (r.get("variant") or "baseline") == variant and r.get("ok")):
+            done.add(int(r["rep"]))
+    return done
+
+
+def _mark_rep_done(state, model_key, cell, rep, variant="baseline", total=None):
+    prog = state.progress.setdefault("models", {}).setdefault(model_key, {})
+    reps = prog.setdefault("reps_done", {}).setdefault(cell, [])
+    entry = {"rep": int(rep), "variant": variant}
+    if not any(e.get("rep") == entry["rep"] and e.get("variant", "baseline") == variant
+               for e in reps):
+        reps.append(entry)
+        reps.sort(key=lambda e: (e.get("variant", "baseline"), e["rep"]))
+    if total is not None:
+        prog.setdefault("reps_total", {})[cell] = int(total)
+
+
+def _clear_rep_done(state, model_key, cell, rep, variant="baseline"):
+    prog = state.progress.get("models", {}).get(model_key, {})
+    reps = prog.get("reps_done", {}).get(cell)
+    if not reps:
+        return
+    prog["reps_done"][cell] = [e for e in reps
+                              if not (e.get("rep") == int(rep)
+                                      and e.get("variant", "baseline") == variant)]
+
+
+def _clear_cell_done(state, model_key, cell):
+    prog = state.progress.get("models", {}).get(model_key, {})
+    prog.get("reps_done", {}).pop(cell, None)
+
+
+def _drop_rep_files(model_key, cell, rep):
+    """Remove just one rep's artifacts so a re-run cannot leave stale files."""
+    d = os.path.join(OUT, "outputs", render.dir_name(model_key), cell)
+    for suffix in (".raw.txt", ".extracted.txt", ".meta.json", ".diff.txt"):
+        p = os.path.join(d, f"rep-{rep:04d}{suffix}")
+        try:
+            os.remove(p)
+        except OSError:
+            pass
+
+
+def checkpoint(state, model_key, cell, rep, repeats):
+    """Manual save point (`s` key). Flush progress + a human-readable marker."""
+    save_progress(state)
+    done = sorted(_done_reps(state, model_key, cell))
+    payload = {
+        "ts": datetime.datetime.now().isoformat(timespec="seconds"),
+        "run_id": state.progress.get("run_id"),
+        "model": model_key,
+        "cell": cell,
+        "reps_done": len(done),
+        "reps_total": repeats,
+        "records_total": len([r for r in state.records if r.get("ok")]),
+        "concurrency": state.progress.get("concurrency", {}).get(model_key),
+        "git_head": _git_head(),
+    }
+    _write_atomic(os.path.join(OUT, "CHECKPOINT.json"),
+                  json.dumps(payload, indent=2) + "\n")
+    log(f"CHECKPOINT saved: {model_key}/{cell} rep {rep} "
+        f"({payload['reps_done']}/{repeats} reps, {payload['records_total']} records)")
+    return payload
+
+
+def _service_keys(state, save_sig, stop_sig, model_key, cell, next_rep, repeats):
+    """Honour pending keypresses from the main loop (never from the listener)."""
+    if save_sig.event.is_set():
+        save_sig.event.clear()
+        checkpoint(state, model_key, cell, next_rep if next_rep else 0, repeats)
+    return stop_sig.event.is_set()
+
+
+def _git_head():
+    try:
+        import subprocess as _sp
+        p = _sp.run(["git", "-C", REPO_ROOT, "rev-parse", "--short", "HEAD"],
+                    capture_output=True, text=True, timeout=20)
+        return p.stdout.strip() or None
+    except Exception:
+        return None
+
+
+def _step_down(state, model_key, reason):
+    """Halve this model's concurrency cap after a truncated stream."""
+    conc = state.progress.setdefault("concurrency", {})
+    cur = conc.get(model_key)
+    if cur is None:
+        return None
+    new = max(1, int(cur) // 2)
+    if new == cur:
+        return cur
+    conc[model_key] = new
+    log(f"step-down {cur}->{new} for {model_key}: {reason}")
+    save_progress(state)
+    return new
+
+
+def stop_key_listener(thread):
     if thread is not None:
         thread.join(timeout=2.0)
 
 
-def _purge_cell(model_key, cell, state):
-    """Drop a partially-processed cell so it will be redone on resume."""
+def _purge_cell(model_key, cell, state, reason="discard"):
+    """Drop a cell's recorded reps entirely.
+
+    Only used when the data itself is worthless (garbage early-abort, model
+    abort) or when the user asks for a clean redo. Safe-stop and crashes keep
+    every finished rep -- see _discard_unfinished.
+    """
     d_out = os.path.join(OUT, "outputs", render.dir_name(model_key), cell)
     d_prompts = os.path.join(OUT, "prompts", render.dir_name(model_key), cell)
     for d in (d_out, d_prompts):
@@ -258,6 +420,7 @@ def _purge_cell(model_key, cell, state):
                         if not (r.get("model") == model_key and r.get("cell") == cell)]
     state.failures[:] = [f for f in state.failures
                          if not (f.get("model") == model_key and f.get("cell") == cell)]
+    _clear_cell_done(state, model_key, cell)
     p = os.path.join(OUT, "requests.jsonl")
     if os.path.exists(p):
         keep = None
@@ -282,14 +445,17 @@ def _purge_cell(model_key, cell, state):
             with open(p, "w", encoding="utf-8") as fh:
                 if keep:
                     fh.write("\n".join(keep) + "\n")
+    log(f"purged {model_key}/{cell} ({reason})")
 
 
-def _write_stopped(state, reason):
-    with open(os.path.join(OUT, "STOPPED.json"), "w", encoding="utf-8") as fh:
-        json.dump({"ts": datetime.datetime.now().isoformat(timespec="seconds"),
-                   "reason": reason,
-                   "commit_global": state.progress.get("commit_global", 0)},
-                  fh, indent=2)
+def _write_stopped(state, reason, partial=None):
+    payload = {"ts": datetime.datetime.now().isoformat(timespec="seconds"),
+               "reason": reason,
+               "commit_global": state.progress.get("commit_global", 0)}
+    if partial:
+        payload["partial"] = partial
+    _write_atomic(os.path.join(OUT, "STOPPED.json"),
+                  json.dumps(payload, indent=2) + "\n")
 
 
 def _rep_tps(rec):
@@ -372,6 +538,8 @@ def run_sample(state, model_key, cell, src, rep, endpoint, variant="baseline"):
             break
         except Exception as e:
             last_err = str(e)
+            if "finish_reason" in last_err:
+                rec["truncated"] = True
             rec["attempts"].append({"n": attempt, "error": last_err,
                                     "status": getattr(e, "status", None)})
             if attempt < MAX_ATTEMPTS:
@@ -630,13 +798,13 @@ def run(opts):
     else:
         subjects = [m for m in all_llms if m["key"] not in cfg["skip"]]
 
-    subjects.sort(key=lambda m: (m["size"] or 0, m["key"]))
+    subjects.sort(key=lambda m: (m["size"] or 0, m["key"]), reverse=True)
 
     tunings = {}
     for m in subjects:
         t = model_tuning(m["key"], m.get("size", 0), cfg)
         if opts.slots:
-            t["slots"] = opts.slots
+            t["max_par"] = opts.slots
         if opts.reps:
             t["repeats"] = opts.reps
         t["size"] = m.get("size", 0)
@@ -648,13 +816,14 @@ def run(opts):
     log(f"GPU: {vram_total_gb if vram_total_gb is not None else 'unknown'} GB total, "
         f"{free_gb if free_gb is not None else 'unknown'} GB free")
     for m in subjects:
-        est = api.lms_load_estimate(m["key"])
+        est = api.lms_load_estimate(m["key"], parallel=t["max_par"],
+                                    ctx=t.get("ctx"), gpu=t.get("gpu"))
         t = tunings[m["key"]]
         if est.get("total_gb") is not None:
             t["est_total_gb"] = est["total_gb"]
         if est.get("gpu_gb") is not None:
             t["est_gpu_gb"] = est["gpu_gb"]
-        log(f"model {m['key']}: slots={t['slots']} repeats={t['repeats']} "
+        log(f"model {m['key']}: max_par={t['max_par']} repeats={t['repeats']} "
             f"est_gpu={est['gpu_gb']}GB est_total={est['total_gb']}GB est_only(rc={est['rc']})")
 
     if skipped:
@@ -671,7 +840,8 @@ def run(opts):
     log(f"subjects: {active}")
 
     stop_sig = StopSignal()
-    sig_thread = start_space_listener(stop_sig)
+    save_sig = SaveSignal()
+    sig_thread = start_key_listener(stop_sig, save_sig)
     tui.header(f"{len(active)} engines · 5-prompt grid · temp 0 · resume-safe · mission → out/")
 
     try:
@@ -687,9 +857,10 @@ def run(opts):
                 continue
             t = tunings[model_key]
             tui.model_card(model_key, t)
-            log(f"== MODEL {model_key} == slots={t['slots']} reps={t['repeats']} ==")
+            log(f"== MODEL {model_key} == max_par={t['max_par']} reps={t['repeats']} ==")
             api.lms_unload_all()
-            api.lms_load(model_key, parallel=t["slots"], ctx=t.get("ctx"), gpu=t.get("gpu"))
+            api.lms_load(model_key, parallel=t["max_par"], ctx=t.get("ctx"),
+                          gpu=t.get("gpu"))
             if not api._server_up(BASE, tries=6, wait=4):
                 log(f"  load failed for {model_key}; skipping")
                 state.progress["skipped"].append({"model": model_key, "reason": "load_failed",
@@ -722,66 +893,130 @@ def run(opts):
                 in_flight = (model_key, cell)
                 log(f"  cell {cell} ({len(src)} chars) x{repeats}")
 
-                p_out = os.path.join(OUT, "outputs", render.dir_name(model_key), cell)
-                p_prompts = os.path.join(OUT, "prompts", render.dir_name(model_key), cell)
-                for p in (p_out, p_prompts):
-                    if os.path.isdir(p):
-                        shutil.rmtree(p)
+                # Resume: only the reps that are not already recorded get run.
+                done_reps = _done_reps(state, model_key, cell, "baseline")
+                todo = [r for r in range(1, repeats + 1) if r not in done_reps]
+                if done_reps:
+                    log(f"    resuming {cell}: {len(done_reps)} rep(s) already saved, "
+                        f"{len(todo)} to go")
 
+                # Seed the garbage streak from reps recorded earlier so the
+                # early-abort rule behaves the same on a resumed cell.
                 empty_streak = 0
+                for r in sorted(done_reps):
+                    rec = next((x for x in state.records
+                                if x.get("model") == model_key and x.get("cell") == cell
+                                and x.get("rep") == r), None)
+                    if not rec:
+                        continue
+                    m = rec.get("metrics", {})
+                    bad = (m.get("cer", 0) >= 0.99 or rec.get("reasoning_only")
+                           or not rec.get("raw_output"))
+                    empty_streak = empty_streak + 1 if bad else 0
+
                 aborted = False
                 stopped = False
-                ex = ThreadPoolExecutor(max_workers=t["slots"])
-                futs = [ex.submit(run_sample, state, model_key, cell, src,
-                                  rep, endpoint, "baseline")
-                        for rep in range(1, repeats + 1)]
+                # Clear only the reps we are about to (re)run, never the whole cell.
+                for rep in todo:
+                    _drop_rep_files(model_key, cell, rep)
+
+                conc = state.progress.setdefault("concurrency", {})
+                conc.setdefault(model_key, t["max_par"])
+                workers = min(cell_workers(cell, conc[model_key]), len(todo) or 1)
+                log(f"    workers={workers} (max_par={conc[model_key]}, "
+                    f"ladder L=1 M={max(1, conc[model_key] // 2)} S={conc[model_key]})")
+
+                ex = ThreadPoolExecutor(max_workers=workers)
+                futs = {ex.submit(run_sample, state, model_key, cell, src,
+                                  rep, endpoint, "baseline"): rep for rep in todo}
+                submitted_at = {rep: time.time() for rep in todo}
+                pending = set(futs)
+                results = {}
+                nxt = todo[0] if todo else None
                 try:
-                    for rep, fut in enumerate(futs, start=1):
-                        t0 = time.time()
-                        rec = fut.result()
-                        rec["wall_total_s"] = round(time.time() - t0, 2)
-                        if not rec["ok"]:
-                            state.failures.append({"model": model_key, "cell": cell, "rep": rep,
-                                                   "variant": "baseline",
-                                                   "error": rec.get("error")})
-                            consec_fail += 1
-                            if model_abort is None:
-                                model_abort = rec.get("error", "")[:200]
-                            log(f"    rep {rep}: FAIL ({rec.get('error', '')[:120]}); "
-                                f"consec_fail={consec_fail}")
-                            if consec_fail >= 3:
-                                log(f"    MODEL ABORT {model_key}: {consec_fail} consecutive "
-                                    "request failures")
-                                for f in futs[rep:]:
+                    while pending:
+                        if stop_sig.event.is_set() or save_sig.event.is_set():
+                            _service_keys(state, save_sig, stop_sig, model_key, cell,
+                                          nxt, repeats)
+                        done_futs, pending = futures_wait(
+                            pending, timeout=0.5, return_when=FIRST_COMPLETED)
+                        for f in done_futs:
+                            results[futs[f]] = (f.result(), time.time())
+                        # Consume in rep order so the streak logic stays stable.
+                        while nxt is not None and nxt in results:
+                            rec, t_end = results.pop(nxt)
+                            rep = nxt
+                            rec["wall_total_s"] = round(
+                                max(0.0, t_end - submitted_at.get(rep, t_end)), 2)
+                            nxt += 1
+                            if not rec["ok"]:
+                                state.failures.append(
+                                    {"model": model_key, "cell": cell, "rep": rep,
+                                     "variant": "baseline", "error": rec.get("error")})
+                                consec_fail += 1
+                                if rec.get("truncated"):
+                                    _step_down(state, model_key,
+                                               "stream ended without finish_reason")
+                                    conc = state.progress["concurrency"]
+                                if model_abort is None:
+                                    model_abort = rec.get("error", "")[:200]
+                                log(f"    rep {rep}: FAIL ({rec.get('error', '')[:120]}); "
+                                    f"consec_fail={consec_fail}")
+                                if consec_fail >= 3:
+                                    log(f"    MODEL ABORT {model_key}: {consec_fail} "
+                                        "consecutive request failures")
+                                    for f in pending:
+                                        f.cancel()
+                                    aborted = True
+                                    pending = set()
+                                    break
+                            else:
+                                consec_fail = 0
+                                save_sample_files(rec)
+                                append_jsonl(rec)
+                                state.records.append(rec)
+                                _mark_rep_done(state, model_key, cell, rep,
+                                               "baseline", total=repeats)
+                                # save point after every rep
+                                save_progress(state)
+                                m = rec.get("metrics", {})
+                                bad = (m.get("cer", 0) >= 0.99 or rec.get("reasoning_only")
+                                       or not rec.get("raw_output"))
+                                empty_streak = empty_streak + 1 if bad else 0
+                                log(f"    rep {rep}: ok={rec['ok']} "
+                                    f"cer={m.get('cer', 0):.4f} "
+                                    f"exact={m.get('exact')} "
+                                    f"wall={rec.get('wall_total_s')}s "
+                                    f"[saved {len(_done_reps(state, model_key, cell))}"
+                                    f"/{repeats}]")
+                                tui.cell_scan(rep, repeats, m.get("cer", 0),
+                                              _rep_tps(rec))
+                                if empty_streak >= EMPTY_ABORT and len(done_reps) + (
+                                        rep - len(done_reps)) < repeats:
+                                    log(f"    EARLY ABORT: {EMPTY_ABORT} consecutive "
+                                        "empty/reasoning-only/garbage reps")
+                                    aborted = True
+                                    for f in pending:
+                                        f.cancel()
+                                    pending = set()
+                                    break
+                            if stop_sig.event.is_set():
+                                log("SAFE-STOP requested (SPACE); keeping "
+                                    f"{len(_done_reps(state, model_key, cell))} "
+                                    "finished rep(s) for resume")
+                                stopped = True
+                                stop_reason = (f"{model_key} / {cell} "
+                                              f"(partial: {len(_done_reps(state, model_key, cell))}"
+                                              f"/{repeats} reps kept)")
+                                for f in pending:
                                     f.cancel()
-                                aborted = True
+                                pending = set()
                                 break
-                        else:
-                            consec_fail = 0
-                            save_sample_files(rec)
-                            append_jsonl(rec)
-                            state.records.append(rec)
-                            m = rec.get("metrics", {})
-                            bad = m.get("cer", 0) >= 0.99 or rec.get("reasoning_only") or not rec.get("raw_output")
-                            empty_streak = empty_streak + 1 if bad else 0
-                            log(f"    rep {rep}: ok={rec['ok']} cer={m.get('cer', 0):.4f} "
-                                f"exact={m.get('exact')} wall={rec.get('wall_total_s')}s")
-                            tui.cell_scan(rep, repeats, m.get("cer", 0), _rep_tps(rec))
-                            if empty_streak >= EMPTY_ABORT and rep < repeats:
-                                log(f"    EARLY ABORT: {EMPTY_ABORT} consecutive "
-                                    "empty/reasoning-only/garbage reps")
-                                aborted = True
-                                for f in futs[rep:]:
-                                    f.cancel()
-                                break
-                        if stop_sig.event.is_set():
-                            log("SAFE-STOP requested (SPACE); discarding partial cell "
-                                "so it will be redone")
-                            stopped = True
-                            stop_reason = f"{model_key} / {cell} (in-flight discarded for redo)"
-                            for f in futs[rep:]:
-                                f.cancel()
+                        if aborted or stopped:
                             break
+                    if save_sig.event.is_set():
+                        _service_keys(state, save_sig, stop_sig, model_key, cell,
+                                      nxt, repeats)
                 except KeyboardInterrupt:
                     stopped = True
                     raise
@@ -790,25 +1025,36 @@ def run(opts):
                 tui.scan_done()
 
                 if stopped:
-                    _purge_cell(model_key, cell, state)
                     in_flight = None
+                    save_progress(state)
                     break
+
+                # A cell is only "done" once every rep is on disk.
+                if len(_done_reps(state, model_key, cell, "baseline")) >= repeats:
+                    done_cells.add(cell)
 
                 if model_abort:
                     state.progress["skipped"].append(
                         {"model": model_key, "reason": "load_failed",
                          "detail": model_abort})
+                    _purge_cell(model_key, cell, state, reason="model abort")
                     save_progress(state)
                     break
 
                 if aborted:
+                    # Garbage output is not a measurement: drop the cell so the
+                    # next run retries it from scratch instead of resuming on.
                     state.progress["models"].setdefault(model_key, {})
                     state.progress["models"][model_key]["no_content"] = \
                         state.progress["models"][model_key].get("no_content", []) + [cell]
+                    _purge_cell(model_key, cell, state,
+                                reason="garbage early-abort (redo from scratch)")
 
-                if not opts.no_grid:
+                if not opts.no_grid and not aborted:
                     for variant in VARIANTS:
                         if variant == "baseline":
+                            continue
+                        if _done_reps(state, model_key, cell, variant):
                             continue
                         t0 = time.time()
                         rec = run_sample(state, model_key, cell, src, 1, endpoint, variant)
@@ -817,6 +1063,9 @@ def run(opts):
                             save_sample_files(rec)
                         append_jsonl(rec)
                         state.records.append(rec)
+                        if rec["ok"]:
+                            _mark_rep_done(state, model_key, cell, 1, variant)
+                        save_progress(state)
                         m = rec.get("metrics", {})
                         log(f"    variant {variant}: cer={m.get('cer', 0):.4f} "
                             f"exact={m.get('exact')}")
@@ -826,12 +1075,14 @@ def run(opts):
                             break
 
                 if stopped:
-                    _purge_cell(model_key, cell, state)
                     in_flight = None
+                    save_progress(state)
                     break
 
-                done_cells.add(cell)
                 in_flight = None
+                # Cell finished cleanly (baseline + variants): its per-rep
+                # bookkeeping is no longer needed, done_cells carries the state.
+                _clear_cell_done(state, model_key, cell)
                 state.progress["models"].setdefault(model_key, {})
                 state.progress["models"][model_key]["done_cells"] = sorted(done_cells)
                 save_progress(state)
@@ -845,7 +1096,7 @@ def run(opts):
 
         if stop_sig.event.is_set():
             api.lms_unload_all()
-            stop_space_listener(sig_thread)
+            stop_key_listener(sig_thread)
             _write_stopped(state, stop_reason or "safe-stop at boundary")
             log("SAFE-STOP: models unloaded; progress saved; nothing committed")
             tui.closing(stop_reason or "safe-stop at boundary")
@@ -857,15 +1108,22 @@ def run(opts):
         with open(os.path.join(OUT, "FAILED.txt"), "w", encoding="utf-8") as fh:
             fh.write(json.dumps(state.failures, indent=2))
         save_progress(state)
-        stop_space_listener(sig_thread)
+        stop_key_listener(sig_thread)
     except KeyboardInterrupt:
         log("interrupt received; saving progress without commit")
+        partial = None
         if in_flight is not None:
-            _purge_cell(in_flight[0], in_flight[1], state)
+            mk, cl = in_flight
+            partial = {"model": mk, "cell": cl,
+                       "reps_kept": len(_done_reps(state, mk, cl)),
+                       "reps_total": state.progress.get("models", {})
+                                    .get(mk, {}).get("reps_total", {}).get(cl)}
+            log(f"partial cell kept: {mk}/{cl} "
+                f"({partial['reps_kept']} reps on disk, resume continues here)")
         api.lms_unload_all()
-        stop_space_listener(sig_thread)
+        stop_key_listener(sig_thread)
         save_progress(state)
-        _write_stopped(state, "keyboard-interrupt")
+        _write_stopped(state, "keyboard-interrupt", partial=partial)
         log("progress saved to out/progress.json; nothing committed; models unloaded")
         sys.exit(130)
 

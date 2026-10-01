@@ -48,7 +48,7 @@ def header(summary):
 
 def model_card(model_key, t):
     h = w() - 1
-    slots = t.get("slots", 1)
+    slots = t.get("max_par", t.get("slots", 1))
     reps = t.get("repeats", 20)
     ctx = t.get("ctx") or "-"
     gpu = t.get("gpu")
