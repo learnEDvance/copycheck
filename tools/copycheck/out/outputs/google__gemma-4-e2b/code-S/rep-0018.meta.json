@@ -1,0 +1,117 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-10-01T16:22:19",
+  "model": "google/gemma-4-e2b",
+  "cell": "code-S",
+  "type": "code",
+  "size": "S",
+  "rep": 18,
+  "variant": "baseline",
+  "src": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2708,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)",
+  "reasoning": "Thinking Process:\n\n1.  **Analyze the Request:** The user wants me to act as a verbatim text copier and reproduce the text located between `COPYSTART` and `COPYEND`.\n2.  **Identify the Target Text:**\n    ```python\n    import os\n\n\n    def peek(path: str) -> int:\n        with open(path, \"rb\") as fh:\n            data = fh.read()\n        return len(data)\n    ```\n3.  **Execute Copying:** Reproduce the identified text exactly.\n4.  **Final Output Generation:** Ensure only the copied text is outputted, with no extra commentary.",
+  "reasoning_only": false,
+  "extracted": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)",
+  "metrics": {
+    "src_len": 119,
+    "out_len": 118,
+    "edit_distance": 1,
+    "cer": 0.008403361344537815,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 118,
+    "lcs_len": 118,
+    "pct_conserved": 0.9916,
+    "first_divergence": 118,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9916
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 129,
+    "completion_tokens": 184,
+    "total_tokens": 313,
+    "completion_tokens_details": {
+      "reasoning_tokens": 138
+    }
+  },
+  "created": 1790851939,
+  "id": "chatcmpl-b56d2iezh5uzccd7p1l2f",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 486.3,
+    "ttft_ms": 6534.8,
+    "wall_ms": 7520.3,
+    "delta_count": 41,
+    "deltas": [
+      6534.8,
+      6558.0,
+      6581.7,
+      6606.2,
+      6630.2,
+      6653.9,
+      6679.0,
+      6702.0,
+      6726.4,
+      6750.4,
+      6777.9,
+      6806.2,
+      6835.3,
+      6858.1,
+      6881.1,
+      6904.3,
+      6928.3,
+      6953.0,
+      6977.1,
+      7000.0,
+      7021.8,
+      7045.9,
+      7069.5,
+      7093.4,
+      7117.1,
+      7141.3,
+      7166.2,
+      7189.9,
+      7212.9,
+      7235.3,
+      7259.8,
+      7286.4,
+      7310.1,
+      7332.5,
+      7357.7,
+      7382.2,
+      7406.1,
+      7429.5,
+      7452.8,
+      7475.9,
+      7497.6
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "google/gemma-4-e2b",
+  "wall_total_s": 0.15
+}
