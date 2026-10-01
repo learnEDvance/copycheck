@@ -1,0 +1,115 @@
+{
+  "run_id": "20260930-204520",
+  "ts": "2026-10-01T14:57:11",
+  "model": "ibm/granite-4-h-tiny",
+  "cell": "table-S",
+  "type": "table",
+  "size": "S",
+  "rep": 1,
+  "variant": "few-shot",
+  "src": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Example: if the text to copy is exactly {START}abc 123{END}, you output `abc 123` with nothing else. Pay no attention to formatting hints in the text itself. Now copy the text between {START} and {END} exactly, character for character, and output nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2710,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "COPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND",
+  "reasoning": "",
+  "reasoning_only": false,
+  "extracted": "\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\n",
+  "metrics": {
+    "src_len": 120,
+    "out_len": 122,
+    "edit_distance": 2,
+    "cer": 0.016666666666666666,
+    "exact": false,
+    "insertions": 2,
+    "deletions": 0,
+    "substitutions": 0,
+    "lcp": 0,
+    "lcs_len": 120,
+    "pct_conserved": 1.0,
+    "first_divergence": 0,
+    "exact_pct": 0.0,
+    "len_ratio": 1.0167
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 133,
+    "completion_tokens": 40,
+    "total_tokens": 173,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "created": 1790846831,
+  "id": "chatcmpl-jwddrxxu1bsc4aipxf4oxq",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 1787.8,
+    "ttft_ms": 1787.9,
+    "wall_ms": 4762.7,
+    "delta_count": 39,
+    "deltas": [
+      1787.9,
+      1881.3,
+      1964.1,
+      2038.2,
+      2113.5,
+      2190.6,
+      2266.3,
+      2341.3,
+      2418.1,
+      2490.0,
+      2567.1,
+      2642.2,
+      2717.4,
+      2790.8,
+      2865.3,
+      2941.2,
+      3020.4,
+      3094.3,
+      3170.0,
+      3246.3,
+      3323.4,
+      3401.0,
+      3479.5,
+      3558.3,
+      3631.4,
+      3706.3,
+      3783.7,
+      3862.0,
+      3936.1,
+      4013.7,
+      4088.8,
+      4160.0,
+      4238.2,
+      4314.6,
+      4391.3,
+      4464.5,
+      4538.4,
+      4608.1,
+      4685.2
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "ibm/granite-4-h-tiny",
+  "wall_total_s": 4.77
+}
