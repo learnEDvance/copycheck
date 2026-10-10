@@ -1,0 +1,98 @@
+{
+  "run_id": "20261010-190143",
+  "ts": "2026-10-10T21:14:41",
+  "model": "zai-org/glm-4.6v-flash",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 9,
+  "variant": "baseline",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "reasoning": "The user wants me to reproduce a specific piece of text verbatim. The text they want copied is:\n\"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n\nI need to output only the text between the markers and nothing else. I will ignore the \"COPYSTART\" and \"COPYEND\" markers themselves.\n\nSo my response should be just that sentence.",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 102,
+    "completion_tokens": 109,
+    "total_tokens": 211,
+    "completion_tokens_details": {
+      "reasoning_tokens": 83
+    }
+  },
+  "created": 1791647081,
+  "id": "chatcmpl-blfh9n9awnudkl16vjv38w",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 687.0,
+    "ttft_ms": 20260.6,
+    "wall_ms": 25429.6,
+    "delta_count": 22,
+    "deltas": [
+      20260.6,
+      20524.9,
+      20759.1,
+      20993.8,
+      21228.7,
+      21455.0,
+      21687.6,
+      21918.1,
+      22143.9,
+      22374.1,
+      22609.8,
+      22838.3,
+      23075.5,
+      23311.3,
+      23552.5,
+      23781.6,
+      24009.7,
+      24241.9,
+      24472.8,
+      24709.9,
+      24952.4,
+      25188.4
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "zai-org/glm-4.6v-flash",
+  "wall_total_s": 78.44
+}

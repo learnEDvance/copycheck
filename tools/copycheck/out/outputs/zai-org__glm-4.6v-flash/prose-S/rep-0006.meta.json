@@ -1,0 +1,98 @@
+{
+  "run_id": "20261010-190143",
+  "ts": "2026-10-10T21:14:26",
+  "model": "zai-org/glm-4.6v-flash",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 6,
+  "variant": "baseline",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "reasoning": "The user wants me to reproduce a specific piece of text verbatim. The text they want copied is \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n\nI need to:\n1.  Identify the `COPYSTART` and `COPYEND` markers in the prompt.\n2.  Extract the text between these markers.\n3.  Reproduce that exact text without any modifications, additions, or deletions.\n4.  Output only the copied text.\n\nThe text is: \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n\nI will now output this text exactly as requested.",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 102,
+    "completion_tokens": 166,
+    "total_tokens": 268,
+    "completion_tokens_details": {
+      "reasoning_tokens": 140
+    }
+  },
+  "created": 1791647066,
+  "id": "chatcmpl-f7994h0jjhhdu2c3qtird",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 795.3,
+    "ttft_ms": 33787.8,
+    "wall_ms": 38906.5,
+    "delta_count": 22,
+    "deltas": [
+      33787.8,
+      34019.0,
+      34247.1,
+      34473.5,
+      34706.6,
+      34937.1,
+      35169.5,
+      35402.9,
+      35631.3,
+      35858.9,
+      36094.5,
+      36358.6,
+      36590.2,
+      36828.5,
+      37063.5,
+      37290.5,
+      37521.9,
+      37751.0,
+      37979.1,
+      38208.7,
+      38445.1,
+      38673.3
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "zai-org/glm-4.6v-flash",
+  "wall_total_s": 76.08
+}

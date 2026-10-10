@@ -1,0 +1,100 @@
+{
+  "run_id": "20261010-190143",
+  "ts": "2026-10-10T21:16:54",
+  "model": "zai-org/glm-4.6v-flash",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 1,
+  "variant": "codeblock",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Copy the text between COPYSTART and COPYEND verbatim into a single fenced code block, character for character. Output nothing outside the code block."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "```Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.```",
+  "reasoning": "Got it, let's see. The user wants me to copy the text between COPYSTART and COPYEND into a single fenced code block verbatim. So I need to take the content \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\" and put that in a code block.\n\nFirst, check the markers: COPYSTART and COPYEND are given. The text between them is exactly what's provided after those markers. So I just need to output that text inside a fenced code block. The instruction says \"fenced code block\"—usually in markdown that's ```text```, but maybe the user expects just the content with the fences? Wait, no: the task is to copy the text between COPYSTART and COPYEND verbatim into a single fenced code block. So I should produce something like:\n\n```Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.```\n\nYes, that's it. Just put the content inside a code block with backticks. Let me double-check there are no extra characters or changes. The original text has \"Two hundred milliseconds...\" and ends with \". So yes.",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 73,
+    "completion_tokens": 271,
+    "total_tokens": 344,
+    "completion_tokens_details": {
+      "reasoning_tokens": 243
+    }
+  },
+  "created": 1791647214,
+  "id": "chatcmpl-1zg6mpyoc8ovxyonqp01c",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 872.9,
+    "ttft_ms": 39770.8,
+    "wall_ms": 43616.7,
+    "delta_count": 24,
+    "deltas": [
+      39770.8,
+      39930.9,
+      40092.6,
+      40258.7,
+      40421.8,
+      40581.2,
+      40743.0,
+      40902.9,
+      41059.9,
+      41219.8,
+      41381.3,
+      41540.6,
+      41697.4,
+      41856.9,
+      42013.2,
+      42170.7,
+      42344.7,
+      42509.5,
+      42666.0,
+      42823.2,
+      42984.5,
+      43142.8,
+      43298.6,
+      43454.9
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "zai-org/glm-4.6v-flash",
+  "wall_total_s": 43.62
+}
