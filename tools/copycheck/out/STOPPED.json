@@ -1,0 +1,11 @@
+{
+  "ts": "2026-10-10T19:46:53",
+  "reason": "keyboard-interrupt",
+  "commit_global": 2,
+  "partial": {
+    "model": "zai-org/glm-4.6v-flash",
+    "cell": "gibberish-L",
+    "reps_kept": 0,
+    "reps_total": null
+  }
+}
