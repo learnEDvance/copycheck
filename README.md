@@ -15,30 +15,33 @@ A *copy-fidelity* benchmark. Each model is shown 18 fixed texts — 6 content ty
 <pre>
 ┌─CopyCheck live run · refresh: every cell commit──────────────────────┐
 ├────────────────────────────┬─────────────────────────────────────────┤
-│ loaded model               │ no model yet                            │
-│ samples done               │ 0 / 0  <span style="color:#3a3a3a">░░░░░░░░░░░░░░░░░░░░</span>             │
-│ elapsed                    │ 00:00:00                                │
-│ last update                │ 2026-09-25 18:51:12                     │
-│ last commit                │ #0                                      │
+│ loaded model               │ glm-4.6v-flash                          │
+│ samples done               │ 14 / 9972  <span style="color:#3a3a3a">░░░░░░░░░░░░░░░░░░░░</span>         │
+│ elapsed                    │ 00:08:43                                │
+│ last update                │ 2026-10-13 23:36:07                     │
+│ last commit                │ #1                                      │
 ├────────────────────────────┼──────────┼──────────┼───────────────────┤
 │ model                      │ <span style="color:#3a3a3a">CER</span>      │ <span style="color:#3a3a3a">exact%</span>   │ <span style="color:#3a3a3a">bar</span>               │
-│ <span style="color:#3a3a3a">no model results yet</span>                                                 │
+│ glm-4.6v-flash             │ <span style="color:#00cc66">0.83%</span>    │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#00cc66">██████████████</span>    │
+│ <span style="color:#3a3a3a">pending models: gemma-4-12b, qwen3.5-9b, gemma-4-e4b, rnj-1, bonsai-27b, gemma-4-e2b, granite-4-h-tiny, nemotron-3-nano-4b, lfm2.5-1.2b, gemma-3-270m-it</span>│
 ├──────────────────────────────────────────────────────────────────────┤
 │ <span style="color:#3a3a3a">by type</span>                                                             │
 ├────────────────────────────┼──────────┼──────────┼───────────────────┤
 │ type                      │ <span style="color:#3a3a3a">CER</span>      │ <span style="color:#3a3a3a">exact%</span>   │ <span style="color:#3a3a3a">bar</span>               │
-│ gibberish                  │ <span style="color:#3a3a3a">—</span>        │ <span style="color:#3a3a3a">—</span>        │ <span style="color:#3a3a3a">░░░░░░░░░░░░░░</span>    │
+│ gibberish                  │ <span style="color:#00cc66">0.83%</span>    │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#00cc66">██████████████</span>    │
 │ prose                      │ <span style="color:#3a3a3a">—</span>        │ <span style="color:#3a3a3a">—</span>        │ <span style="color:#3a3a3a">░░░░░░░░░░░░░░</span>    │
 │ code                       │ <span style="color:#3a3a3a">—</span>        │ <span style="color:#3a3a3a">—</span>        │ <span style="color:#3a3a3a">░░░░░░░░░░░░░░</span>    │
 │ list                       │ <span style="color:#3a3a3a">—</span>        │ <span style="color:#3a3a3a">—</span>        │ <span style="color:#3a3a3a">░░░░░░░░░░░░░░</span>    │
 │ table                      │ <span style="color:#3a3a3a">—</span>        │ <span style="color:#3a3a3a">—</span>        │ <span style="color:#3a3a3a">░░░░░░░░░░░░░░</span>    │
 │ data                       │ <span style="color:#3a3a3a">—</span>        │ <span style="color:#3a3a3a">—</span>        │ <span style="color:#3a3a3a">░░░░░░░░░░░░░░</span>    │
 ├──────────────────────────────────────────────────────────────────────┤
-│ No baseline results yet — the run is just getting started.           │
+│ Best copier so far: glm-4.6v-flash @ 0.83% CER (0.0% exact). Worst:  │
+│ glm-4.6v-flash @ 0.83%. That model is a dependable verbatim copier   │
+│ for editing tas…                                                     │
 └──────────────────────────────────────────────────────────────────────┘
 </pre>
 
-**Run ID:** `None`  ·  **Last update:** 2026-09-25 18:51:12  ·  **Elapsed:** 00:00:00  ·  **Commits:** 0
+**Run ID:** `20261013-232724`  ·  **Last update:** 2026-10-13 23:36:07  ·  **Elapsed:** 00:08:43  ·  **Commits:** 1
 
 ## How to read the results
 
@@ -54,23 +57,25 @@ A *copy-fidelity* benchmark. Each model is shown 18 fixed texts — 6 content ty
 
 ## Methodology
 
-1. **Models.** Every LLM discovered on the LM Studio server at run time is run automatically (`GET /api/v1/models`, embedding models excluded). Models are processed smallest-first. Parallel slots, repeats and skip rules come from `bench_models.json` (size-based defaults otherwise: ≤8 GB estimate → 8 slots, larger → 4, `gemma-3-270m-it` → 64 slots × 100 reps).
+1. **Models.** Every LLM discovered on the LM Studio server at run time is run automatically (`GET /api/v1/models`, embedding models excluded). Models are processed heaviest-first (sorted on `size_bytes`, descending). Concurrency, repeats and skip rules come from `bench_models.json`. Concurrency is a per-cell ladder off `max_par`: L cells run 1 request at a time, M cells `max_par/2`, S cells `max_par` — the shared KV pool is sized by `ctx` for all slots, so limiting in-flight requests (rather than slots) is what keeps a cell's token demand inside the pool. `max_par` is loaded on the server and auto-halved for a model if a stream ever ends without a `finish_reason`.
 2. **Corpus.** A frozen, deterministic corpus of 18 cells (`out/corpus.json`): 6 content types (gibberish, prose, code, list, table, data) × 3 sizes (S ≈ 120, M ≈ 700, L ≈ 2000 chars).
-3. **Baseline reps.** Each model produces `N` repetitions of each cell at temperature 0 with the single *baseline* system prompt. If 3 consecutive reps come back empty or reasoning-only, the remaining baseline reps for that cell are aborted (cell marked *no-content*).
+3. **Baseline reps.** Each model produces `N` repetitions of each cell at temperature 0 with the single *baseline* system prompt. If 3 consecutive reps come back empty or reasoning-only, the cell is aborted (marked *no-content*) and its records are discarded so the next run retries it from scratch. A rep whose stream ends without a `finish_reason` is never recorded: it fails and retries, and `max_par` is halved for that model.
 4. **Prompt-variant grid.** For every cell, one extra temperature-0 sample is taken with each of 4 alternative system prompts: **echo-only**, **no-thinking**, **code-block**, **few-shot** — to see which prompt gets the best copy rate out of a given model.
 5. **Scoring.** `metrics.py` computes Levenshtein CER, exact-match rate, LCS-conserved ratio and length ratio over the *extracted* output (markers/fences stripped).
-6. **Artifacts.** Per-sample raw/extracted/diff/meta files live under `out/outputs/<model>/<cell>/` (baseline) and `out/prompts/<model>/<cell>/<variant>/` (variants); the full machine log is `out/requests.jsonl`; `out/progress.json` supports resume.
+6. **Artifacts and save points.** Per-sample raw/extracted/diff/meta files live under `out/outputs/<model>/<cell>/` (baseline) and `out/prompts/<model>/<cell>/<variant>/` (variants); the full machine log is `out/requests.jsonl`. Progress is saved after **every rep** (`out/progress.json`), so an interrupted cell resumes at the next missing rep instead of being redone. Press `S` at any time for a manual checkpoint (`out/CHECKPOINT.json`); `SPACE` is a safe-stop that keeps every finished rep. All writes are atomic and fsync'd.
 7. **Commits.** Every finished cell is committed and pushed automatically (`ccrun[<model>][<timestamp>][<n>]`), and this README is regenerated on each commit.
 
 ## Ranking
 
-_No baseline samples yet._
+| Model | CER | exact% | samples | empty | reasoning-only | avg wall (s) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| glm-4.6v-flash | <span style="color:#00cc66">0.83%</span> | <span style="color:#00cc66">0.00%</span> | 10 | 0 | 0 | 135.08 |
 
 ## Content-type summary
 
 | Type | CER | exact% | samples |
 | --- | ---: | ---: | ---: |
-| gibberish | _pending_ | _pending_ | 0 |
+| gibberish | <span style="color:#00cc66">0.83%</span> | <span style="color:#00cc66">0.00%</span> | 10 |
 | prose | _pending_ | _pending_ | 0 |
 | code | _pending_ | _pending_ | 0 |
 | list | _pending_ | _pending_ | 0 |
@@ -81,15 +86,54 @@ _No baseline samples yet._
 
 | Model \ Cell | gib·S  gib·M  gib·L  pro·S  pro·M  pro·L  cod·S  cod·M  cod·L  lis·S  lis·M  lis·L  tab·S  tab·M  tab·L  dat·S  dat·M  dat·L |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| **glm-4.6v-flash** | <span style="color:#00cc66">1%</span> | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
+| **gemma-4-12b** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
+| **qwen3.5-9b** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
+| **gemma-4-e4b** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
+| **rnj-1** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
+| **bonsai-27b** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
+| **gemma-4-e2b** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
+| **granite-4-h-tiny** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
+| **nemotron-3-nano-4b** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
+| **lfm2.5-1.2b** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
+| **gemma-3-270m-it** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
 
 ## Per-model breakdown (18 cells)
+
+### glm-4.6v-flash
+
+| Cell | CER | exact% | samples | empty | reasoning-only | avg wall (s) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| gibberish-S | <span style="color:#00cc66">0.83%</span> | <span style="color:#00cc66">0.00%</span> | 10 | 0 | 0 | 135.08 |
+| gibberish-M | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| gibberish-L | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| prose-S | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| prose-M | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| prose-L | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| code-S | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| code-M | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| code-L | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| list-S | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| list-M | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| list-L | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| table-S | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| table-M | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| table-L | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| data-S | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| data-M | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| data-L | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
 
 
 ## Prompt-variant comparison
 
 One temperature-0 sample per variant per cell, to see which system prompt gets the best copy rate out of each model.
 
-_No variant samples yet._
+| Model | Variant | CER | exact% | samples |
+| --- | --- | ---: | ---: | ---: |
+| glm-4.6v-flash | codeblock | <span style="color:#00cc66">0.83%</span> | 0.00% | 1 |
+| glm-4.6v-flash | echo | <span style="color:#00cc66">0.83%</span> | 0.00% | 1 |
+| glm-4.6v-flash | few-shot | <span style="color:#00cc66">0.83%</span> | 0.00% | 1 |
+| glm-4.6v-flash | no-thinking | <span style="color:#00cc66">0.83%</span> | 0.00% | 1 |
 
 ## Skipped / failed models
 
@@ -97,19 +141,52 @@ _No models skipped._
 
 ## Conclusion
 
-No baseline results yet — the run is just getting started.
+Best copier so far: glm-4.6v-flash @ 0.83% CER (0.0% exact). Worst: glm-4.6v-flash @ 0.83%. That model is a dependable verbatim copier for editing tasks.
 
 <details>
 <summary><b>Machine-readable status</b></summary>
 
 ```
-run_id = n/a
-loaded_model = None
-samples_done = 0
-total_samples = 0
-elapsed_sec = 0.0
-last_update = 2026-09-25 18:51:12
-commit_num = 0
+run_id = 20261013-232724
+loaded_model = glm-4.6v-flash
+samples_done = 14
+total_samples = 9972
+elapsed_sec = 522.9455690383911
+last_update = 2026-10-13 23:36:07
+commit_num = 1
+model.glm-4.6v-flash.cer = 0.008333333333333333
+model.glm-4.6v-flash.exact_pct = 0.0
+model.glm-4.6v-flash.samples = 10
+model.gemma-4-12b.cer = 0.0
+model.gemma-4-12b.exact_pct = 0.0
+model.gemma-4-12b.samples = 0
+model.qwen3.5-9b.cer = 0.0
+model.qwen3.5-9b.exact_pct = 0.0
+model.qwen3.5-9b.samples = 0
+model.gemma-4-e4b.cer = 0.0
+model.gemma-4-e4b.exact_pct = 0.0
+model.gemma-4-e4b.samples = 0
+model.rnj-1.cer = 0.0
+model.rnj-1.exact_pct = 0.0
+model.rnj-1.samples = 0
+model.bonsai-27b.cer = 0.0
+model.bonsai-27b.exact_pct = 0.0
+model.bonsai-27b.samples = 0
+model.gemma-4-e2b.cer = 0.0
+model.gemma-4-e2b.exact_pct = 0.0
+model.gemma-4-e2b.samples = 0
+model.granite-4-h-tiny.cer = 0.0
+model.granite-4-h-tiny.exact_pct = 0.0
+model.granite-4-h-tiny.samples = 0
+model.nemotron-3-nano-4b.cer = 0.0
+model.nemotron-3-nano-4b.exact_pct = 0.0
+model.nemotron-3-nano-4b.samples = 0
+model.lfm2.5-1.2b.cer = 0.0
+model.lfm2.5-1.2b.exact_pct = 0.0
+model.lfm2.5-1.2b.samples = 0
+model.gemma-3-270m-it.cer = 0.0
+model.gemma-3-270m-it.exact_pct = 0.0
+model.gemma-3-270m-it.samples = 0
 ```
 
 </details>
