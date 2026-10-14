@@ -1,0 +1,70 @@
+### SOURCE
+report_date,shard,seq,source,status,latency_ms
+2026-09-21,s0,001,ingest,ok,12.4
+2026-09-21,s0,002,ingest,ok,11.9
+2026-09-21,s0,003,ingest,retry,34.7
+2026-09-21,s1,001,replay,ok,9.2
+2026-09-21,s1,002,replay,ok,8.8
+2026-09-21,s1,003,replay,failed,
+2026-09-22,s0,004,ingest,ok,10.1
+2026-09-22,s0,005,ingest,ok,13.0
+2026-09-22,s1,004,replay,ok,9.5
+2026-09-22,s2,001,manual,ok,41.2
+2026-09-22,s2,002,manual,ok,47.6
+2026-09-22,s2,003,manual,retry,52.9
+2026-09-22,s3,001,ingest,ok,9.0
+2026-09-23,s0,006,ingest,ok,11.2
+2026-09-23,s0,007,ingest,ok,10.7
+2026-09-23,s1,005,replay,ok,9.9
+2026-09-23,s2,004,manual,ok,48.1
+2026-09-23,s3,002,ingest,ok,9.6
+2026-09-23,s3,003,ingest,retry,12.3
+2026-09-24,s0,008,ingest,ok,10.9
+2026-09-24,s2,005,manual,ok,44.7
+
+### EXTRACTED OUTPUT
+
+report_date,shard,seq,source,status,latency_ms
+2026-09-21,s0,001,ingest,ok,12.4
+2026-09-21,s0,002,ingest,ok,11.9
+2026-09-21,s0,003,ingest,retry,34.7
+2026-09-21,s1,001,replay,ok,9.2
+2026-09-21,s1,002,replay,ok,8.8
+2026-09-21,s1,003,replay,failed,
+2026-09-22,s0,004,ingest,ok,10.1
+2026-09-22,s0,005,ingest,ok,13.0
+2026-09-22,s1,004,replay,ok,9.5
+2026-09-22,s2,001,manual,ok,41.2
+2026-09-22,s2,002,manual,ok,47.6
+2026-09-22,s2,003,manual,retry,52.9
+2026-09-22,s3,001,ingest,ok,9.0
+2026-09-23,s0,006,ingest,ok,11.2
+2026-09-23,s0,007,ingest,ok,10.7
+2026-09-23,s1,005,replay,ok,9.9
+2026-09-23,s2,004,manual,ok,48.1
+2026-09-23,s3,002,ingest,ok,9.6
+2026-09-23,s3,003,ingest,retry,12.3
+2026-09-24,s0,008,ingest,ok,10.9
+2026-09-24,s2,005,manual,ok,44.7
+
+
+### METRICS
+{
+  "src_len": 743,
+  "out_len": 745,
+  "edit_distance": 2,
+  "cer": 0.0026917900403768506,
+  "exact": false,
+  "insertions": 2,
+  "deletions": 0,
+  "substitutions": 0,
+  "lcp": 0,
+  "lcs_len": 743,
+  "pct_conserved": 1.0,
+  "first_divergence": 0,
+  "exact_pct": 0.0,
+  "len_ratio": 1.0027
+}
+### FIRST DIVERGENCE
+  src: 'report_date,shard,seq,source,status,latency_ms\n2026-09-21,s0'
+  out: '\nreport_date,shard,seq,source,status,latency_ms\n2026-09-21,s'
