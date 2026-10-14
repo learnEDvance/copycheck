@@ -1,0 +1,98 @@
+{
+  "run_id": "20261013-232724",
+  "ts": "2026-10-15T00:03:42",
+  "model": "zai-org/glm-4.6v-flash",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 2,
+  "variant": "baseline",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "reasoning": "The user wants me to reproduce a specific piece of text verbatim. The text is \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n\nI need to:\n1.  Identify the `COPYSTART` and `COPYEND` markers in the prompt.\n2.  Extract the text between these markers.\n3.  Reproduce that exact text without any modifications, comments, or additional formatting.\n\nThe user's request is straightforward: \"You are a verbatim text copier.\" So I will simply output the content between those markers.\n\nLet's check the text:\n- `COPYSTART`\n- `Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.`\n- `COPYEND`\n\nThe text to copy is: \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n\nI will output this exactly as it appears.",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 102,
+    "completion_tokens": 224,
+    "total_tokens": 326,
+    "completion_tokens_details": {
+      "reasoning_tokens": 198
+    }
+  },
+  "created": 1792002822,
+  "id": "chatcmpl-9hki12p9cwg2xsmxuggvij",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 1640.7,
+    "ttft_ms": 60209.5,
+    "wall_ms": 66698.0,
+    "delta_count": 22,
+    "deltas": [
+      60209.5,
+      60499.9,
+      60788.0,
+      61091.1,
+      61378.2,
+      61676.8,
+      61975.4,
+      62264.3,
+      62555.5,
+      62853.2,
+      63143.3,
+      63433.6,
+      63725.4,
+      64017.3,
+      64308.2,
+      64639.3,
+      64923.8,
+      65216.6,
+      65510.5,
+      65799.4,
+      66102.9,
+      66397.6
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "zai-org/glm-4.6v-flash",
+  "wall_total_s": 66.71
+}

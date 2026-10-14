@@ -1,0 +1,98 @@
+{
+  "run_id": "20261013-232724",
+  "ts": "2026-10-15T00:07:04",
+  "model": "zai-org/glm-4.6v-flash",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 1,
+  "variant": "no-thinking",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Do not think out loud. Do not reason. Do not plan. Simply output the text between COPYSTART and COPYEND verbatim and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "reasoning": "The user wants me to copy a specific piece of text exactly as it appears between \"COPYSTART\" and \"COPYEND\". I need to follow their instructions precisely: do not think out loud, reason, or plan. Just output the text verbatim.\n\nThe text provided is:\n\"COPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\nCOPYEND\"\n\nI will extract and output only the content between \"COPYSTART\" and \"COPYEND\". The user's request includes the markers themselves. I should include them exactly.\n\nSo the text to be output is:\n\"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 74,
+    "completion_tokens": 175,
+    "total_tokens": 249,
+    "completion_tokens_details": {
+      "reasoning_tokens": 149
+    }
+  },
+  "created": 1792003024,
+  "id": "chatcmpl-zlgpzhyimj1eivu5x2mrd",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 1061.2,
+    "ttft_ms": 26673.0,
+    "wall_ms": 30729.1,
+    "delta_count": 22,
+    "deltas": [
+      26673.0,
+      26856.4,
+      27042.0,
+      27228.5,
+      27412.4,
+      27599.9,
+      27790.2,
+      27978.1,
+      28161.2,
+      28348.8,
+      28529.6,
+      28711.6,
+      28897.0,
+      29080.2,
+      29261.4,
+      29447.3,
+      29627.4,
+      29810.4,
+      30001.5,
+      30184.8,
+      30365.9,
+      30550.0
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "zai-org/glm-4.6v-flash",
+  "wall_total_s": 30.74
+}
