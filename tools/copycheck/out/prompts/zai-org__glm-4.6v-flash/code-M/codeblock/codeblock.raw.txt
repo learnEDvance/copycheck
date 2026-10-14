@@ -1,0 +1,27 @@
+```python
+"""Event ordering helpers for the collector agents."""
+
+import itertools
+import time
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class Event:
+    """A single observed mutation with its causal token."""
+
+    seq: int
+    source_id: str
+    payload: str
+    received_at: float = time.monotonic()
+
+
+def order_events(events: Iterator[Event]) -> Iterator[Event]:
+    """Group events by source, preserving sequence."""
+    key = lambda e: e.source_id
+    for source_id, group in itertools.groupby(events, key):
+        for event in sorted(group, key=lambda e: e.seq):
+            if event.seq < 0:
+                raise ValueError(f"negative sequence {event.seq!r}")
+            yield event
+```
