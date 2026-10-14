@@ -1,0 +1,105 @@
+{
+  "run_id": "20261013-232724",
+  "ts": "2026-10-15T02:00:09",
+  "model": "zai-org/glm-4.6v-flash",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 10,
+  "variant": "baseline",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "reasoning": "Got it, let's see. The user wants me to reproduce the text between COPYSTART and COPYEND exactly. So first I need to find those markers. The input has:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND\n\nSo I just output that middle part, verbatim. No extra stuff. Let me check each line. The first line after COPYSTART is \"Cut-over checklist:\", then 1., 2., 3. with the backticks and hyphens. Yep. So I'll copy it exactly as given.",
+  "reasoning_only": false,
+  "extracted": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 115,
+    "edit_distance": 1,
+    "cer": 0.008620689655172414,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 115,
+    "lcs_len": 115,
+    "pct_conserved": 0.9914,
+    "first_divergence": 115,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9914
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 109,
+    "completion_tokens": 169,
+    "total_tokens": 278,
+    "completion_tokens_details": {
+      "reasoning_tokens": 134
+    }
+  },
+  "created": 1792009809,
+  "id": "chatcmpl-vmnehmtmvnno0nmyrrdfn",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 981.4,
+    "ttft_ms": 38492.7,
+    "wall_ms": 44208.6,
+    "delta_count": 29,
+    "deltas": [
+      38492.7,
+      38681.3,
+      38875.3,
+      39062.9,
+      39248.7,
+      39435.7,
+      39621.8,
+      39804.8,
+      39990.9,
+      40175.7,
+      40392.7,
+      40579.9,
+      40765.6,
+      40954.1,
+      41139.1,
+      41326.2,
+      41521.9,
+      41714.2,
+      41906.0,
+      42104.0,
+      42295.7,
+      42490.1,
+      42685.0,
+      42881.1,
+      43070.9,
+      43268.0,
+      43458.5,
+      43646.4,
+      43837.7
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "zai-org/glm-4.6v-flash",
+  "wall_total_s": 149.02
+}

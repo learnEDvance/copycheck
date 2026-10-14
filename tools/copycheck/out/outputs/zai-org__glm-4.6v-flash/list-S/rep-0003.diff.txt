@@ -1,0 +1,33 @@
+### SOURCE
+Cut-over checklist:
+
+1. Freeze `schema_migrations`.
+2. Promote the standby replica.
+3. Run `--strict` verification.
+
+### EXTRACTED OUTPUT
+Cut-over checklist:
+
+1. Freeze `schema_migrations`.
+2. Promote the standby replica.
+3. Run `--strict` verification.
+### METRICS
+{
+  "src_len": 116,
+  "out_len": 115,
+  "edit_distance": 1,
+  "cer": 0.008620689655172414,
+  "exact": false,
+  "insertions": 0,
+  "deletions": 1,
+  "substitutions": 0,
+  "lcp": 115,
+  "lcs_len": 115,
+  "pct_conserved": 0.9914,
+  "first_divergence": 115,
+  "exact_pct": 0.0,
+  "len_ratio": 0.9914
+}
+### FIRST DIVERGENCE
+  src: '\n'
+  out: ''

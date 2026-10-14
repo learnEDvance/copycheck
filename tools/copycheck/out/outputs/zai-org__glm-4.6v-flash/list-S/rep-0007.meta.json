@@ -1,0 +1,105 @@
+{
+  "run_id": "20261013-232724",
+  "ts": "2026-10-15T01:59:23",
+  "model": "zai-org/glm-4.6v-flash",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 7,
+  "variant": "baseline",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "reasoning": "The user wants me to reproduce a specific piece of text verbatim. The text is:\n\"Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND\"\n\nI need to output only the content between \"COPYSTART\" and \"COPYEND\". So I should ignore the instructions at the beginning (\"Copy this text exactly...\") and just copy what's inside those markers.\n\nThe content is:\n\"Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\"\n\nI need to make sure to include every character, including line breaks. The original text has a newline after \"COPYEND\", so I should preserve that as well.\n\nLet me check:\n- \"Cut-over checklist:\"\n- Newline\n- \"1. Freeze `schema_migrations`. \"\n- Newline\n- \"2. Promote the standby replica.\"\n- Newline\n- \"3. Run `--strict` verification.\"\n\nYes, this matches exactly what's inside the markers.\n\nSo I will output that text.",
+  "reasoning_only": false,
+  "extracted": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 115,
+    "edit_distance": 1,
+    "cer": 0.008620689655172414,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 115,
+    "lcs_len": 115,
+    "pct_conserved": 0.9914,
+    "first_divergence": 115,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9914
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 109,
+    "completion_tokens": 277,
+    "total_tokens": 386,
+    "completion_tokens_details": {
+      "reasoning_tokens": 244
+    }
+  },
+  "created": 1792009763,
+  "id": "chatcmpl-sp40ki6wlkfjcdrv2ki5",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 1082.2,
+    "ttft_ms": 73001.7,
+    "wall_ms": 80992.2,
+    "delta_count": 29,
+    "deltas": [
+      73001.7,
+      73279.0,
+      73547.3,
+      73825.4,
+      74097.3,
+      74376.8,
+      74651.7,
+      74923.7,
+      75197.9,
+      75472.1,
+      75742.8,
+      76018.7,
+      76291.7,
+      76562.7,
+      76841.7,
+      77119.4,
+      77421.7,
+      77698.6,
+      77974.5,
+      78252.0,
+      78521.2,
+      78800.4,
+      79073.1,
+      79342.1,
+      79612.0,
+      79891.1,
+      80162.9,
+      80441.6,
+      80711.9
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "zai-org/glm-4.6v-flash",
+  "wall_total_s": 140.07
+}

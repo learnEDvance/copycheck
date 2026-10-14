@@ -1,0 +1,105 @@
+{
+  "run_id": "20261013-232724",
+  "ts": "2026-10-15T01:58:24",
+  "model": "zai-org/glm-4.6v-flash",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 4,
+  "variant": "baseline",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "reasoning": "The user wants me to reproduce a specific piece of text verbatim. The text is:\n\"Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND\"\n\nI need to output only the content between \"COPYSTART\" and \"COPYEND\". So I should ignore the instructions at the beginning (\"Copy this text exactly...\") and just copy what's inside those markers.\n\nThe text within the markers is:\n\"Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\"\n\nI need to reproduce this exactly, character for character. I will output that text without any additional formatting or explanation.",
+  "reasoning_only": false,
+  "extracted": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 115,
+    "edit_distance": 1,
+    "cer": 0.008620689655172414,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 115,
+    "lcs_len": 115,
+    "pct_conserved": 0.9914,
+    "first_divergence": 115,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9914
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 109,
+    "completion_tokens": 198,
+    "total_tokens": 307,
+    "completion_tokens_details": {
+      "reasoning_tokens": 165
+    }
+  },
+  "created": 1792009704,
+  "id": "chatcmpl-rn3nqifcvxkoycyzgr17vg",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 1692.9,
+    "ttft_ms": 50342.2,
+    "wall_ms": 59058.6,
+    "delta_count": 29,
+    "deltas": [
+      50342.2,
+      50641.5,
+      50915.0,
+      51353.6,
+      51668.7,
+      51959.7,
+      52252.0,
+      52554.2,
+      52842.9,
+      53142.7,
+      53441.8,
+      53736.6,
+      54028.2,
+      54317.8,
+      54607.3,
+      54890.6,
+      55179.1,
+      55465.2,
+      55756.9,
+      56052.3,
+      56339.5,
+      56628.7,
+      56918.0,
+      57204.3,
+      57479.4,
+      57923.4,
+      58207.7,
+      58491.9,
+      58776.0
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "zai-org/glm-4.6v-flash",
+  "wall_total_s": 59.08
+}

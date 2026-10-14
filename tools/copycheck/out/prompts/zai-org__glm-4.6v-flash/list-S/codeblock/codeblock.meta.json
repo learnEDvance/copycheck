@@ -1,0 +1,109 @@
+{
+  "run_id": "20261013-232724",
+  "ts": "2026-10-15T02:01:41",
+  "model": "zai-org/glm-4.6v-flash",
+  "cell": "list-S",
+  "type": "list",
+  "size": "S",
+  "rep": 1,
+  "variant": "codeblock",
+  "src": "Cut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Copy the text between COPYSTART and COPYEND verbatim into a single fenced code block, character for character. Output nothing outside the code block."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nCut-over checklist:\n\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2705,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "```python\nCut-over checklist:\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n```",
+  "reasoning": "Got it, let's see. The user wants me to copy the text between COPYSTART and COPYEND into a single fenced code block verbatim. So first, I need to identify that part. The text is:\n\nCut-over checklist:\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nAnd then output only that as a fenced code block. Let's check for any special characters or formatting. The original has line breaks, numbers with dots, and backticks around schema_migrations and --strict. So I need to preserve all of that exactly. Then wrap it in a code block. Since the user didn't specify language, just use ``` (fenced code). So final output should be:\n\n```python\nCut-over checklist:\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n```\n\nWait, but wait—wait the original text doesn't have a specific language tag. The instruction says \"fenced code block\". Typically, if no language is specified, sometimes people use ``` or just put it in markdown code fences without language. But looking at the example from the user's request: they want verbatim into a single fenced code block. So I should output exactly that text inside a code block.\n\nLet me check again:\n\nThe content between COPYSTART and COPYEND is:\n\nCut-over checklist:\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.\n\nYes, so I need to put that into a fenced code block. So the final output should be that text inside ```...```.",
+  "reasoning_only": false,
+  "extracted": "Cut-over checklist:\n1. Freeze `schema_migrations`.\n2. Promote the standby replica.\n3. Run `--strict` verification.",
+  "metrics": {
+    "src_len": 116,
+    "out_len": 114,
+    "edit_distance": 2,
+    "cer": 0.017241379310344827,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 2,
+    "substitutions": 0,
+    "lcp": 20,
+    "lcs_len": 114,
+    "pct_conserved": 0.9828,
+    "first_divergence": 20,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9828
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 80,
+    "completion_tokens": 380,
+    "total_tokens": 460,
+    "completion_tokens_details": {
+      "reasoning_tokens": 343
+    }
+  },
+  "created": 1792009901,
+  "id": "chatcmpl-80van5mc8k6j08y2nvk2q",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 986.5,
+    "ttft_ms": 62527.6,
+    "wall_ms": 68833.9,
+    "delta_count": 33,
+    "deltas": [
+      62527.6,
+      62712.9,
+      62899.6,
+      63087.4,
+      63271.9,
+      63460.9,
+      63653.5,
+      63842.4,
+      64026.8,
+      64216.7,
+      64412.6,
+      64608.2,
+      64801.5,
+      65006.1,
+      65202.3,
+      65398.7,
+      65592.7,
+      65784.3,
+      65971.9,
+      66157.8,
+      66346.2,
+      66538.7,
+      66723.6,
+      66920.4,
+      67111.1,
+      67300.7,
+      67488.3,
+      67677.2,
+      67864.2,
+      68058.3,
+      68252.6,
+      68443.6,
+      68638.8
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "zai-org/glm-4.6v-flash",
+  "wall_total_s": 68.84
+}
