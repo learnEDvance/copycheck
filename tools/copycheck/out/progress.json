@@ -1,19 +1,21 @@
 {
   "start_ts": 1791914244.2167299,
   "run_id": "20261013-232724",
-  "commit_global": 1,
+  "commit_global": 2,
   "models": {
     "zai-org/glm-4.6v-flash": {
       "reps_done": {},
       "reps_total": {
         "gibberish-S": 10,
-        "gibberish-M": 10
+        "gibberish-M": 10,
+        "gibberish-L": 10
       },
       "done_cells": [
+        "gibberish-L",
         "gibberish-M",
         "gibberish-S"
       ],
-      "commits": 1
+      "commits": 2
     }
   },
   "models_cfg": {
@@ -64,8 +66,8 @@
       "ctx": 16384,
       "gpu": 0.65625,
       "size": 5114143239,
-      "est_total_gb": 6.33,
-      "est_gpu_gb": 3.77
+      "est_total_gb": 6.67,
+      "est_gpu_gb": 6.67
     },
     "prism-ml/bonsai-27b": {
       "max_par": 4,
@@ -97,6 +99,16 @@
       "est_total_gb": 4.3,
       "est_gpu_gb": 3.79
     },
+    "qwen/qwen3-vl-4b": {
+      "max_par": 8,
+      "repeats": 20,
+      "est_gb": 3.333641502,
+      "ctx": null,
+      "gpu": null,
+      "size": 3333641502,
+      "est_total_gb": 4.34,
+      "est_gpu_gb": 4.34
+    },
     "nvidia/nemotron-3-nano-4b": {
       "max_par": 8,
       "repeats": 100,
@@ -104,8 +116,8 @@
       "ctx": 16384,
       "gpu": null,
       "size": 2837173509,
-      "est_total_gb": 3.4,
-      "est_gpu_gb": 3.4
+      "est_total_gb": 2.64,
+      "est_gpu_gb": 2.64
     },
     "liquid/lfm2.5-1.2b": {
       "max_par": 8,
