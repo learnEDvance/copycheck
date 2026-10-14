@@ -16,13 +16,13 @@ A *copy-fidelity* benchmark. Each model is shown 18 fixed texts — 6 content ty
 ┌─CopyCheck live run · refresh: every cell commit──────────────────────┐
 ├────────────────────────────┬─────────────────────────────────────────┤
 │ loaded model               │ glm-4.6v-flash                          │
-│ samples done               │ 196 / 10404  <span style="color:#3a3a3a">░░░░░░░░░░░░░░░░░░░░</span>       │
-│ elapsed                    │ 27:43:34                                │
-│ last update                │ 2026-10-15 03:10:58                     │
-│ last commit                │ #14                                     │
+│ samples done               │ 210 / 10404  <span style="color:#3a3a3a">░░░░░░░░░░░░░░░░░░░░</span>       │
+│ elapsed                    │ 28:31:31                                │
+│ last update                │ 2026-10-15 03:58:55                     │
+│ last commit                │ #15                                     │
 ├────────────────────────────┼──────────┼──────────┼───────────────────┤
 │ model                      │ <span style="color:#3a3a3a">CER</span>      │ <span style="color:#3a3a3a">exact%</span>   │ <span style="color:#3a3a3a">bar</span>               │
-│ glm-4.6v-flash             │ <span style="color:#00cc66">0.37%</span>    │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#00cc66">██████████████</span>    │
+│ glm-4.6v-flash             │ <span style="color:#00cc66">0.35%</span>    │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#00cc66">██████████████</span>    │
 │ <span style="color:#3a3a3a">pending models: gemma-4-12b, qwen3.5-9b, gemma-4-e4b, rnj-1, bonsai-27b, gemma-4-e2b, granite-4-h-tiny, qwen3-vl-4b, nemotron-3-nano-4b, lfm2.5-1.2b, gemma-3-270m-it</span>│
 ├──────────────────────────────────────────────────────────────────────┤
 │ <span style="color:#3a3a3a">by type</span>                                                             │
@@ -32,16 +32,16 @@ A *copy-fidelity* benchmark. Each model is shown 18 fixed texts — 6 content ty
 │ prose                      │ <span style="color:#00cc66">0.33%</span>    │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#00cc66">██████████████</span>    │
 │ code                       │ <span style="color:#00cc66">0.34%</span>    │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#00cc66">██████████████</span>    │
 │ list                       │ <span style="color:#00cc66">0.38%</span>    │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#00cc66">██████████████</span>    │
-│ table                      │ <span style="color:#00cc66">0.50%</span>    │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#00cc66">██████████████</span>    │
+│ table                      │ <span style="color:#00cc66">0.35%</span>    │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#00cc66">██████████████</span>    │
 │ data                       │ <span style="color:#3a3a3a">—</span>        │ <span style="color:#3a3a3a">—</span>        │ <span style="color:#3a3a3a">░░░░░░░░░░░░░░</span>    │
 ├──────────────────────────────────────────────────────────────────────┤
-│ Best copier so far: glm-4.6v-flash @ 0.37% CER (0.0% exact). Worst:  │
-│ glm-4.6v-flash @ 0.37%. That model is a dependable verbatim copier   │
+│ Best copier so far: glm-4.6v-flash @ 0.35% CER (0.0% exact). Worst:  │
+│ glm-4.6v-flash @ 0.35%. That model is a dependable verbatim copier   │
 │ for editing tas…                                                     │
 └──────────────────────────────────────────────────────────────────────┘
 </pre>
 
-**Run ID:** `20261013-232724`  ·  **Last update:** 2026-10-15 03:10:58  ·  **Elapsed:** 27:43:34  ·  **Commits:** 14
+**Run ID:** `20261013-232724`  ·  **Last update:** 2026-10-15 03:58:55  ·  **Elapsed:** 28:31:31  ·  **Commits:** 15
 
 ## How to read the results
 
@@ -69,7 +69,7 @@ A *copy-fidelity* benchmark. Each model is shown 18 fixed texts — 6 content ty
 
 | Model | CER | exact% | samples | empty | reasoning-only | avg wall (s) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| glm-4.6v-flash | <span style="color:#00cc66">0.37%</span> | <span style="color:#00cc66">0.00%</span> | 140 | 0 | 0 | 465.02 |
+| glm-4.6v-flash | <span style="color:#00cc66">0.35%</span> | <span style="color:#00cc66">0.00%</span> | 150 | 0 | 0 | 504.05 |
 
 ## Content-type summary
 
@@ -79,14 +79,14 @@ A *copy-fidelity* benchmark. Each model is shown 18 fixed texts — 6 content ty
 | prose | <span style="color:#00cc66">0.33%</span> | <span style="color:#00cc66">0.00%</span> | 30 |
 | code | <span style="color:#00cc66">0.34%</span> | <span style="color:#00cc66">0.00%</span> | 30 |
 | list | <span style="color:#00cc66">0.38%</span> | <span style="color:#00cc66">0.00%</span> | 30 |
-| table | <span style="color:#00cc66">0.50%</span> | <span style="color:#00cc66">0.00%</span> | 20 |
+| table | <span style="color:#00cc66">0.35%</span> | <span style="color:#00cc66">0.00%</span> | 30 |
 | data | _pending_ | _pending_ | 0 |
 
 ## CER matrix (model × cell)
 
 | Model \ Cell | gib·S  gib·M  gib·L  pro·S  pro·M  pro·L  cod·S  cod·M  cod·L  lis·S  lis·M  lis·L  tab·S  tab·M  tab·L  dat·S  dat·M  dat·L |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| **glm-4.6v-flash** | <span style="color:#00cc66">1%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">1%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">1%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">1%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">1%</span> | <span style="color:#00cc66">0%</span> | · | · | · | · |
+| **glm-4.6v-flash** | <span style="color:#00cc66">1%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">1%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">1%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">1%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">1%</span> | <span style="color:#00cc66">0%</span> | <span style="color:#00cc66">0%</span> | · | · | · |
 | **gemma-4-12b** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
 | **qwen3.5-9b** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
 | **gemma-4-e4b** | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · |
@@ -119,7 +119,7 @@ A *copy-fidelity* benchmark. Each model is shown 18 fixed texts — 6 content ty
 | list-L | <span style="color:#00cc66">0.05%</span> | <span style="color:#00cc66">0.00%</span> | 10 | 0 | 0 | 592.46 |
 | table-S | <span style="color:#00cc66">0.83%</span> | <span style="color:#00cc66">0.00%</span> | 10 | 0 | 0 | 73.51 |
 | table-M | <span style="color:#00cc66">0.17%</span> | <span style="color:#00cc66">0.00%</span> | 10 | 0 | 0 | 356.75 |
-| table-L | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
+| table-L | <span style="color:#00cc66">0.05%</span> | <span style="color:#00cc66">0.00%</span> | 10 | 0 | 0 | 1050.56 |
 | data-S | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
 | data-M | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
 | data-L | _pending_ | _pending_ | 0 | 0 | 0 | 0 |
@@ -131,10 +131,10 @@ One temperature-0 sample per variant per cell, to see which system prompt gets t
 
 | Model | Variant | CER | exact% | samples |
 | --- | --- | ---: | ---: | ---: |
-| glm-4.6v-flash | codeblock | <span style="color:#00cc66">0.42%</span> | 0.00% | 14 |
-| glm-4.6v-flash | echo | <span style="color:#00cc66">0.43%</span> | 0.00% | 14 |
-| glm-4.6v-flash | few-shot | <span style="color:#00cc66">0.36%</span> | 0.00% | 14 |
-| glm-4.6v-flash | no-thinking | <span style="color:#00cc66">0.52%</span> | 0.00% | 14 |
+| glm-4.6v-flash | codeblock | <span style="color:#00cc66">0.40%</span> | 0.00% | 15 |
+| glm-4.6v-flash | echo | <span style="color:#00cc66">0.41%</span> | 0.00% | 15 |
+| glm-4.6v-flash | few-shot | <span style="color:#00cc66">0.36%</span> | 0.00% | 15 |
+| glm-4.6v-flash | no-thinking | <span style="color:#00cc66">0.49%</span> | 0.00% | 15 |
 
 ## Skipped / failed models
 
@@ -142,7 +142,7 @@ _No models skipped._
 
 ## Conclusion
 
-Best copier so far: glm-4.6v-flash @ 0.37% CER (0.0% exact). Worst: glm-4.6v-flash @ 0.37%. That model is a dependable verbatim copier for editing tasks.
+Best copier so far: glm-4.6v-flash @ 0.35% CER (0.0% exact). Worst: glm-4.6v-flash @ 0.35%. That model is a dependable verbatim copier for editing tasks.
 
 <details>
 <summary><b>Machine-readable status</b></summary>
@@ -150,14 +150,14 @@ Best copier so far: glm-4.6v-flash @ 0.37% CER (0.0% exact). Worst: glm-4.6v-fla
 ```
 run_id = 20261013-232724
 loaded_model = glm-4.6v-flash
-samples_done = 196
+samples_done = 210
 total_samples = 10404
-elapsed_sec = 99814.45237779617
-last_update = 2026-10-15 03:10:58
-commit_num = 14
-model.glm-4.6v-flash.cer = 0.0037059473573554484
+elapsed_sec = 102691.49131917953
+last_update = 2026-10-15 03:58:55
+commit_num = 15
+model.glm-4.6v-flash.cer = 0.0034922676086444194
 model.glm-4.6v-flash.exact_pct = 0.0
-model.glm-4.6v-flash.samples = 140
+model.glm-4.6v-flash.samples = 150
 model.gemma-4-12b.cer = 0.0
 model.gemma-4-12b.exact_pct = 0.0
 model.gemma-4-12b.samples = 0

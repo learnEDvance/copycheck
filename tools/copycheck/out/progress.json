@@ -1,7 +1,7 @@
 {
   "start_ts": 1791914244.2167299,
   "run_id": "20261013-232724",
-  "commit_global": 13,
+  "commit_global": 14,
   "models": {
     "zai-org/glm-4.6v-flash": {
       "reps_done": {},
@@ -19,7 +19,8 @@
         "list-M": 10,
         "list-L": 10,
         "table-S": 10,
-        "table-M": 10
+        "table-M": 10,
+        "table-L": 10
       },
       "done_cells": [
         "code-L",
@@ -34,10 +35,11 @@
         "prose-L",
         "prose-M",
         "prose-S",
+        "table-L",
         "table-M",
         "table-S"
       ],
-      "commits": 13
+      "commits": 14
     }
   },
   "models_cfg": {
