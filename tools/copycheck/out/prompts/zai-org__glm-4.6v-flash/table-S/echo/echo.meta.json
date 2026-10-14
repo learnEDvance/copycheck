@@ -1,0 +1,112 @@
+{
+  "run_id": "20261013-232724",
+  "ts": "2026-10-15T02:52:11",
+  "model": "zai-org/glm-4.6v-flash",
+  "cell": "table-S",
+  "type": "table",
+  "size": "S",
+  "rep": 1,
+  "variant": "echo",
+  "src": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim copier. Output only the text between COPYSTART and COPYEND, exactly as written. Nothing else. No markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2710,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "reasoning": "Got it, let's see. The user wants me to output only the text between COPYSTART and COPYEND exactly as written. So I need to find that section.\n\nFirst, look at the input:\n\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYSTART\n... then the text ... \nCOPYEND\n\nSo the content between COPYSTART and COPYEND is exactly that part. I need to output it verbatim, no extra stuff.\n\nSo extract from after COPYSTART to before COPYEND. The text includes \"The table shows...\" and the table rows. Let's check:\n\nYes, so the output should be:\n\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nThat's it. No changes, no extra characters.",
+  "reasoning_only": false,
+  "extracted": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "metrics": {
+    "src_len": 120,
+    "out_len": 119,
+    "edit_distance": 1,
+    "cer": 0.008333333333333333,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 119,
+    "lcs_len": 119,
+    "pct_conserved": 0.9917,
+    "first_divergence": 119,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9917
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 87,
+    "completion_tokens": 240,
+    "total_tokens": 327,
+    "completion_tokens_details": {
+      "reasoning_tokens": 198
+    }
+  },
+  "created": 1792012931,
+  "id": "chatcmpl-gb7pfkt14b6w4g0zf3q6v",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 1188.2,
+    "ttft_ms": 36336.4,
+    "wall_ms": 43425.7,
+    "delta_count": 36,
+    "deltas": [
+      36336.4,
+      36526.7,
+      36718.7,
+      36905.3,
+      37095.4,
+      37285.6,
+      37471.5,
+      37660.1,
+      37853.1,
+      38040.0,
+      38231.1,
+      38421.2,
+      38605.1,
+      38797.0,
+      38994.8,
+      39191.5,
+      39387.1,
+      39587.0,
+      39778.2,
+      39971.6,
+      40164.9,
+      40358.3,
+      40557.5,
+      40750.4,
+      40942.4,
+      41139.0,
+      41336.3,
+      41527.3,
+      41720.4,
+      41910.7,
+      42102.4,
+      42292.0,
+      42481.1,
+      42673.6,
+      42863.3,
+      43052.3
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "zai-org/glm-4.6v-flash",
+  "wall_total_s": 43.43
+}

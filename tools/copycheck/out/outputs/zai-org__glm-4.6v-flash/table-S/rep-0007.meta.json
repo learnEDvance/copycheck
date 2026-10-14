@@ -1,0 +1,112 @@
+{
+  "run_id": "20261013-232724",
+  "ts": "2026-10-15T02:50:59",
+  "model": "zai-org/glm-4.6v-flash",
+  "cell": "table-S",
+  "type": "table",
+  "size": "S",
+  "rep": 7,
+  "variant": "baseline",
+  "src": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2710,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "reasoning": "Got it, let's see. The user wants me to reproduce the text exactly between COPYSTART and COPYEND. So I need to take that content and output only that.\n\nFirst, check the input:\n\nThe table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |\n\nYes, so I just need to output that exactly. No changes, no extra stuff. Just copy it as is.",
+  "reasoning_only": false,
+  "extracted": "The table shows the default service ports.\n\n| Service | Port |\n| ------- | ---- |\n| copy    | 8080 |\n| sync    | 9091 |",
+  "metrics": {
+    "src_len": 120,
+    "out_len": 119,
+    "edit_distance": 1,
+    "cer": 0.008333333333333333,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 119,
+    "lcs_len": 119,
+    "pct_conserved": 0.9917,
+    "first_divergence": 119,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9917
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 116,
+    "completion_tokens": 143,
+    "total_tokens": 259,
+    "completion_tokens_details": {
+      "reasoning_tokens": 101
+    }
+  },
+  "created": 1792012859,
+  "id": "chatcmpl-jimga12s4gnninfq8g80p",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 1451.6,
+    "ttft_ms": 31522.0,
+    "wall_ms": 42409.3,
+    "delta_count": 36,
+    "deltas": [
+      31522.0,
+      31804.3,
+      32097.8,
+      32381.2,
+      32672.9,
+      32969.5,
+      33271.6,
+      33579.8,
+      33877.5,
+      34179.0,
+      34472.5,
+      34768.0,
+      35054.2,
+      35341.1,
+      35623.8,
+      35915.9,
+      36203.5,
+      36485.6,
+      36773.2,
+      37068.8,
+      37351.6,
+      37634.3,
+      37955.3,
+      38249.4,
+      38532.0,
+      38820.9,
+      39109.3,
+      39399.9,
+      39689.2,
+      39969.7,
+      40257.5,
+      40544.3,
+      40835.2,
+      41127.7,
+      41413.5,
+      41708.9
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "zai-org/glm-4.6v-flash",
+  "wall_total_s": 84.62
+}
