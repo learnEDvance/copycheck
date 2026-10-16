@@ -1,0 +1,25 @@
+### SOURCE
+1bMVyI]3uVp3H[=w_)xTl!0}.vsAjyRPd6Rd;1aa@u}wKm*1n&{xWD!/QfDp,B[#xG/3:qfvMbtDS(RuXPbgh4kXwbVB%;p9-hb= P_1)zU@p[tk,vQDAuu
+
+### EXTRACTED OUTPUT
+
+### METRICS
+{
+  "src_len": 120,
+  "out_len": 0,
+  "edit_distance": 120,
+  "cer": 1.0,
+  "exact": false,
+  "insertions": 0,
+  "deletions": 120,
+  "substitutions": 0,
+  "lcp": 0,
+  "lcs_len": 0,
+  "pct_conserved": 0.0,
+  "first_divergence": 0,
+  "exact_pct": 0.0,
+  "len_ratio": 0.0
+}
+### FIRST DIVERGENCE
+  src: '1bMVyI]3uVp3H[=w_)xTl!0}.vsAjyRPd6Rd;1aa@u}wKm*1n&{xWD!/QfDp'
+  out: ''
