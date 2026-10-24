@@ -1,11 +1,5 @@
 {
-  "ts": "2026-10-24T20:02:21",
-  "reason": "keyboard-interrupt",
-  "commit_global": 21,
-  "partial": {
-    "model": "google/gemma-4-12b",
-    "cell": "gibberish-M",
-    "reps_kept": 2,
-    "reps_total": 10
-  }
+  "ts": "2026-10-24T22:19:35",
+  "reason": "safe-stop at boundary",
+  "commit_global": 23
 }
