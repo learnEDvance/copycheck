@@ -1,0 +1,102 @@
+{
+  "run_id": "20261013-232724",
+  "ts": "2026-10-25T02:14:09",
+  "model": "google/gemma-4-12b",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 1,
+  "variant": "codeblock",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Copy the text between COPYSTART and COPYEND verbatim into a single fenced code block, character for character. Output nothing outside the code block."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "```\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n```",
+  "reasoning": "*   Input text: \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n    *   Instruction: Copy the text between COPYSTART and COPYEND verbatim into a single fenced code block.\n    *   Constraint: Output nothing outside the code block.\n\n    \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n\n    ```\n    Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n    ```\n\n    *   Is it verbatim? Yes.\n    *   Is it in a single fenced code block? Yes.\n    *   Is there anything outside the code block? No.",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 82,
+    "completion_tokens": 189,
+    "total_tokens": 271,
+    "completion_tokens_details": {
+      "reasoning_tokens": 158
+    }
+  },
+  "created": 1792874649,
+  "id": "chatcmpl-s3ve4369fleo7fd1sgiewd",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 6062.5,
+    "ttft_ms": 61385.6,
+    "wall_ms": 70600.5,
+    "delta_count": 26,
+    "deltas": [
+      61385.6,
+      61774.6,
+      62118.1,
+      62463.4,
+      62818.0,
+      63175.3,
+      63521.5,
+      63874.5,
+      64230.4,
+      64583.9,
+      64938.2,
+      65291.5,
+      65642.2,
+      66009.1,
+      66367.1,
+      66721.1,
+      67083.9,
+      67441.7,
+      67802.8,
+      68156.2,
+      68509.2,
+      68859.9,
+      69213.2,
+      69559.5,
+      69908.3,
+      70257.2
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "google/gemma-4-12b",
+  "wall_total_s": 70.61
+}

@@ -1,0 +1,98 @@
+{
+  "run_id": "20261013-232724",
+  "ts": "2026-10-25T02:07:11",
+  "model": "google/gemma-4-12b",
+  "cell": "prose-S",
+  "type": "prose",
+  "size": "S",
+  "rep": 3,
+  "variant": "baseline",
+  "src": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim text copier. Reproduce the text between the COPYSTART and COPYEND markers exactly, character for character: every letter, digit, space, punctuation and line break. Output only the copied text. No commentary, no explanation, no code fences, no markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nTwo hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2716,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "reasoning": "*   Task: Verbatim text copier.\n    *   Input: \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\" (between COPYSTART and COPYEND).\n    *   Constraint 1: Reproduce exactly character for character (letters, digits, spaces, punctuation, line breaks).\n    *   Constraint 2: Output *only* the copied text. No commentary, no explanation, no code fences, no markers.\n\n    \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n\n    - \"Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.\"\n    - Check punctuation: comma after \"reads\", period at the end.\n    - Check capitalization: \"T\" in \"Two\".\n\n    Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "reasoning_only": false,
+  "extracted": "Two hundred milliseconds of replication lag is fine for staging reads, so long as every acknowledged write is durable first.",
+  "metrics": {
+    "src_len": 125,
+    "out_len": 124,
+    "edit_distance": 1,
+    "cer": 0.008,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 124,
+    "lcs_len": 124,
+    "pct_conserved": 0.992,
+    "first_divergence": 124,
+    "exact_pct": 0.0,
+    "len_ratio": 0.992
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 110,
+    "completion_tokens": 232,
+    "total_tokens": 342,
+    "completion_tokens_details": {
+      "reasoning_tokens": 205
+    }
+  },
+  "created": 1792874231,
+  "id": "chatcmpl-etm0k1bbqqkuk924nqz6xb",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 22284.1,
+    "ttft_ms": 110343.4,
+    "wall_ms": 120270.1,
+    "delta_count": 22,
+    "deltas": [
+      110343.4,
+      110770.2,
+      111196.2,
+      111624.8,
+      112100.3,
+      112532.2,
+      112970.3,
+      113416.2,
+      113866.3,
+      114313.5,
+      114767.4,
+      115211.3,
+      115656.0,
+      116106.4,
+      116568.0,
+      117035.7,
+      117476.7,
+      117929.2,
+      118378.5,
+      118823.5,
+      119304.5,
+      119754.5
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "google/gemma-4-12b",
+  "wall_total_s": 120.28
+}
