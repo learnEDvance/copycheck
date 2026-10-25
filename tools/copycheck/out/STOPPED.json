@@ -1,5 +1,11 @@
 {
-  "ts": "2026-10-25T06:50:40",
-  "reason": "google/gemma-4-12b / prose-L (partial: 9/10 reps kept)",
-  "commit_global": 26
+  "ts": "2026-10-25T13:49:30",
+  "reason": "keyboard-interrupt",
+  "commit_global": 27,
+  "partial": {
+    "model": "google/gemma-4-12b",
+    "cell": "gibberish-L",
+    "reps_kept": 1,
+    "reps_total": 10
+  }
 }
