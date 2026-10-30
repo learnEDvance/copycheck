@@ -1,7 +1,7 @@
 {
   "start_ts": 1791914244.2167299,
   "run_id": "20261013-232724",
-  "commit_global": 27,
+  "commit_global": 28,
   "models": {
     "zai-org/glm-4.6v-flash": {
       "reps_done": {},
@@ -91,6 +91,14 @@
           {
             "rep": 1,
             "variant": "baseline"
+          },
+          {
+            "rep": 2,
+            "variant": "baseline"
+          },
+          {
+            "rep": 3,
+            "variant": "baseline"
           }
         ]
       },
@@ -107,7 +115,7 @@
         "prose-M",
         "prose-S"
       ],
-      "commits": 9,
+      "commits": 10,
       "no_content": [
         "gibberish-M",
         "gibberish-M",
@@ -115,6 +123,7 @@
         "gibberish-L",
         "gibberish-M",
         "gibberish-L",
+        "gibberish-M",
         "gibberish-M",
         "gibberish-M"
       ]
