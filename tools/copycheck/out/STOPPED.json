@@ -1,11 +1,11 @@
 {
-  "ts": "2026-10-26T03:24:26",
+  "ts": "2026-10-31T04:17:32",
   "reason": "keyboard-interrupt",
-  "commit_global": 28,
+  "commit_global": 29,
   "partial": {
     "model": "google/gemma-4-12b",
     "cell": "gibberish-L",
-    "reps_kept": 3,
+    "reps_kept": 4,
     "reps_total": 10
   }
 }
