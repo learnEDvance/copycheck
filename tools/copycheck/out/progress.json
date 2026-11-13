@@ -1,7 +1,7 @@
 {
   "start_ts": 1791914244.2167299,
   "run_id": "20261013-232724",
-  "commit_global": 31,
+  "commit_global": 32,
   "models": {
     "zai-org/glm-4.6v-flash": {
       "reps_done": {},
@@ -48,46 +48,7 @@
       "commits": 18
     },
     "google/gemma-4-12b": {
-      "reps_done": {
-        "prose-L": [
-          {
-            "rep": 1,
-            "variant": "baseline"
-          },
-          {
-            "rep": 2,
-            "variant": "baseline"
-          },
-          {
-            "rep": 3,
-            "variant": "baseline"
-          },
-          {
-            "rep": 4,
-            "variant": "baseline"
-          },
-          {
-            "rep": 5,
-            "variant": "baseline"
-          },
-          {
-            "rep": 6,
-            "variant": "baseline"
-          },
-          {
-            "rep": 7,
-            "variant": "baseline"
-          },
-          {
-            "rep": 8,
-            "variant": "baseline"
-          },
-          {
-            "rep": 9,
-            "variant": "baseline"
-          }
-        ]
-      },
+      "reps_done": {},
       "reps_total": {
         "gibberish-S": 10,
         "gibberish-M": 10,
@@ -98,10 +59,11 @@
       },
       "done_cells": [
         "gibberish-S",
+        "prose-L",
         "prose-M",
         "prose-S"
       ],
-      "commits": 13,
+      "commits": 14,
       "no_content": [
         "gibberish-M",
         "gibberish-M",
