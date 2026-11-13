@@ -1,0 +1,9 @@
+```python
+import os
+
+
+def peek(path: str) -> int:
+    with open(path, "rb") as fh:
+        data = fh.read()
+    return len(data)
+```

@@ -1,0 +1,117 @@
+{
+  "run_id": "20261013-232724",
+  "ts": "2026-11-13T16:13:23",
+  "model": "google/gemma-4-12b",
+  "cell": "code-S",
+  "type": "code",
+  "size": "S",
+  "rep": 1,
+  "variant": "no-thinking",
+  "src": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Do not think out loud. Do not reason. Do not plan. Simply output the text between COPYSTART and COPYEND verbatim and nothing else."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2708,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)",
+  "reasoning": "The user wants me to copy a specific block of text between `COPYSTART` and `COPYEND`.\nThe instructions are very strict: \"Do not think out loud. Do not reason. Do not plan. Simply output the text between COPYSTART and COPYEND verbatim and nothing else.\"\n\nText to copy:\n```python\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n```\n\nI must output only this text.",
+  "reasoning_only": false,
+  "extracted": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)",
+  "metrics": {
+    "src_len": 119,
+    "out_len": 118,
+    "edit_distance": 1,
+    "cer": 0.008403361344537815,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 118,
+    "lcs_len": 118,
+    "pct_conserved": 0.9916,
+    "first_divergence": 118,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9916
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 102,
+    "completion_tokens": 164,
+    "total_tokens": 266,
+    "completion_tokens_details": {
+      "reasoning_tokens": 118
+    }
+  },
+  "created": 1794566603,
+  "id": "chatcmpl-wl7t4tkwpxgp1u2u6b4xhi",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 4813.2,
+    "ttft_ms": 42438.9,
+    "wall_ms": 55670.6,
+    "delta_count": 41,
+    "deltas": [
+      42438.9,
+      42755.5,
+      43072.2,
+      43389.3,
+      43703.9,
+      44015.5,
+      44331.1,
+      44641.3,
+      44963.9,
+      45276.1,
+      45592.4,
+      45905.1,
+      46220.2,
+      46535.3,
+      46849.0,
+      47163.6,
+      47476.4,
+      47791.1,
+      48103.2,
+      48449.8,
+      48762.1,
+      49072.9,
+      49387.6,
+      49702.6,
+      50018.1,
+      50330.3,
+      50644.9,
+      50959.5,
+      51276.2,
+      51594.9,
+      51929.6,
+      52251.4,
+      52568.4,
+      52913.8,
+      53259.1,
+      53599.5,
+      53937.7,
+      54276.9,
+      54651.4,
+      54992.7,
+      55332.1
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "google/gemma-4-12b",
+  "wall_total_s": 55.68
+}

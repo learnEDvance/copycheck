@@ -1,11 +1,5 @@
 {
-  "ts": "2026-11-03T00:29:06",
-  "reason": "keyboard-interrupt",
-  "commit_global": 30,
-  "partial": {
-    "model": "google/gemma-4-12b",
-    "cell": "gibberish-L",
-    "reps_kept": 4,
-    "reps_total": 10
-  }
+  "ts": "2026-11-13T16:25:45",
+  "reason": "google/gemma-4-12b / code-S (variant grid interrupted)",
+  "commit_global": 33
 }

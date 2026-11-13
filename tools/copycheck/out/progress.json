@@ -1,7 +1,7 @@
 {
   "start_ts": 1791914244.2167299,
   "run_id": "20261013-232724",
-  "commit_global": 32,
+  "commit_global": 33,
   "models": {
     "zai-org/glm-4.6v-flash": {
       "reps_done": {},
@@ -48,14 +48,74 @@
       "commits": 18
     },
     "google/gemma-4-12b": {
-      "reps_done": {},
+      "reps_done": {
+        "code-S": [
+          {
+            "rep": 1,
+            "variant": "baseline"
+          },
+          {
+            "rep": 2,
+            "variant": "baseline"
+          },
+          {
+            "rep": 3,
+            "variant": "baseline"
+          },
+          {
+            "rep": 4,
+            "variant": "baseline"
+          },
+          {
+            "rep": 5,
+            "variant": "baseline"
+          },
+          {
+            "rep": 6,
+            "variant": "baseline"
+          },
+          {
+            "rep": 7,
+            "variant": "baseline"
+          },
+          {
+            "rep": 8,
+            "variant": "baseline"
+          },
+          {
+            "rep": 9,
+            "variant": "baseline"
+          },
+          {
+            "rep": 10,
+            "variant": "baseline"
+          },
+          {
+            "rep": 1,
+            "variant": "codeblock"
+          },
+          {
+            "rep": 1,
+            "variant": "echo"
+          },
+          {
+            "rep": 1,
+            "variant": "few-shot"
+          },
+          {
+            "rep": 1,
+            "variant": "no-thinking"
+          }
+        ]
+      },
       "reps_total": {
         "gibberish-S": 10,
         "gibberish-M": 10,
         "gibberish-L": 10,
         "prose-S": 10,
         "prose-M": 10,
-        "prose-L": 10
+        "prose-L": 10,
+        "code-S": 10
       },
       "done_cells": [
         "gibberish-S",
@@ -63,7 +123,7 @@
         "prose-M",
         "prose-S"
       ],
-      "commits": 14,
+      "commits": 15,
       "no_content": [
         "gibberish-M",
         "gibberish-M",
@@ -76,7 +136,8 @@
         "gibberish-M",
         "gibberish-M",
         "gibberish-M",
-        "gibberish-L"
+        "gibberish-L",
+        "gibberish-M"
       ]
     }
   },

@@ -1,0 +1,117 @@
+{
+  "run_id": "20261013-232724",
+  "ts": "2026-11-13T16:11:56",
+  "model": "google/gemma-4-12b",
+  "cell": "code-S",
+  "type": "code",
+  "size": "S",
+  "rep": 1,
+  "variant": "echo",
+  "src": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a verbatim copier. Output only the text between COPYSTART and COPYEND, exactly as written. Nothing else. No markers."
+    },
+    {
+      "role": "user",
+      "content": "Copy this text exactly, between the markers:\n\nCOPYSTART\nimport os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)\n\nCOPYEND"
+    }
+  ],
+  "params": {
+    "temperature": 0.0,
+    "max_tokens": 2708,
+    "endpoint": "v0"
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "error": null
+    }
+  ],
+  "ok": true,
+  "raw_output": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)",
+  "reasoning": "*   Role: Verbatim copier.\n    *   Constraint 1: Output *only* the text between COPYSTART and COPYEND.\n    *   Constraint 2: No markers (no \"COPYSTART\" or \"COPYEND\").\n    *   Constraint 3: Exactly as written.\n\n    ```python\n    import os\n\n\n    def peek(path: str) -> int:\n        with open(path, \"rb\") as fh:\n            data = fh.read()\n        return len(data)\n    ```\n\n    The user wants the content between COPYSTART and COPYEND exactly.\n\n    Content to copy:\n    import os\n\n\n    def peek(path: str) -> int:\n        with open(path, \"rb\") as fh:\n            data = fh.read()\n        return len(data)\n\n    *   No extra text? Yes.\n    *   Exactly as written? Yes.\n    *   No markers? Yes.",
+  "reasoning_only": false,
+  "extracted": "import os\n\n\ndef peek(path: str) -> int:\n    with open(path, \"rb\") as fh:\n        data = fh.read()\n    return len(data)",
+  "metrics": {
+    "src_len": 119,
+    "out_len": 118,
+    "edit_distance": 1,
+    "cer": 0.008403361344537815,
+    "exact": false,
+    "insertions": 0,
+    "deletions": 1,
+    "substitutions": 0,
+    "lcp": 118,
+    "lcs_len": 118,
+    "pct_conserved": 0.9916,
+    "first_divergence": 118,
+    "exact_pct": 0.0,
+    "len_ratio": 0.9916
+  },
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 100,
+    "completion_tokens": 253,
+    "total_tokens": 353,
+    "completion_tokens_details": {
+      "reasoning_tokens": 207
+    }
+  },
+  "created": 1794566516,
+  "id": "chatcmpl-98n9javp4runx6z8g1pns",
+  "stats": null,
+  "timings": {
+    "first_byte_ms": 5298.6,
+    "ttft_ms": 72486.0,
+    "wall_ms": 86590.4,
+    "delta_count": 41,
+    "deltas": [
+      72486.0,
+      72851.7,
+      73191.8,
+      73532.4,
+      73871.7,
+      74209.2,
+      74549.0,
+      74892.0,
+      75233.3,
+      75572.9,
+      75939.9,
+      76292.5,
+      76631.9,
+      76972.3,
+      77313.2,
+      77651.2,
+      77990.7,
+      78334.2,
+      78675.7,
+      79012.5,
+      79394.3,
+      79739.4,
+      80081.9,
+      80428.1,
+      80770.9,
+      81112.6,
+      81455.1,
+      81792.3,
+      82134.2,
+      82478.9,
+      82815.3,
+      83154.7,
+      83489.1,
+      83831.3,
+      84172.4,
+      84511.8,
+      84854.0,
+      85194.5,
+      85537.5,
+      85880.3,
+      86221.4
+    ],
+    "endpoint": "v0"
+  },
+  "model_returned": "google/gemma-4-12b",
+  "wall_total_s": 86.6
+}
