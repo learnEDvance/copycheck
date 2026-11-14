@@ -17,8 +17,8 @@ A *copy-fidelity* benchmark. Each model is shown 18 fixed texts — 6 content ty
 ├────────────────────────────┬─────────────────────────────────────────┤
 │ loaded model               │ gemma-4-12b                             │
 │ samples done               │ 322 / 10404  <span style="color:#8a8a8a">█</span><span style="color:#3a3a3a">░░░░░░░░░░░░░░░░░░░</span>       │
-│ elapsed                    │ 739:33:22                               │
-│ last update                │ 2026-11-13 19:00:46                     │
+│ elapsed                    │ 773:34:34                               │
+│ last update                │ 2026-11-15 05:01:58                     │
 │ last commit                │ #34                                     │
 ├────────────────────────────┼──────────┼──────────┼───────────────────┤
 │ model                      │ <span style="color:#3a3a3a">CER</span>      │ <span style="color:#3a3a3a">exact%</span>   │ <span style="color:#3a3a3a">bar</span>               │
@@ -42,7 +42,7 @@ A *copy-fidelity* benchmark. Each model is shown 18 fixed texts — 6 content ty
 └──────────────────────────────────────────────────────────────────────┘
 </pre>
 
-**Run ID:** `20261013-232724`  ·  **Last update:** 2026-11-13 19:00:46  ·  **Elapsed:** 739:33:22  ·  **Commits:** 34
+**Run ID:** `20261013-232724`  ·  **Last update:** 2026-11-15 05:01:58  ·  **Elapsed:** 773:34:34  ·  **Commits:** 34
 
 ## How to read the results
 
@@ -181,8 +181,8 @@ run_id = 20261013-232724
 loaded_model = gemma-4-12b
 samples_done = 322
 total_samples = 10404
-elapsed_sec = 2662402.357414007
-last_update = 2026-11-13 19:00:46
+elapsed_sec = 2784873.810012102
+last_update = 2026-11-15 05:01:58
 commit_num = 34
 model.glm-4.6v-flash.cer = 0.0034586484169594495
 model.glm-4.6v-flash.exact_pct = 0.0
