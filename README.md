@@ -17,9 +17,9 @@ A *copy-fidelity* benchmark. Each model is shown 18 fixed texts — 6 content ty
 ├────────────────────────────┬─────────────────────────────────────────┤
 │ loaded model               │ gemma-4-12b                             │
 │ samples done               │ 322 / 10404  <span style="color:#8a8a8a">█</span><span style="color:#3a3a3a">░░░░░░░░░░░░░░░░░░░</span>       │
-│ elapsed                    │ 822:09:44                               │
-│ last update                │ 2026-11-17 05:37:08                     │
-│ last commit                │ #36                                     │
+│ elapsed                    │ 822:09:54                               │
+│ last update                │ 2026-11-17 05:37:18                     │
+│ last commit                │ #37                                     │
 ├────────────────────────────┼──────────┼──────────┼───────────────────┤
 │ model                      │ <span style="color:#3a3a3a">CER</span>      │ <span style="color:#3a3a3a">exact%</span>   │ <span style="color:#3a3a3a">bar</span>               │
 │ glm-4.6v-flash             │ <span style="color:#00cc66">0.35%</span>    │ <span style="color:#00cc66">0.00%</span>    │ <span style="color:#00cc66">██████████████</span>    │
@@ -42,7 +42,7 @@ A *copy-fidelity* benchmark. Each model is shown 18 fixed texts — 6 content ty
 └──────────────────────────────────────────────────────────────────────┘
 </pre>
 
-**Run ID:** `20261013-232724`  ·  **Last update:** 2026-11-17 05:37:08  ·  **Elapsed:** 822:09:44  ·  **Commits:** 36
+**Run ID:** `20261013-232724`  ·  **Last update:** 2026-11-17 05:37:18  ·  **Elapsed:** 822:09:54  ·  **Commits:** 37
 
 ## How to read the results
 
@@ -181,9 +181,9 @@ run_id = 20261013-232724
 loaded_model = gemma-4-12b
 samples_done = 322
 total_samples = 10404
-elapsed_sec = 2959783.8595514297
-last_update = 2026-11-17 05:37:08
-commit_num = 36
+elapsed_sec = 2959793.8391549587
+last_update = 2026-11-17 05:37:18
+commit_num = 37
 model.glm-4.6v-flash.cer = 0.0034586484169594495
 model.glm-4.6v-flash.exact_pct = 0.0
 model.glm-4.6v-flash.samples = 180
