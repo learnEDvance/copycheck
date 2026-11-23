@@ -1,5 +1,5 @@
 {
-  "ts": "2026-11-17T06:18:41",
-  "reason": "google/gemma-4-12b / code-M (partial: 1/10 reps kept)",
-  "commit_global": 37
+  "ts": "2026-11-23T22:39:17",
+  "reason": "safe-stop at boundary",
+  "commit_global": 38
 }
